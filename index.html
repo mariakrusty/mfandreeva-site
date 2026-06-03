@@ -25,7 +25,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'ShareTechMono',monospace;background:var(--ink);color:var(--cream);overflow-x:hidden}
+  body{font-family:'ShareTechMono',monospace;background:var(--ink);color:var(--cream);overflow-x:clip}
 
   /* ============ HERO ============ */
   .hero{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;background:var(--red);color:var(--cream);overflow:hidden;z-index:0}
@@ -448,17 +448,16 @@
     .trow .tfree{display:none}
     .ghost-num{font-size:42vw;bottom:1vh}
   }
-  /* ===== страховка от горизонтального переполнения + перенос длинных слов ===== */
-  html,body{overflow-x:hidden}
+  /* ===== перенос длинных слов (без overflow на html — иначе ломается sticky-колода!) ===== */
   .hero h1,.footer .big,.erow .ett,.step-body h3,.txt,.vword,.about-word,.b-word,.fs-text,.book-info h3,.tagline,.lead{overflow-wrap:break-word}
   @media (max-width:600px){
     .hero-body{align-items:flex-start}
     .eyebrow{font-size:11px;letter-spacing:.08em;margin-bottom:16px;max-width:100%}
-    .hero h1{font-size:clamp(28px,9vw,64px);max-width:100%}
+    .hero h1{font-size:clamp(23px,7.4vw,60px);max-width:100%}
     .tagline{font-size:14px;margin-top:18px;width:100%;max-width:100%}
     .step-head{gap:12px}
     .step-head .hint{display:none}
-    .footer .big{font-size:clamp(30px,9vw,52px)}
+    .footer .big{font-size:clamp(26px,8vw,52px)}
     .footer-sub-h{font-size:clamp(16px,5vw,22px)}
     .fs-text{font-size:clamp(15px,4.4vw,20px)}
     .erow{gap:12px}
