@@ -1,0 +1,5 @@
+# Публикуем только готовую страницу и ассеты
+*.html
+!index.html
+assets/book-pages/_orig/
+.DS_Store
