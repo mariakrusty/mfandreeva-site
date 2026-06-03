@@ -101,7 +101,6 @@
   .corner.bl{left:clamp(20px,4vw,56px);bottom:26px}
   .corner.br{right:clamp(20px,4vw,56px);bottom:26px;text-align:right}
 
-  .replay{position:fixed;right:22px;bottom:22px;z-index:200;display:flex;gap:8px;align-items:center;padding:10px 18px;background:rgba(20,10,4,.78);backdrop-filter:blur(14px);border:1px solid rgba(253,247,235,.18);border-radius:100px;color:var(--cream);font-family:'ShareTechMono';font-size:13px;letter-spacing:.04em;cursor:pointer;text-transform:uppercase}
 
   /* ============ КТО Я (ступенька 01, приём bymonolog: слово | фото | слово) ============ */
   .s-about{background:var(--cream);color:var(--ink)}
@@ -776,8 +775,6 @@
   </div>
 </div>
 
-<button class="replay" id="replay">↻ Повторить анимацию</button>
-
 <script>
   var hero = document.getElementById('hero');
   var ov = document.getElementById('overlay');
@@ -833,7 +830,6 @@
     t2 = setTimeout(function(){ hero.className = 'hero s-done'; decodeTitle(); }, 1150);  /* быстрее к буквам */
   }
   runIntro();
-  document.getElementById('replay').addEventListener('click', runIntro);
 
   var aboutPhoto = document.getElementById('aboutPhoto');
   if('IntersectionObserver' in window){
