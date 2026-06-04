@@ -487,6 +487,18 @@
     .s-events .step-body h3,.s-tools .step-body h3{font-size:clamp(20px,6vw,30px)}
   }
   @media (max-width:760px){:root{--head:58px}}
+  /* ===== МОБИЛЬНАЯ ГАРМОШКА: вкладки-аккордеон вместо прилипающей колоды ===== */
+  @media (max-width:860px){
+    .steps > .step{position:static;min-height:0;display:block}
+    .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(48px,14vw,68px);-webkit-tap-highlight-color:transparent}
+    .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:11px;height:11px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:translateY(-72%) rotate(45deg);transition:transform .35s var(--ease);opacity:.5}
+    .step.open > .step-head::after{transform:translateY(-28%) rotate(225deg);opacity:.85}
+    .step > .step-body, .step > .step-fold{display:block;flex:none;min-height:0;max-height:0;overflow:hidden;transition:max-height .42s var(--ease)}
+    .step:not(.open) > .step-body, .step:not(.open) > .step-fold{padding-top:0;padding-bottom:0}
+    .s-tools:not(.open) .sphere-bg{display:none}
+    .txsplit .txpane{opacity:1;animation:none}
+    .about-photo .eyes-open{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
@@ -529,6 +541,7 @@
   <!-- 01 КТО Я -->
   <section class="step s-about" id="about">
     <div class="step-head"><span class="idx">01</span> Кто я <span class="hint">экономист · не айтишник</span></div>
+    <div class="step-fold">
     <div class="about-hero">
       <div class="about-line">
         <span class="about-word l">Я вижу</span>
@@ -545,6 +558,7 @@
       <div class="about-who">
         <div class="nm"><b>Мария Андреева</b><span>экономист · партнёр МойСклад · автор книги</span></div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -899,6 +913,54 @@
     }, {threshold:.25});
     ioT.observe(txSplit);
   } else if(txSplit){ txSplit.classList.add('inview'); }
+
+  /* ===== МОБИЛЬНАЯ ГАРМОШКА: тап по вкладке раскрывает раздел в списке ===== */
+  (function(){
+    var mqA = window.matchMedia('(max-width:860px)');
+    var stepsEls = document.querySelectorAll('.steps > .step');
+    function bodyOf(st){ return st.querySelector(':scope > .step-body, :scope > .step-fold'); }
+    function reveal(st){
+      st.querySelectorAll('.about-photo').forEach(function(p){ p.classList.add('awake'); });
+      st.querySelectorAll('.txsplit').forEach(function(p){ p.classList.add('inview'); });
+      if(videoWord && st.contains(videoWord) && !videoWord.dataset.done){
+        videoWord.dataset.done='1';
+        var t=videoWord.getAttribute('data-text').toUpperCase();
+        videoWord.textContent=''; decodeLine(videoWord, t);
+      }
+    }
+    function toggle(st){
+      var body=bodyOf(st); if(!body) return;
+      if(st.classList.contains('open')){
+        body.style.maxHeight=body.scrollHeight+'px';
+        requestAnimationFrame(function(){ body.style.maxHeight='0px'; });
+        st.classList.remove('open');
+      } else {
+        st.classList.add('open'); reveal(st);
+        body.style.maxHeight=body.scrollHeight+'px';
+        var te=function(){ if(st.classList.contains('open')) body.style.maxHeight='none'; body.removeEventListener('transitionend',te); };
+        body.addEventListener('transitionend', te);
+      }
+    }
+    stepsEls.forEach(function(st){
+      var head=st.querySelector(':scope > .step-head');
+      if(head) head.addEventListener('click', function(){ if(mqA.matches) toggle(st); });
+    });
+    /* переход из меню — открыть нужную вкладку */
+    document.querySelectorAll('.overlay nav a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        if(!mqA.matches) return;
+        var st=document.getElementById(a.getAttribute('href').slice(1));
+        if(st && st.classList.contains('step') && !st.classList.contains('open')){
+          setTimeout(function(){ toggle(st); }, 360);
+        }
+      });
+    });
+    function onMode(){
+      if(!mqA.matches){ stepsEls.forEach(function(st){ st.classList.remove('open'); var b=bodyOf(st); if(b) b.style.maxHeight=''; }); }
+    }
+    if(mqA.addEventListener) mqA.addEventListener('change', onMode);
+    else if(mqA.addListener) mqA.addListener(onMode);
+  })();
 
   /* ЛИСТАЛКА КНИГИ — развороты + 3D-перелистывание */
   (function(){
