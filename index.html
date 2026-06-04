@@ -487,17 +487,41 @@
     .s-events .step-body h3,.s-tools .step-body h3{font-size:clamp(20px,6vw,30px)}
   }
   @media (max-width:760px){:root{--head:58px}}
-  /* ===== МОБИЛЬНАЯ ГАРМОШКА: вкладки-аккордеон вместо прилипающей колоды ===== */
+  /* ===== МОБИЛЬНАЯ КОЛОДА: корешки собираются по скроллу, тап → раздел на первый план ===== */
+  @keyframes stepRise{from{opacity:0;transform:translateY(7%)}to{opacity:1;transform:none}}
+  @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .step-back{display:none}
   @media (max-width:860px){
-    .steps > .step{position:static;min-height:0;display:block}
-    .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(48px,14vw,68px);-webkit-tap-highlight-color:transparent}
-    .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:11px;height:11px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:translateY(-72%) rotate(45deg);transition:transform .35s var(--ease);opacity:.5}
-    .step.open > .step-head::after{transform:translateY(-28%) rotate(225deg);opacity:.85}
-    .step > .step-body, .step > .step-fold{display:block;flex:none;min-height:0;max-height:0;overflow:hidden;transition:max-height .42s var(--ease)}
-    .step:not(.open) > .step-body, .step:not(.open) > .step-fold{padding-top:0;padding-bottom:0}
-    .s-tools:not(.open) .sphere-bg{display:none}
+    /* корешки колоды в общем потоке + стартовое состояние сборки */
+    .steps > .step{position:static;min-height:0;display:block;opacity:0;transform:translateY(36px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+    .steps.assembled > .step{opacity:1;transform:none}
+    .steps.assembled > .step:nth-child(1){transition-delay:.03s}
+    .steps.assembled > .step:nth-child(2){transition-delay:.11s}
+    .steps.assembled > .step:nth-child(3){transition-delay:.19s}
+    .steps.assembled > .step:nth-child(4){transition-delay:.27s}
+    .steps.assembled > .step:nth-child(5){transition-delay:.35s}
+    .steps.assembled > .step:nth-child(6){transition-delay:.43s}
+
+    /* корешок-вкладка: кликабельный, со стрелкой «открыть» */
+    .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(50px,14vw,70px);-webkit-tap-highlight-color:transparent}
+    .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:10px;height:10px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:translateY(-50%) rotate(45deg);opacity:.5;transition:transform .3s var(--ease)}
+    .step > .step-head:active::after{transform:translateY(-50%) translateX(3px) rotate(45deg)}
+
+    /* контент скрыт, пока вкладка не открыта */
+    .step > .step-body, .step > .step-fold{display:none}
+
+    /* АКТИВНАЯ вкладка — на весь экран, поверх всего */
+    .step.active{position:fixed;inset:0;z-index:200;height:100dvh;display:flex;flex-direction:column;opacity:1;transform:none;border-radius:0;box-shadow:none;overflow:hidden;animation:stepRise .46s var(--ease)}
+    .step.active > .step-head{flex:0 0 auto;height:auto;min-height:var(--head);padding-top:16px;padding-bottom:16px}
+    .step.active > .step-head::after{display:none}
+    .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+    .s-tools:not(.active) .sphere-bg{display:none}
     .txsplit .txpane{opacity:1;animation:none}
     .about-photo .eyes-open{opacity:1;transform:none}
+
+    /* кнопка «закрыть» поверх активной вкладки */
+    .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+    body.step-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
   }
 </style>
 </head>
@@ -914,11 +938,14 @@
     ioT.observe(txSplit);
   } else if(txSplit){ txSplit.classList.add('inview'); }
 
-  /* ===== МОБИЛЬНАЯ ГАРМОШКА: тап по вкладке раскрывает раздел в списке ===== */
+  /* ===== МОБИЛЬНАЯ КОЛОДА: сборка корешков + открытие раздела на первый план ===== */
   (function(){
     var mqA = window.matchMedia('(max-width:860px)');
+    var stepsWrap = document.querySelector('.steps');
     var stepsEls = document.querySelectorAll('.steps > .step');
-    function bodyOf(st){ return st.querySelector(':scope > .step-body, :scope > .step-fold'); }
+    if(!stepsWrap) return;
+    var activeStep = null;
+
     function reveal(st){
       st.querySelectorAll('.about-photo').forEach(function(p){ p.classList.add('awake'); });
       st.querySelectorAll('.txsplit').forEach(function(p){ p.classList.add('inview'); });
@@ -928,36 +955,57 @@
         videoWord.textContent=''; decodeLine(videoWord, t);
       }
     }
-    function toggle(st){
-      var body=bodyOf(st); if(!body) return;
-      if(st.classList.contains('open')){
-        body.style.maxHeight=body.scrollHeight+'px';
-        requestAnimationFrame(function(){ body.style.maxHeight='0px'; });
-        st.classList.remove('open');
-      } else {
-        st.classList.add('open'); reveal(st);
-        body.style.maxHeight=body.scrollHeight+'px';
-        var te=function(){ if(st.classList.contains('open')) body.style.maxHeight='none'; body.removeEventListener('transitionend',te); };
-        body.addEventListener('transitionend', te);
-      }
+
+    /* кнопка «закрыть» поверх открытой вкладки */
+    var backBtn = document.createElement('button');
+    backBtn.type='button'; backBtn.className='step-back';
+    backBtn.innerHTML='✕';
+    backBtn.setAttribute('aria-label','Закрыть раздел, вернуться к списку');
+    document.body.appendChild(backBtn);
+
+    function openStep(st){
+      if(!mqA.matches || activeStep) return;
+      reveal(st);
+      activeStep = st;
+      st.classList.add('active');
+      document.body.classList.add('step-open');
+      document.body.style.overflow='hidden';
+      var b=st.querySelector(':scope > .step-body, :scope > .step-fold'); if(b) b.scrollTop=0;
     }
+    function closeStep(){
+      if(!activeStep) return;
+      activeStep.classList.remove('active');
+      activeStep = null;
+      document.body.classList.remove('step-open');
+      document.body.style.overflow='';
+    }
+    backBtn.addEventListener('click', closeStep);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && activeStep) closeStep(); });
+
     stepsEls.forEach(function(st){
-      var head=st.querySelector(':scope > .step-head');
-      if(head) head.addEventListener('click', function(){ if(mqA.matches) toggle(st); });
+      var head = st.querySelector(':scope > .step-head');
+      if(head) head.addEventListener('click', function(){ if(mqA.matches) openStep(st); });
     });
-    /* переход из меню — открыть нужную вкладку */
+
+    /* переход из меню — открыть нужную вкладку на первый план */
     document.querySelectorAll('.overlay nav a[href^="#"]').forEach(function(a){
       a.addEventListener('click', function(){
         if(!mqA.matches) return;
         var st=document.getElementById(a.getAttribute('href').slice(1));
-        if(st && st.classList.contains('step') && !st.classList.contains('open')){
-          setTimeout(function(){ toggle(st); }, 360);
-        }
+        if(st && st.classList.contains('step')) setTimeout(function(){ openStep(st); }, 420);
       });
     });
-    function onMode(){
-      if(!mqA.matches){ stepsEls.forEach(function(st){ st.classList.remove('open'); var b=bodyOf(st); if(b) b.style.maxHeight=''; }); }
-    }
+
+    /* сборка колоды, когда корешки появляются после Hero */
+    function assemble(){ stepsWrap.classList.add('assembled'); }
+    if('IntersectionObserver' in window){
+      var ioS = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ assemble(); ioS.disconnect(); } });
+      }, {threshold:.06});
+      ioS.observe(stepsWrap);
+    } else { assemble(); }
+
+    function onMode(){ if(!mqA.matches){ closeStep(); assemble(); } }
     if(mqA.addEventListener) mqA.addEventListener('change', onMode);
     else if(mqA.addListener) mqA.addListener(onMode);
   })();
