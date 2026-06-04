@@ -492,11 +492,10 @@
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .step-back{display:none}
   @media (max-width:860px){
-    /* корешки = отдельные карточки с воздухом между ними */
-    .steps{padding-top:10px}
-    .steps > .step{position:static;min-height:0;display:block;margin:0 0 10px;border-radius:18px;overflow:hidden;box-shadow:0 16px 34px -18px rgba(0,0,0,.6);
-      opacity:0;transform:translateY(50px) scale(.96);
-      transition:opacity .5s var(--ease), transform .62s var(--ease)}
+    /* ступеньки-картотека: сохраняем вид колоды (скруглённый верх + тень-нахлёст), добавляем сборку по одной */
+    .steps > .step{position:static;min-height:0;display:block;
+      opacity:0;transform:translateY(46px);
+      transition:opacity .5s var(--ease), transform .6s var(--ease)}
     .steps > .step.in{opacity:1;transform:none}
 
     /* корешок-вкладка: кликабельный, со стрелкой «открыть» */
