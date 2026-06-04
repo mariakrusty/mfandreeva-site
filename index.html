@@ -492,15 +492,12 @@
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .step-back{display:none}
   @media (max-width:860px){
-    /* корешки колоды в общем потоке + стартовое состояние сборки */
-    .steps > .step{position:static;min-height:0;display:block;opacity:0;transform:translateY(36px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-    .steps.assembled > .step{opacity:1;transform:none}
-    .steps.assembled > .step:nth-child(1){transition-delay:.03s}
-    .steps.assembled > .step:nth-child(2){transition-delay:.11s}
-    .steps.assembled > .step:nth-child(3){transition-delay:.19s}
-    .steps.assembled > .step:nth-child(4){transition-delay:.27s}
-    .steps.assembled > .step:nth-child(5){transition-delay:.35s}
-    .steps.assembled > .step:nth-child(6){transition-delay:.43s}
+    /* корешки = отдельные карточки с воздухом между ними */
+    .steps{padding-top:10px}
+    .steps > .step{position:static;min-height:0;display:block;margin:0 0 10px;border-radius:18px;overflow:hidden;box-shadow:0 16px 34px -18px rgba(0,0,0,.6);
+      opacity:0;transform:translateY(50px) scale(.96);
+      transition:opacity .5s var(--ease), transform .62s var(--ease)}
+    .steps > .step.in{opacity:1;transform:none}
 
     /* корешок-вкладка: кликабельный, со стрелкой «открыть» */
     .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(50px,14vw,70px);-webkit-tap-highlight-color:transparent}
@@ -996,12 +993,16 @@
       });
     });
 
-    /* сборка колоды, когда корешки появляются после Hero */
-    function assemble(){ stepsWrap.classList.add('assembled'); }
+    /* сборка колоды ПО ОДНОЙ карточке, когда долистали до неё */
+    var assembled=false;
+    function assemble(){
+      if(assembled) return; assembled=true;
+      stepsEls.forEach(function(st,i){ setTimeout(function(){ st.classList.add('in'); }, i*180); });
+    }
     if('IntersectionObserver' in window){
       var ioS = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if(e.isIntersecting){ assemble(); ioS.disconnect(); } });
-      }, {threshold:.06});
+      }, {threshold:0, rootMargin:'0px 0px -22% 0px'});
       ioS.observe(stepsWrap);
     } else { assemble(); }
 
