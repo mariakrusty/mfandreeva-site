@@ -999,7 +999,22 @@
       flipEnd.classList.remove('show'); book.style.visibility=''; book.classList.remove('turning');
       atEnd=false; cur=1; setStatic(1);
     });
-    function close(){ flip.classList.remove('open'); flip.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    /* iOS Safari: после поворота телефона внутри полноэкранной листалки
+       высоты 100vh и прилипание ступенек остаются «протухшими» — заставляем
+       страницу пересчитать раскладку (с сохранением позиции скролла). */
+    function forceReflow(){
+      var sc = document.scrollingElement || document.documentElement;
+      var y = sc.scrollTop;
+      document.body.style.display='none';
+      void document.body.offsetHeight;
+      document.body.style.display='';
+      sc.scrollTop = y;
+    }
+    function close(){
+      flip.classList.remove('open'); flip.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      requestAnimationFrame(forceReflow);
+    }
     openBtn.addEventListener('click',open);
     closeBtn.addEventListener('click',close);
     prev.addEventListener('click',function(){go(-1)});
@@ -1028,7 +1043,12 @@
       setStatic(cur);
     }
     window.addEventListener('resize', applyMode);
-    window.addEventListener('orientationchange', function(){ setTimeout(applyMode,220); });
+    window.addEventListener('orientationchange', function(){
+      setTimeout(function(){
+        applyMode();
+        if(!flip.classList.contains('open')) forceReflow();
+      },220);
+    });
     for(var i=1;i<=TOTAL;i++){ var im=new Image(); im.src=src(i); }
   })();
 </script>
