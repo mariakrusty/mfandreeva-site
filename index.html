@@ -379,6 +379,21 @@
   .flip-nav:disabled{opacity:.25;cursor:default}
   .flip-nav:disabled:hover{background:rgba(253,240,213,.06);color:var(--cream);border-color:rgba(253,240,213,.4)}
   @media(max-width:700px){.flip-nav{width:42px;height:42px;font-size:20px}.flip-book{height:min(74vh,92vw)}.flip-stage{gap:6px;padding:0 6px clamp(16px,3vh,28px)}}
+  /* подсказка «поверните телефон» — только на узких экранах в портрете */
+  .flip-rotate{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;color:var(--cream);font-family:'ShareTechMono';padding:30px}
+  .flip-rotate svg{width:62px;height:62px;opacity:.92;transform-origin:50% 50%;animation:flipRotateHint 2.6s ease-in-out infinite}
+  .flip-rotate p{font-size:14px;line-height:1.6;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+  @keyframes flipRotateHint{0%,38%{transform:rotate(0)}58%,82%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+  @media (max-width:760px) and (orientation:portrait){
+    .flip.open .flip-stage{display:none}
+    .flip.open .flip-rotate{display:flex}
+  }
+  @media (orientation:landscape) and (max-height:560px){
+    .flip-bar{padding-top:8px;padding-bottom:8px}
+    .flip-book{height:86vh}
+    .flip-stage{padding-bottom:10px}
+  }
+  @media(prefers-reduced-motion:reduce){.flip-rotate svg{animation:none}}
   /* подвал */
   .footer{background:var(--ink);color:var(--cream);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(50px,8vh,90px) clamp(22px,5vw,80px) clamp(28px,4vh,48px);position:relative;z-index:5;border-top-left-radius:26px;border-top-right-radius:26px}
   .footer-inner{width:100%;max-width:1180px;margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,7vh,80px)}
@@ -738,6 +753,17 @@
     </div>
     <button class="flip-nav" id="flipNext" type="button" aria-label="Вперёд">›</button>
   </div>
+  <div class="flip-rotate" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="7" y="2" width="10" height="20" rx="2"/>
+      <path d="M12 18h.01"/>
+      <path d="M3.5 9.5a9 9 0 0 1 2.2-3.6"/>
+      <path d="M20.5 14.5a9 9 0 0 1-2.2 3.6"/>
+      <path d="M2 8.2 3.6 9.6 5 8"/>
+      <path d="M22 15.8 20.4 14.4 19 16"/>
+    </svg>
+    <p>Поверните телефон,<br>чтобы листать книгу</p>
+  </div>
 </div>
 
 <!-- ===================== МЕНЮ-ОВЕРЛЕЙ ===================== -->
@@ -991,6 +1017,18 @@
       if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; sx=null;
       if(Math.abs(dx)>40){ go(dx<0?1:-1); }
     });
+    function applyMode(){
+      if(!flip.classList.contains('open')) return;
+      var ns = window.innerWidth>=760;
+      if(ns===spread) return;
+      spread = ns;
+      animating=false; turn.className='flip-turn'; book.classList.remove('turning');
+      if(atEnd) return;
+      if(spread && cur%2===0){ cur=Math.max(1,cur-1); }
+      setStatic(cur);
+    }
+    window.addEventListener('resize', applyMode);
+    window.addEventListener('orientationchange', function(){ setTimeout(applyMode,220); });
     for(var i=1;i<=TOTAL;i++){ var im=new Image(); im.src=src(i); }
   })();
 </script>
