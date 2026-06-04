@@ -422,10 +422,10 @@
   @media(max-width:760px){.footer-top{flex-direction:column}.footer-sub{max-width:none}.footer .big{font-size:clamp(38px,11vw,60px)}}
 
   @media (max-width:860px){
-    .about-line{flex-direction:column;gap:6px}
-    .about-word{font-size:clamp(30px,8.6vw,50px);text-align:center;line-height:1.02}
+    .about-line{flex-flow:row wrap;justify-content:center;align-items:baseline;gap:4px 9px}
+    .about-word{flex:0 0 auto;white-space:nowrap;font-size:clamp(18px,6vw,36px);text-align:center;line-height:1.05}
     .about-word.l{text-align:center}
-    .about-photo{order:-1;width:74vw;margin-bottom:16px}
+    .about-photo{order:-1;flex:0 0 100%;width:74vw;margin:0 auto 16px}
     .corner{display:none}
     .intro-photo .ph{width:64vw}
     .cols,.video-row,.vid-grid,.vsplit{grid-template-columns:1fr}
@@ -449,8 +449,9 @@
     .trow .tprev{display:none}
     .trow .tfree{display:none}
     .s-tools .tlist{max-width:none}
-    .s-tools .sphere-bg{top:clamp(38px,6.5vh,70px);bottom:auto;right:-15vw;align-items:flex-start}
-    .s-tools .sphere-bg img{width:min(54vw,240px);opacity:.5}
+    .s-tools .step-body{justify-content:flex-start;padding-top:clamp(150px,25vh,210px)}
+    .s-tools .sphere-bg{inset:clamp(46px,7vh,78px) 0 auto 0;justify-content:center;align-items:flex-start}
+    .s-tools .sphere-bg img{width:min(54vw,200px);opacity:.92}
     .ghost-num{font-size:42vw;bottom:1vh}
   }
   /* ===== перенос длинных слов (без overflow на html — иначе ломается sticky-колода!) ===== */
