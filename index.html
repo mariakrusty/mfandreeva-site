@@ -236,14 +236,14 @@
 
   /* AI-сфера из цифр — объект справа, в пределах контентной ширины */
   .sphere-bg{position:absolute;top:0;bottom:0;right:max(4vw,calc((100% - 1280px)/2 + 40px));display:flex;align-items:center;pointer-events:none;z-index:0}
-  .sphere-bg img{width:min(56vh,520px);height:auto;opacity:.95}
+  .sphere-bg img{width:min(56vh,520px);height:auto;opacity:.95;mix-blend-mode:screen}
   .s-tools .trow .tt{padding-right:0}        /* фото-превью на этом блоке не нужно — есть сфера */
   .s-tools .tprev{display:none}
   .s-tools .step-body{max-width:1280px;margin:0 auto;width:100%}
   .s-tools .tlist{max-width:min(52%,600px)}
 
   /* цвета ступенек (палитра книги) */
-  .s-tools{background:#070707;color:var(--cream)} .s-tools .step-head{color:var(--cream)} .s-tools h3 em{color:var(--gold)}
+  .s-tools{background:#000;color:var(--cream)} .s-tools .step-head{color:var(--cream)} .s-tools h3 em{color:var(--gold)}
   .s-tools .tlist{border-color:rgba(253,240,213,.18)} .s-tools .trow{border-color:rgba(253,240,213,.18)}
   .s-tools .trow:hover{color:#fff} .s-tools .trow:hover .tgo{color:var(--gold)}
   .s-video{background:var(--marble);color:var(--ink)} .s-video .step-head{color:var(--cosmos)} .s-video h3 em{color:var(--cosmos)} .s-video .cta:hover{background:var(--cosmos);color:var(--cream);border-color:var(--cosmos)}
@@ -450,8 +450,8 @@
     .trow .tfree{display:none}
     .s-tools .tlist{max-width:none}
     .s-tools .step-body{justify-content:flex-start;padding-top:clamp(150px,25vh,210px)}
-    .s-tools .sphere-bg{inset:clamp(46px,7vh,78px) 0 auto 0;justify-content:center;align-items:flex-start}
-    .s-tools .sphere-bg img{width:min(54vw,200px);opacity:.92}
+    .s-tools .sphere-bg{inset:clamp(40px,6.5vh,72px) 0 auto 0;justify-content:flex-end;align-items:flex-start}
+    .s-tools .sphere-bg img{width:min(52vw,200px);opacity:.95;margin-right:clamp(2px,1vw,12px)}
     .ghost-num{font-size:42vw;bottom:1vh}
   }
   /* ===== перенос длинных слов (без overflow на html — иначе ломается sticky-колода!) ===== */
