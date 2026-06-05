@@ -492,6 +492,8 @@
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .step-back{display:none}
   @media (max-width:860px){
+    /* Hero не прилипает — уезжает вверх, чтобы ступеньки собирались на чистом фоне */
+    .hero{position:static}
     /* ступеньки-картотека: сохраняем вид колоды (скруглённый верх + тень-нахлёст), добавляем сборку по одной */
     .steps > .step{position:static;min-height:0;display:block;
       opacity:0;transform:translateY(46px);
@@ -1001,7 +1003,7 @@
     if('IntersectionObserver' in window){
       var ioS = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if(e.isIntersecting){ assemble(); ioS.disconnect(); } });
-      }, {threshold:0, rootMargin:'0px 0px -22% 0px'});
+      }, {threshold:0, rootMargin:'0px 0px -50% 0px'});
       ioS.observe(stepsWrap);
     } else { assemble(); }
 
