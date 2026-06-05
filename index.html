@@ -490,15 +490,17 @@
   /* ===== МОБИЛЬНАЯ КОЛОДА: корешки собираются по скроллу, тап → раздел на первый план ===== */
   @keyframes stepRise{from{opacity:0;transform:translateY(7%)}to{opacity:1;transform:none}}
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  /* подъём ступеньки снизу с лёгким «приземлением» (overshoot) */
+  @keyframes stepStack{0%{opacity:0;transform:translateY(95px) scale(.985)}58%{opacity:1;transform:translateY(-9px) scale(1)}100%{opacity:1;transform:translateY(0)}}
+  /* раздел выкручивается из колоды на первый план (3D, «как по кольцу») */
+  @keyframes stepToFront{0%{opacity:.3;transform:perspective(1300px) rotateX(38deg) translateY(34%) scale(.92);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
   .step-back{display:none}
   @media (max-width:860px){
     /* Hero не прилипает — уезжает вверх, чтобы ступеньки собирались на чистом фоне */
     .hero{position:static}
     /* ступеньки-картотека: сохраняем вид колоды (скруглённый верх + тень-нахлёст), добавляем сборку по одной */
-    .steps > .step{position:static;min-height:0;display:block;
-      opacity:0;transform:translateY(46px);
-      transition:opacity .5s var(--ease), transform .6s var(--ease)}
-    .steps > .step.in{opacity:1;transform:none}
+    .steps > .step{position:static;min-height:0;display:block;opacity:0}
+    .steps > .step.in{animation:stepStack .6s var(--ease) both}
 
     /* корешок-вкладка: кликабельный, со стрелкой «открыть» */
     .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(50px,14vw,70px);-webkit-tap-highlight-color:transparent}
@@ -509,7 +511,7 @@
     .step > .step-body, .step > .step-fold{display:none}
 
     /* АКТИВНАЯ вкладка — на весь экран, поверх всего */
-    .step.active{position:fixed;inset:0;z-index:200;height:100dvh;display:flex;flex-direction:column;opacity:1;transform:none;border-radius:0;box-shadow:none;overflow:hidden;animation:stepRise .46s var(--ease)}
+    .step.active{position:fixed;inset:0;z-index:200;height:100dvh;display:flex;flex-direction:column;opacity:1;transform:none;border-radius:0;box-shadow:none;overflow:hidden;animation:stepToFront .55s var(--ease)}
     .step.active > .step-head{flex:0 0 auto;height:auto;min-height:var(--head);padding-top:16px;padding-bottom:16px}
     .step.active > .step-head::after{display:none}
     .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
