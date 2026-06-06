@@ -556,7 +556,10 @@
     body.deck-on .steps > .step.s-book .book-split{gap:clamp(6px,1.4vh,12px)}
     body.deck-on .steps > .step.s-book .book-info h3{margin-bottom:4px}
     body.deck-on .steps > .step.s-book .book-info .lead{margin-bottom:0}
-    body.deck-on .steps > .step.s-book .book-cta-row{gap:8px;margin-top:clamp(8px,1.6vh,14px)}
+    /* кнопки книги — в один ряд, рядом, чтобы обе влезли */
+    body.deck-on .steps > .step.s-book .book-cta-row{flex-direction:row;width:min(460px,94vw);gap:10px;margin-top:clamp(10px,2vh,16px);align-items:stretch}
+    body.deck-on .steps > .step.s-book .book-cta-row .cta{flex:1 1 0;min-width:0;padding:13px 12px;font-size:clamp(11px,3.1vw,13px);letter-spacing:0;text-align:center;white-space:normal;line-height:1.15}
+    body.deck-on .steps > .step.s-book .book-cta-row .cta .ar{display:none}
     body.deck-on .steps > .step.s-book > .step-body{padding-top:clamp(8px,1.5vh,16px);padding-bottom:clamp(12px,2.5vh,22px)}
     .s-tools:not(.active) .sphere-bg{display:none}
     .txsplit .txpane{opacity:1;animation:none}
