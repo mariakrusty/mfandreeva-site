@@ -489,8 +489,8 @@
   @media (max-width:760px){:root{--head:58px}}
   /* ===== МОБИЛЬНАЯ ЛЕСЕНКА: целые страницы взлетают снизу и складываются в колоду по тапу из hero ===== */
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-  /* раздел выкручивается из колоды на первый план (3D, «как по кольцу») */
-  @keyframes stepToFront{0%{opacity:.5;transform:perspective(1300px) rotateX(32deg) translateY(24%) scale(.93);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
+  /* выбранная карта выходит на первый план «из-за угла» (3D-поворот из нижнего левого угла) */
+  @keyframes cornerIn{0%{opacity:.15;transform:perspective(1300px) translate(-24%,16%) rotate3d(1,1,0,-72deg) scale(.6);transform-origin:0% 100%}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) translate(0,0) rotate3d(1,1,0,0deg) scale(1);transform-origin:0% 100%}}
   /* подвал выезжает снизу */
   @keyframes footerUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
   /* крестик «пыхает» размером (без зависимости от прозрачности — всегда видим) */
@@ -543,13 +543,18 @@
     .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:10px;height:10px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:translateY(-50%) rotate(45deg);opacity:.5;transition:transform .3s var(--ease)}
     .step > .step-head:active::after{transform:translateY(-50%) translateX(3px) rotate(45deg)}
 
-    /* ОТКРЫТИЕ: колода расступается — выбранная карта выходит вперёд с мягким отскоком, остальные разъезжаются с 3D-наклоном */
-    body.deck-on .steps > .step.active{transform:translateY(0)!important;z-index:200!important;border-radius:0;box-shadow:0 -36px 80px -28px rgba(0,0,0,.6);overflow:hidden;transition:transform .62s cubic-bezier(.34,1.42,.5,1),box-shadow .5s var(--ease)!important}
-    body.deck-on .steps > .step.peel-up{transform:perspective(1300px) translateY(-118%) rotateX(20deg) scale(.92)!important;opacity:0;transition:transform .55s var(--ease),opacity .4s var(--ease)!important}
-    body.deck-on .steps > .step.peel-down{transform:perspective(1300px) translateY(120%) rotateX(-20deg) scale(.92)!important;opacity:0;transition:transform .55s var(--ease),opacity .4s var(--ease)!important}
+    /* ОТКРЫТИЕ: остальные карты отступают-уменьшаются, выбранная выходит вперёд «из-за угла» */
+    body.deck-on .steps > .step.recede{opacity:.4;filter:brightness(.65);transition:transform .55s var(--ease),opacity .45s var(--ease),filter .45s var(--ease)!important;pointer-events:none}
+    body.deck-on .steps > .step.active{z-index:200!important;border-radius:0;box-shadow:0 24px 80px -12px rgba(0,0,0,.6);overflow:hidden;animation:cornerIn .62s var(--ease) both}
     .step.active > .step-head{flex:0 0 auto;height:auto;min-height:var(--head);padding-top:16px;padding-bottom:16px}
     .step.active > .step-head::after{display:none}
     .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+    /* видео: контент по центру по вертикали, не прижат вверх */
+    body.deck-on .steps > .step.active.s-video > .step-body{display:flex;flex-direction:column;justify-content:center;padding-top:clamp(14px,3vh,26px);padding-bottom:clamp(18px,4vh,40px)}
+    /* книга: компактнее, чтобы на экран влезли обе кнопки */
+    body.deck-on .steps > .step.active.s-book .book-cover{max-height:20vh;width:clamp(120px,34vw,170px)}
+    body.deck-on .steps > .step.active.s-book .book-split{gap:clamp(8px,1.6vh,14px)}
+    body.deck-on .steps > .step.active.s-book .book-cta-row{gap:8px}
     .s-tools:not(.active) .sphere-bg{display:none}
     .txsplit .txpane{opacity:1;animation:none}
     .about-photo .eyes-open{opacity:1;transform:none}
@@ -1002,24 +1007,22 @@
       if(!mqA.matches || !deckOn || activeStep) return;
       reveal(st);
       activeStep = st;
-      var idx = Array.prototype.indexOf.call(stepsEls, st);
-      /* ФАЗА 1: колода расступается — остальные карты разъезжаются (видно!) */
+      var head = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--head'))||58;
+      /* остальные карты уменьшаются и отступают назад (остаются на своих местах в лесенке) */
       stepsEls.forEach(function(o,i){
         if(o===st) return;
-        var dist = Math.abs(i-idx);
-        o.style.transitionDelay = ((dist-1)*55)+'ms';        /* каскад: ближние уезжают первыми */
-        o.classList.add(i<idx ? 'peel-up' : 'peel-down');
+        o.style.transform = 'translateY('+(i*head)+'px) scale(.84)';
+        o.classList.add('recede');
       });
+      /* выбранная выходит вперёд «из-за угла» */
+      st.classList.add('active');
       document.body.classList.add('step-open');
       var b=st.querySelector(':scope > .step-body, :scope > .step-fold'); if(b) b.scrollTop=0;
-      /* ФАЗА 2: на расчищенное место выходит выбранная карта вперёд */
-      st._openT = setTimeout(function(){ st.classList.add('active'); }, 330);
     }
     function closeStep(){
       if(!activeStep) return;
-      clearTimeout(activeStep._openT);
       activeStep.classList.remove('active');
-      stepsEls.forEach(function(o){ o.classList.remove('peel-up','peel-down'); o.style.transitionDelay=''; });
+      stepsEls.forEach(function(o){ o.classList.remove('recede'); o.style.transform=''; o.style.transitionDelay=''; });
       activeStep = null;
       document.body.classList.remove('step-open');
     }
