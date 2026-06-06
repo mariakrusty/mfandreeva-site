@@ -487,31 +487,56 @@
     .s-events .step-body h3,.s-tools .step-body h3{font-size:clamp(20px,6vw,30px)}
   }
   @media (max-width:760px){:root{--head:58px}}
-  /* ===== МОБИЛЬНАЯ КОЛОДА: корешки собираются по скроллу, тап → раздел на первый план ===== */
-  @keyframes stepRise{from{opacity:0;transform:translateY(7%)}to{opacity:1;transform:none}}
+  /* ===== МОБИЛЬНАЯ ЛЕСЕНКА: целые страницы взлетают снизу и складываются в колоду по тапу из hero ===== */
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-  /* подъём ступеньки снизу с лёгким «приземлением» (overshoot) */
-  @keyframes stepStack{0%{opacity:0;transform:translateY(95px) scale(.985)}58%{opacity:1;transform:translateY(-9px) scale(1)}100%{opacity:1;transform:translateY(0)}}
   /* раздел выкручивается из колоды на первый план (3D, «как по кольцу») */
-  @keyframes stepToFront{0%{opacity:.3;transform:perspective(1300px) rotateX(38deg) translateY(34%) scale(.92);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
+  @keyframes stepToFront{0%{opacity:.5;transform:perspective(1300px) rotateX(32deg) translateY(24%) scale(.93);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
   .step-back{display:none}
   @media (max-width:860px){
-    /* Hero не прилипает — уезжает вверх, чтобы ступеньки собирались на чистом фоне */
-    .hero{position:static}
-    /* ступеньки-картотека: сохраняем вид колоды (скруглённый верх + тень-нахлёст), добавляем сборку по одной */
-    .steps > .step{position:static;min-height:0;display:block;opacity:0}
-    .steps > .step.in{animation:stepStack .6s var(--ease) both}
+    /* hero — обычный первый экран, не прилипает */
+    .hero{position:relative}
+    /* ступеньки спрятаны, пока колоду не вызвали тапом */
+    .steps{display:none}
 
-    /* корешок-вкладка: кликабельный, со стрелкой «открыть» */
+    /* СЦЕНА собранной лесенки — на весь экран, поверх всего */
+    body.deck-on{overflow:hidden}
+    body.deck-on .hero{display:none}
+    body.deck-on .steps{display:block;position:fixed;inset:0;height:100dvh;z-index:50;overflow:hidden;perspective:1500px;background:var(--red)}
+
+    /* каждая ступенька — ПОЛНАЯ страница; стартует снизу за экраном */
+    body.deck-on .steps > .step{
+      position:absolute;left:0;right:0;top:0;height:100dvh;min-height:0;display:flex;flex-direction:column;
+      border-top-left-radius:22px;border-top-right-radius:22px;
+      box-shadow:0 -22px 46px -16px rgba(0,0,0,.55);
+      transform:translateY(112%);opacity:0;will-change:transform,opacity;
+    }
+    /* позже по порядку = выше в стопке (накрывает предыдущую, оставляя её корешок) */
+    body.deck-on .steps > .step:nth-child(1){z-index:1}
+    body.deck-on .steps > .step:nth-child(2){z-index:2}
+    body.deck-on .steps > .step:nth-child(3){z-index:3}
+    body.deck-on .steps > .step:nth-child(4){z-index:4}
+    body.deck-on .steps > .step:nth-child(5){z-index:5}
+    body.deck-on .steps > .step:nth-child(6){z-index:6}
+    /* приехала на свой «этаж» лесенки */
+    body.deck-on .steps > .step.in{opacity:1;transition:transform .6s var(--ease),opacity .35s var(--ease)}
+    body.deck-on .steps > .step.in:nth-child(1){transform:translateY(calc(var(--head)*0))}
+    body.deck-on .steps > .step.in:nth-child(2){transform:translateY(calc(var(--head)*1))}
+    body.deck-on .steps > .step.in:nth-child(3){transform:translateY(calc(var(--head)*2))}
+    body.deck-on .steps > .step.in:nth-child(4){transform:translateY(calc(var(--head)*3))}
+    body.deck-on .steps > .step.in:nth-child(5){transform:translateY(calc(var(--head)*4))}
+    body.deck-on .steps > .step.in:nth-child(6){transform:translateY(calc(var(--head)*5))}
+
+    /* тело страницы заполняет карту целиком (полноценная страница) */
+    body.deck-on .steps > .step > .step-body,
+    body.deck-on .steps > .step > .step-fold{display:block;flex:1 1 auto;min-height:0;overflow:hidden}
+
+    /* корешок — кликабельный, со стрелкой «открыть» */
     .step > .step-head{cursor:pointer;position:relative;z-index:3;padding-right:clamp(50px,14vw,70px);-webkit-tap-highlight-color:transparent}
     .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:10px;height:10px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:translateY(-50%) rotate(45deg);opacity:.5;transition:transform .3s var(--ease)}
     .step > .step-head:active::after{transform:translateY(-50%) translateX(3px) rotate(45deg)}
 
-    /* контент скрыт, пока вкладка не открыта */
-    .step > .step-body, .step > .step-fold{display:none}
-
-    /* АКТИВНАЯ вкладка — на весь экран, поверх всего */
-    .step.active{position:fixed;inset:0;z-index:200;height:100dvh;display:flex;flex-direction:column;opacity:1;transform:none;border-radius:0;box-shadow:none;overflow:hidden;animation:stepToFront .55s var(--ease)}
+    /* ОТКРЫТАЯ вкладка — на весь экран, поверх всего, с 3D-выходом «как по кольцу» */
+    body.deck-on .steps > .step.active{position:fixed;inset:0;top:0;height:100dvh;transform:none!important;z-index:200;border-radius:0;box-shadow:none;overflow:hidden;animation:stepToFront .55s var(--ease)}
     .step.active > .step-head{flex:0 0 auto;height:auto;min-height:var(--head);padding-top:16px;padding-bottom:16px}
     .step.active > .step-head::after{display:none}
     .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
@@ -519,7 +544,7 @@
     .txsplit .txpane{opacity:1;animation:none}
     .about-photo .eyes-open{opacity:1;transform:none}
 
-    /* кнопка «закрыть» поверх активной вкладки */
+    /* кнопка «закрыть» поверх открытой вкладки */
     .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
     body.step-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
   }
@@ -938,13 +963,13 @@
     ioT.observe(txSplit);
   } else if(txSplit){ txSplit.classList.add('inview'); }
 
-  /* ===== МОБИЛЬНАЯ КОЛОДА: сборка корешков + открытие раздела на первый план ===== */
+  /* ===== МОБИЛЬНАЯ ЛЕСЕНКА: целые страницы собираются в колоду по тапу из hero ===== */
   (function(){
     var mqA = window.matchMedia('(max-width:860px)');
     var stepsWrap = document.querySelector('.steps');
     var stepsEls = document.querySelectorAll('.steps > .step');
     if(!stepsWrap) return;
-    var activeStep = null;
+    var activeStep = null, deckOn = false, assembled = false;
 
     function reveal(st){
       st.querySelectorAll('.about-photo').forEach(function(p){ p.classList.add('awake'); });
@@ -964,12 +989,11 @@
     document.body.appendChild(backBtn);
 
     function openStep(st){
-      if(!mqA.matches || activeStep) return;
+      if(!mqA.matches || !deckOn || activeStep) return;
       reveal(st);
       activeStep = st;
       st.classList.add('active');
       document.body.classList.add('step-open');
-      document.body.style.overflow='hidden';
       var b=st.querySelector(':scope > .step-body, :scope > .step-fold'); if(b) b.scrollTop=0;
     }
     function closeStep(){
@@ -977,39 +1001,69 @@
       activeStep.classList.remove('active');
       activeStep = null;
       document.body.classList.remove('step-open');
-      document.body.style.overflow='';
     }
     backBtn.addEventListener('click', closeStep);
     document.addEventListener('keydown', function(e){ if(e.key==='Escape' && activeStep) closeStep(); });
 
+    /* тап по корешку → раздел на первый план */
     stepsEls.forEach(function(st){
       var head = st.querySelector(':scope > .step-head');
-      if(head) head.addEventListener('click', function(){ if(mqA.matches) openStep(st); });
+      if(head) head.addEventListener('click', function(){ if(mqA.matches && deckOn) openStep(st); });
     });
 
-    /* переход из меню — открыть нужную вкладку на первый план */
+    /* сборка лесенки: целые страницы взлетают снизу одна за другой */
+    function assemble(){
+      if(assembled) return; assembled = true;
+      stepsEls.forEach(function(st,i){
+        setTimeout(function(){ st.classList.add('in'); reveal(st); }, 80 + i*150);
+      });
+    }
+    /* вход в колоду по тапу из hero */
+    function enterDeck(){
+      if(deckOn || !mqA.matches) return;
+      deckOn = true;
+      document.body.classList.add('deck-on');
+      assemble();
+    }
+
+    /* подсказка «Смотреть, чем помогаю» — тап запускает сборку */
+    var hint = document.querySelector('.scroll-hint');
+    if(hint) hint.addEventListener('click', function(e){ if(mqA.matches){ e.preventDefault(); enterDeck(); } });
+
+    /* свайп вверх по hero — тоже запускает сборку */
+    var hero = document.getElementById('hero'), ty=null;
+    if(hero){
+      hero.addEventListener('touchstart', function(e){ ty = e.touches[0].clientY; }, {passive:true});
+      hero.addEventListener('touchend', function(e){
+        if(ty==null) return;
+        var dy = ty - e.changedTouches[0].clientY;
+        if(mqA.matches && dy > 40) enterDeck();
+        ty = null;
+      }, {passive:true});
+    }
+
+    /* переход из меню — собрать колоду и открыть нужную вкладку */
     document.querySelectorAll('.overlay nav a[href^="#"]').forEach(function(a){
       a.addEventListener('click', function(){
         if(!mqA.matches) return;
         var st=document.getElementById(a.getAttribute('href').slice(1));
-        if(st && st.classList.contains('step')) setTimeout(function(){ openStep(st); }, 420);
+        if(st && st.classList.contains('step')){
+          var fresh = !deckOn;
+          enterDeck();
+          setTimeout(function(){ openStep(st); }, fresh ? 1000 : 80);
+        }
       });
     });
 
-    /* сборка колоды ПО ОДНОЙ карточке, когда долистали до неё */
-    var assembled=false;
-    function assemble(){
-      if(assembled) return; assembled=true;
-      stepsEls.forEach(function(st,i){ setTimeout(function(){ st.classList.add('in'); }, i*180); });
+    /* при переходе на десктоп — сбросить мобильное состояние */
+    function onMode(){
+      if(!mqA.matches){
+        closeStep();
+        document.body.classList.remove('deck-on');
+        deckOn = false;
+        stepsEls.forEach(function(st){ st.classList.remove('in'); });
+      }
     }
-    if('IntersectionObserver' in window){
-      var ioS = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ assemble(); ioS.disconnect(); } });
-      }, {threshold:0, rootMargin:'0px 0px -50% 0px'});
-      ioS.observe(stepsWrap);
-    } else { assemble(); }
-
-    function onMode(){ if(!mqA.matches){ closeStep(); assemble(); } }
     if(mqA.addEventListener) mqA.addEventListener('change', onMode);
     else if(mqA.addListener) mqA.addListener(onMode);
   })();
