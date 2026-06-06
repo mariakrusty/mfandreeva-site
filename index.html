@@ -266,6 +266,10 @@
   .erow .einfo{font-family:'ShareTechMono';font-size:11px;opacity:.65;letter-spacing:.02em}
   .erow .ego{font-size:18px;opacity:.4;transition:.3s var(--ease);flex:0 0 auto}
   .erow:hover .ego{opacity:1;transform:translateX(4px)}
+  /* событие-анонс (ещё нет страницы): не кликабельно, плашка вместо стрелки */
+  .erow.soon{cursor:default}
+  .erow.soon:hover{padding-left:4px}
+  .erow .esoon{flex:0 0 auto;font-family:'ShareTechMono';font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.65;border:1px solid currentColor;border-radius:100px;padding:5px 11px;white-space:nowrap}
   /* главное событие — выделено */
   .erow.featured .ett{font-size:clamp(18px,1.9vw,30px)}
   .erow.featured .en{opacity:1;font-weight:700}
@@ -674,13 +678,13 @@
         </div>
         <div class="vsplit-r">
           <div class="vlist">
-            <a class="vrow" href="#"><span class="vn">01</span><span class="vtt">Цветочный бизнес в Китае</span><span class="vgo">▶</span></a>
-            <a class="vrow" href="#"><span class="vn">02</span><span class="vtt">Тренды 2026/27</span><span class="vgo">▶</span></a>
+            <a class="vrow" href="https://vkvideo.ru/video-211635814_456239034?t=2m59s" target="_blank" rel="noopener"><span class="vn">01</span><span class="vtt">Цветочный бизнес в Китае</span><span class="vgo">▶</span></a>
+            <a class="vrow" href="https://vkvideo.ru/video-211635814_456239026?t=34m24s" target="_blank" rel="noopener"><span class="vn">02</span><span class="vtt">Тренды 2026/27</span><span class="vgo">▶</span></a>
           </div>
           <div class="channels">
             <span class="ch-label">Смотреть на каналах:</span>
-            <a class="ch" href="#"><span class="ch-ic yt">▶</span> YouTube <span class="ar">→</span></a>
-            <a class="ch" href="#"><span class="ch-ic vk">VK</span> ВКонтакте <span class="ar">→</span></a>
+            <a class="ch" href="https://www.youtube.com/@mariaandreeva6046" target="_blank" rel="noopener"><span class="ch-ic yt">▶</span> YouTube <span class="ar">→</span></a>
+            <a class="ch" href="https://vk.com/floral_business" target="_blank" rel="noopener"><span class="ch-ic vk">VK</span> ВКонтакте <span class="ar">→</span></a>
           </div>
         </div>
       </div>
@@ -692,30 +696,30 @@
     <div class="step-head"><span class="idx">04</span> Мероприятия <span class="hint">расписание 2026/2027</span></div>
     <div class="step-body">
       <div class="elist">
-        <a class="erow featured" href="#">
+        <a class="erow featured" href="https://mfandreeva.ru/kemp2026/" target="_blank" rel="noopener">
           <span class="en">01</span>
           <span class="emain"><span class="etag">Главное · лето</span><span class="ett">AI-Кемп для цветочных</span></span>
           <span class="emeta"><span class="edate">7 июня — 23 августа</span><span class="einfo">6 уроков · 3 месяца · 50 000 ₽</span></span>
           <span class="ego">→</span>
         </a>
-        <a class="erow" href="#">
+        <div class="erow soon">
           <span class="en">02</span>
           <span class="emain"><span class="etag">Лекция · офлайн</span><span class="ett">Тренды 2027/2028</span></span>
           <span class="emeta"><span class="edate">Сентябрь 2026</span><span class="einfo">Крокус, Москва</span></span>
-          <span class="ego">→</span>
-        </a>
-        <a class="erow" href="#">
+          <span class="esoon">Анонс · авг 2026</span>
+        </div>
+        <div class="erow soon">
           <span class="en">03</span>
           <span class="emain"><span class="etag">Программа · онлайн</span><span class="ett">Прокачка цветочного бизнеса 2.0</span></span>
           <span class="emeta"><span class="edate">Октябрь — май</span><span class="einfo">AI + аналитика</span></span>
-          <span class="ego">→</span>
-        </a>
-        <a class="erow" href="#">
+          <span class="esoon">Анонс · авг 2026</span>
+        </div>
+        <div class="erow soon">
           <span class="en">04</span>
           <span class="emain"><span class="etag">Онлайн · сезон</span><span class="ett">Марафон по подготовке к 8 марта</span></span>
           <span class="emeta"><span class="edate">Январь 2027</span><span class="einfo">пиковый сезон под ключ</span></span>
-          <span class="ego">→</span>
-        </a>
+          <span class="esoon">Анонс · ноя 2026</span>
+        </div>
       </div>
     </div>
   </section>
@@ -725,13 +729,13 @@
     <div class="step-head"><span class="idx">05</span> Учёт и налоги <span class="hint">НК РФ · ТК РФ · МойСклад</span></div>
     <div class="step-body">
       <div class="txsplit">
-        <a class="txpane svc" href="#">
+        <a class="txpane svc" href="mailto:hello@andreeva-mf.ru?subject=Настройка учёта в МойСклад" target="_blank" rel="noopener">
           <div class="txrole"><span>Услуга · под ключ · МойСклад</span><span class="txnum">01</span></div>
           <div class="txt">Настройка учета</div>
           <div class="txdesc">Авторизованный партнёр «МойСклад». Настрою кассы, базы и отчёты, обучу команду работать без боли.</div>
           <span class="txbtn">Обсудить внедрение <i>→</i></span>
         </a>
-        <a class="txpane ch" href="#">
+        <a class="txpane ch" href="https://web.tribute.tg/s/sE1" target="_blank" rel="noopener">
           <div class="txrole"><span>Telegram-канал · подписка</span><span class="txnum">02</span></div>
           <div class="txt">ФИНШУЙ</div>
           <div class="txdesc">Про налоги, бухгалтерию, кассы и ОКВЭД — простым языком, без занудства.</div>
@@ -759,7 +763,7 @@
           <p class="lead">Прямой разговор о деньгах, налогах, людях и провалах. Без приукрашивания и «успешного успеха».</p>
         </div>
         <div class="book-cta-row">
-          <a class="cta book-buy" href="#">Купить на Озон <span class="ar">→</span></a>
+          <a class="cta book-buy" href="https://ozon.ru/t/wMGzZQZ" target="_blank" rel="noopener">Купить на Озон <span class="ar">→</span></a>
           <button class="cta book-flip" type="button" id="bookFlipOpen">Полистать фрагмент <span class="ar">→</span></button>
         </div>
       </div>
@@ -830,7 +834,7 @@
         <h4>Дальше <em>в книге</em></h4>
         <p>20 мифов цветочного бизнеса, реальные истории и цифры — без цензуры. Продолжите чтение в полной версии.</p>
         <div class="flip-end-row">
-          <a class="cta book-buy" href="#">Купить на Озон <span class="ar">→</span></a>
+          <a class="cta book-buy" href="https://ozon.ru/t/wMGzZQZ" target="_blank" rel="noopener">Купить на Озон <span class="ar">→</span></a>
           <button class="cta" type="button" id="flipRestart">Листать сначала <span class="ar">↺</span></button>
         </div>
       </div>
@@ -872,16 +876,16 @@
       <a class="soc" href="https://t.me/FloralBusiness" aria-label="Telegram" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
       </a>
-      <a class="soc" href="#" aria-label="Max">
+      <a class="soc" href="https://max.ru/id143506715455_biz" aria-label="Max" target="_blank" rel="noopener">
         <img src="assets/max.png" alt="Max">
       </a>
-      <a class="soc" href="#" aria-label="Instagram" target="_blank" rel="noopener">
+      <a class="soc" href="https://www.instagram.com/andreeva_mf/" aria-label="Instagram" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.05" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a class="soc" href="#" aria-label="ВКонтакте" target="_blank" rel="noopener">
+      <a class="soc" href="https://vk.com/floral_business" aria-label="ВКонтакте" target="_blank" rel="noopener">
         <svg viewBox="3.6 3.2 16.4 16.4" aria-hidden="true"><path fill="currentColor" d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.576-1.496c.588-.19 1.341 1.26 2.14 1.818.605.422 1.064.33 1.064.33l2.137-.03s1.117-.071.587-.964c-.043-.073-.308-.661-1.588-1.87-1.34-1.264-1.16-1.059.453-3.246.983-1.332 1.376-2.145 1.253-2.493-.117-.332-.84-.244-.84-.244l-2.406.015s-.178-.025-.31.056c-.13.079-.212.262-.212.262s-.382 1.03-.89 1.907c-1.07 1.85-1.499 1.948-1.674 1.832-.407-.267-.305-1.075-.305-1.649 0-1.793.267-2.54-.521-2.733-.262-.064-.454-.107-1.123-.114-.858-.009-1.585.003-1.996.21-.274.139-.485.448-.356.465.159.022.519.099.71.363.246.341.237 1.107.237 1.107s.142 2.11-.33 2.371c-.325.18-.77-.187-1.725-1.865-.489-.859-.859-1.81-.859-1.81s-.07-.176-.198-.272c-.154-.115-.37-.151-.37-.151l-2.286.015s-.343.01-.469.161C3.94 7.721 4.043 8 4.043 8s1.79 4.258 3.817 6.403c1.858 1.967 3.968 1.838 3.968 1.838h.957z"/></svg>
       </a>
-      <a class="soc" href="#" aria-label="YouTube" target="_blank" rel="noopener">
+      <a class="soc" href="https://www.youtube.com/@mariaandreeva6046" aria-label="YouTube" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       </a>
     </div>
