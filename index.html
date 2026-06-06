@@ -491,6 +491,8 @@
   @keyframes backIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   /* раздел выкручивается из колоды на первый план (3D, «как по кольцу») */
   @keyframes stepToFront{0%{opacity:.5;transform:perspective(1300px) rotateX(32deg) translateY(24%) scale(.93);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
+  /* подвал выезжает снизу */
+  @keyframes footerUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
   .step-back{display:none}
   @media (max-width:860px){
     /* до колоды — ровно один экран hero, без прокрутки (весь контент в полноэкранных слоях) */
@@ -499,6 +501,9 @@
     /* ступеньки и подвал спрятаны, пока колоду не вызвали тапом */
     .steps{display:none}
     .footer{display:none}
+    /* подвал выезжает снизу: свайп вверх по колоде (после книги) или «Отзывы» из меню */
+    body.footer-open .footer{display:flex;justify-content:flex-start;position:fixed;inset:0;z-index:205;height:100dvh;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;border-radius:0;animation:footerUp .5s var(--ease)}
+    body.footer-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
 
     /* СЦЕНА собранной лесенки — на весь экран, поверх всего */
     body.deck-on .hero{display:none}
@@ -546,7 +551,7 @@
     .about-photo .eyes-open{opacity:1;transform:none}
 
     /* кнопка «закрыть» поверх открытой вкладки */
-    .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+    .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
     body.step-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
   }
 </style>
@@ -1003,8 +1008,17 @@
       activeStep = null;
       document.body.classList.remove('step-open');
     }
-    backBtn.addEventListener('click', closeStep);
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && activeStep) closeStep(); });
+    /* подвал — выезжает снизу как отдельный полноэкранный слой */
+    function openFooter(){
+      if(!mqA.matches) return;
+      closeStep();
+      document.body.classList.add('footer-open');
+      var f=document.querySelector('.footer'); if(f) f.scrollTop=0;
+    }
+    function closeFooter(){ document.body.classList.remove('footer-open'); }
+    function closeTop(){ if(document.body.classList.contains('footer-open')) closeFooter(); else closeStep(); }
+    backBtn.addEventListener('click', closeTop);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeTop(); });
 
     /* тап по корешку → раздел на первый план */
     stepsEls.forEach(function(st){
@@ -1043,11 +1057,33 @@
       }, {passive:true});
     }
 
-    /* переход из меню — собрать колоду и открыть нужную вкладку */
+    /* свайп вверх по собранной колоде → подвал; свайп вниз по подвалу → закрыть */
+    var dty=null;
+    stepsWrap.addEventListener('touchstart', function(e){ dty=e.touches[0].clientY; }, {passive:true});
+    stepsWrap.addEventListener('touchend', function(e){
+      if(dty==null) return;
+      var dy = dty - e.changedTouches[0].clientY;
+      if(mqA.matches && deckOn && !activeStep && !document.body.classList.contains('footer-open') && dy>50) openFooter();
+      dty=null;
+    }, {passive:true});
+    var footEl=document.querySelector('.footer'), fty=null;
+    if(footEl){
+      footEl.addEventListener('touchstart', function(e){ fty=e.touches[0].clientY; }, {passive:true});
+      footEl.addEventListener('touchend', function(e){
+        if(fty==null) return;
+        var dy = e.changedTouches[0].clientY - fty;
+        if(mqA.matches && footEl.scrollTop<=2 && dy>60) closeFooter();
+        fty=null;
+      }, {passive:true});
+    }
+
+    /* переход из меню — собрать колоду и открыть нужную вкладку (или подвал для «Отзывы») */
     document.querySelectorAll('.overlay nav a[href^="#"]').forEach(function(a){
       a.addEventListener('click', function(){
         if(!mqA.matches) return;
-        var st=document.getElementById(a.getAttribute('href').slice(1));
+        var id=a.getAttribute('href').slice(1);
+        if(id==='reviews'){ setTimeout(openFooter, 80); return; }
+        var st=document.getElementById(id);
         if(st && st.classList.contains('step')){
           var fresh = !deckOn;
           enterDeck();
@@ -1060,6 +1096,7 @@
     function onMode(){
       if(!mqA.matches){
         closeStep();
+        closeFooter();
         document.body.classList.remove('deck-on');
         deckOn = false;
         stepsEls.forEach(function(st){ st.classList.remove('in'); });
