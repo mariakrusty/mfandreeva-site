@@ -493,6 +493,8 @@
   @keyframes stepToFront{0%{opacity:.5;transform:perspective(1300px) rotateX(32deg) translateY(24%) scale(.93);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
   /* подвал выезжает снизу */
   @keyframes footerUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  /* крестик «пыхает» размером (без зависимости от прозрачности — всегда видим) */
+  @keyframes backPop{from{transform:scale(.5)}to{transform:scale(1)}}
   .step-back{display:none}
   @media (max-width:860px){
     /* до колоды — ровно один экран hero, без прокрутки (весь контент в полноэкранных слоях) */
@@ -503,7 +505,7 @@
     .footer{display:none}
     /* подвал выезжает снизу: свайп вверх по колоде (после книги) или «Отзывы» из меню */
     body.footer-open .footer{display:flex;justify-content:flex-start;position:fixed;inset:0;z-index:205;height:100dvh;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;border-radius:0;animation:footerUp .5s var(--ease)}
-    body.footer-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
+    body.footer-open .step-back{display:inline-flex;animation:backPop .3s var(--ease) .1s both}
 
     /* СЦЕНА собранной лесенки — на весь экран, поверх всего */
     body.deck-on .hero{display:none}
@@ -541,8 +543,10 @@
     .step > .step-head::after{content:"";position:absolute;right:clamp(20px,5vw,32px);top:50%;width:10px;height:10px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:translateY(-50%) rotate(45deg);opacity:.5;transition:transform .3s var(--ease)}
     .step > .step-head:active::after{transform:translateY(-50%) translateX(3px) rotate(45deg)}
 
-    /* ОТКРЫТАЯ вкладка — на весь экран, поверх всего, с 3D-выходом «как по кольцу» */
-    body.deck-on .steps > .step.active{position:fixed;inset:0;top:0;height:100dvh;transform:none!important;z-index:200;border-radius:0;box-shadow:none;overflow:hidden;animation:stepToFront .55s var(--ease)}
+    /* ОТКРЫТИЕ: колода расступается — выбранная карта выходит вперёд с мягким отскоком, остальные разъезжаются с 3D-наклоном */
+    body.deck-on .steps > .step.active{transform:translateY(0)!important;z-index:200!important;border-radius:0;box-shadow:0 -36px 80px -28px rgba(0,0,0,.6);overflow:hidden;transition:transform .62s cubic-bezier(.34,1.42,.5,1),box-shadow .5s var(--ease)!important}
+    body.deck-on .steps > .step.peel-up{transform:perspective(1300px) translateY(-118%) rotateX(20deg) scale(.92)!important;opacity:0;transition:transform .55s var(--ease),opacity .4s var(--ease)!important}
+    body.deck-on .steps > .step.peel-down{transform:perspective(1300px) translateY(120%) rotateX(-20deg) scale(.92)!important;opacity:0;transition:transform .55s var(--ease),opacity .4s var(--ease)!important}
     .step.active > .step-head{flex:0 0 auto;height:auto;min-height:var(--head);padding-top:16px;padding-bottom:16px}
     .step.active > .step-head::after{display:none}
     .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
@@ -552,7 +556,7 @@
 
     /* кнопка «закрыть» поверх открытой вкладки */
     .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-    body.step-open .step-back{display:inline-flex;animation:backIn .35s var(--ease) .12s both}
+    body.step-open .step-back{display:inline-flex;animation:backPop .3s var(--ease) .1s both}
   }
 </style>
 </head>
@@ -998,6 +1002,14 @@
       if(!mqA.matches || !deckOn || activeStep) return;
       reveal(st);
       activeStep = st;
+      var idx = Array.prototype.indexOf.call(stepsEls, st);
+      stepsEls.forEach(function(o,i){
+        if(o===st) return;
+        var dist = Math.abs(i-idx);
+        o.style.transitionDelay = ((dist-1)*45)+'ms';        /* каскад: ближние уезжают первыми */
+        o.classList.add(i<idx ? 'peel-up' : 'peel-down');
+      });
+      st.style.transitionDelay = '70ms';                      /* выбранная выходит, когда колода начала расступаться */
       st.classList.add('active');
       document.body.classList.add('step-open');
       var b=st.querySelector(':scope > .step-body, :scope > .step-fold'); if(b) b.scrollTop=0;
@@ -1005,6 +1017,7 @@
     function closeStep(){
       if(!activeStep) return;
       activeStep.classList.remove('active');
+      stepsEls.forEach(function(o){ o.classList.remove('peel-up','peel-down'); o.style.transitionDelay=''; });
       activeStep = null;
       document.body.classList.remove('step-open');
     }
