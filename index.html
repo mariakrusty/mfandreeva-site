@@ -493,13 +493,14 @@
   @keyframes stepToFront{0%{opacity:.5;transform:perspective(1300px) rotateX(32deg) translateY(24%) scale(.93);transform-origin:center bottom}55%{opacity:1}100%{opacity:1;transform:perspective(1300px) rotateX(0deg) translateY(0) scale(1);transform-origin:center bottom}}
   .step-back{display:none}
   @media (max-width:860px){
-    /* hero — обычный первый экран, не прилипает */
-    .hero{position:relative}
-    /* ступеньки спрятаны, пока колоду не вызвали тапом */
+    /* до колоды — ровно один экран hero, без прокрутки (весь контент в полноэкранных слоях) */
+    html,body{overflow:hidden}
+    .hero{position:relative;min-height:100dvh}
+    /* ступеньки и подвал спрятаны, пока колоду не вызвали тапом */
     .steps{display:none}
+    .footer{display:none}
 
     /* СЦЕНА собранной лесенки — на весь экран, поверх всего */
-    body.deck-on{overflow:hidden}
     body.deck-on .hero{display:none}
     body.deck-on .steps{display:block;position:fixed;inset:0;height:100dvh;z-index:50;overflow:hidden;perspective:1500px;background:var(--red)}
 
