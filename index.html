@@ -551,10 +551,13 @@
     .step.active > .step-body, .step.active > .step-fold{display:block;flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
     /* видео: контент по центру по вертикали, не прижат вверх */
     body.deck-on .steps > .step.active.s-video > .step-body{display:flex;flex-direction:column;justify-content:center;padding-top:clamp(14px,3vh,26px);padding-bottom:clamp(18px,4vh,40px)}
-    /* книга: компактнее, чтобы на экран влезли обе кнопки */
-    body.deck-on .steps > .step.active.s-book .book-cover{max-height:20vh;width:clamp(120px,34vw,170px)}
-    body.deck-on .steps > .step.active.s-book .book-split{gap:clamp(8px,1.6vh,14px)}
-    body.deck-on .steps > .step.active.s-book .book-cta-row{gap:8px}
+    /* книга: компактнее всегда в колоде (и в покое как передняя карта, и открытая), чтобы влезли обе кнопки */
+    body.deck-on .steps > .step.s-book .book-cover{max-height:17vh;width:clamp(110px,30vw,160px)}
+    body.deck-on .steps > .step.s-book .book-split{gap:clamp(6px,1.4vh,12px)}
+    body.deck-on .steps > .step.s-book .book-info h3{margin-bottom:4px}
+    body.deck-on .steps > .step.s-book .book-info .lead{margin-bottom:0}
+    body.deck-on .steps > .step.s-book .book-cta-row{gap:8px;margin-top:clamp(8px,1.6vh,14px)}
+    body.deck-on .steps > .step.s-book > .step-body{padding-top:clamp(8px,1.5vh,16px);padding-bottom:clamp(12px,2.5vh,22px)}
     .s-tools:not(.active) .sphere-bg{display:none}
     .txsplit .txpane{opacity:1;animation:none}
     .about-photo .eyes-open{opacity:1;transform:none}
