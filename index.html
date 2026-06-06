@@ -1003,19 +1003,21 @@
       reveal(st);
       activeStep = st;
       var idx = Array.prototype.indexOf.call(stepsEls, st);
+      /* ФАЗА 1: колода расступается — остальные карты разъезжаются (видно!) */
       stepsEls.forEach(function(o,i){
         if(o===st) return;
         var dist = Math.abs(i-idx);
-        o.style.transitionDelay = ((dist-1)*45)+'ms';        /* каскад: ближние уезжают первыми */
+        o.style.transitionDelay = ((dist-1)*55)+'ms';        /* каскад: ближние уезжают первыми */
         o.classList.add(i<idx ? 'peel-up' : 'peel-down');
       });
-      st.style.transitionDelay = '70ms';                      /* выбранная выходит, когда колода начала расступаться */
-      st.classList.add('active');
       document.body.classList.add('step-open');
       var b=st.querySelector(':scope > .step-body, :scope > .step-fold'); if(b) b.scrollTop=0;
+      /* ФАЗА 2: на расчищенное место выходит выбранная карта вперёд */
+      st._openT = setTimeout(function(){ st.classList.add('active'); }, 330);
     }
     function closeStep(){
       if(!activeStep) return;
+      clearTimeout(activeStep._openT);
       activeStep.classList.remove('active');
       stepsEls.forEach(function(o){ o.classList.remove('peel-up','peel-down'); o.style.transitionDelay=''; });
       activeStep = null;
