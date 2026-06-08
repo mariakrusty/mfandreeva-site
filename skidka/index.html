@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расчёт возможной скидки · Мария Андреева</title>
+<meta name="description" content="Бесплатный AI-калькулятор для флористов: на сколько увеличить заказ, чтобы скидка не съела прибыль.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* фирменная палитра сайта mfandreeva.ru */
+  --red:#B01B18; --red-bright:#E0463B; --cream:#FDF0D5; --cosmos:#003049; --blue:#669BBC; --blue-light:#A9CDE0;
+  /* тёмная база на cosmos */
+  --bg-0:#001722; --bg-1:#002032; --bg-2:#003049;
+  --glass-1:rgba(253,240,213,.04); --glass-2:rgba(253,240,213,.07); --glass-3:rgba(253,240,213,.11);
+  --glass-border:rgba(253,240,213,.12); --glass-border-strong:rgba(253,240,213,.20);
+  --red-glow:radial-gradient(circle at 32% 28%,#A9CDE0 0%,#669BBC 26%,#B01B18 72%,#5A0D0C 100%);
+  --text-1:var(--cream); --text-2:rgba(253,240,213,.66); --text-3:rgba(253,240,213,.42); --text-4:rgba(253,240,213,.25);
+  --success:#5FBE8A; --warning:#E0A93B; --error:var(--red-bright);
+  --ambient:radial-gradient(ellipse 80% 60% at 15% 30%,rgba(102,155,188,.18) 0%,transparent 60%),
+            radial-gradient(ellipse 60% 50% at 85% 70%,rgba(176,27,24,.12) 0%,transparent 55%),
+            radial-gradient(ellipse 100% 100% at 50% 100%,rgba(102,155,188,.08) 0%,transparent 70%),
+            linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 100%);
+  --font-sans:'Share Tech Mono',ui-monospace,Menlo,monospace;
+  --font-display:'Unbounded',-apple-system,'Segoe UI',sans-serif;
+  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:28px; --r-full:999px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background:var(--bg-1);background-image:var(--ambient);background-attachment:fixed;
+  color:var(--text-1);font-family:var(--font-sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
+.app{max-width:1100px;margin:0 auto;padding:40px 28px 96px;position:relative}
+
+/* corner micro */
+.corner-micro{position:fixed;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);z-index:1;pointer-events:none}
+.corner-micro.tr{top:22px;right:26px}
+.corner-micro.bl{bottom:22px;left:26px}
+.corner-micro .em{color:var(--text-1)}
+
+/* header */
+.header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;padding-top:18px}
+.brand{display:flex;align-items:center;gap:18px}
+.brand-orb{width:60px;height:60px;flex-shrink:0;border-radius:50%;background:var(--red-glow);
+  box-shadow:0 0 32px rgba(176,27,24,.45),0 0 80px rgba(176,27,24,.22)}
+.brand-text{display:flex;flex-direction:column;gap:7px}
+.brand-title{font-family:var(--font-display);font-weight:800;font-size:clamp(32px,5.5vw,48px);line-height:1;letter-spacing:-.025em;color:var(--cream)}
+.brand-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.header-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;white-space:nowrap}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.eyebrow-warm{color:var(--red-bright)}
+
+/* intro */
+.intro{font-size:clamp(16px,2.4vw,19px);line-height:1.6;color:var(--text-2);margin-bottom:14px;text-wrap:pretty}
+.intro .hl{color:var(--cream)}
+.intro .serif{font-family:var(--font-display);font-weight:500;color:var(--blue-light);font-size:.92em}
+
+/* glass */
+.glass{background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-lg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.glass-elevated{background:var(--glass-2);border-color:var(--glass-border-strong);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+
+.section{margin-bottom:34px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;padding:0 4px;flex-wrap:wrap;gap:8px}
+.section-title{font-family:var(--font-display);font-size:clamp(22px,3.6vw,28px);font-weight:400;letter-spacing:-.015em;color:var(--cream)}
+
+/* how accordion */
+.how-card{padding:0;overflow:hidden;margin-bottom:28px}
+.how-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:15px 20px;background:transparent;border:0;cursor:pointer;
+  color:var(--text-2);font-family:inherit;font-size:13.5px;letter-spacing:.04em;transition:.15s}
+.how-toggle:hover{color:var(--cream);background:rgba(255,255,255,.02)}
+.how-toggle-text{flex:1;text-align:left}
+.how-toggle .chev{transition:transform .2s var(--ease);color:var(--text-3)}
+.how-card.open .how-toggle .chev{transform:rotate(180deg)}
+.how-body{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .3s var(--ease),padding .3s var(--ease)}
+.how-card.open .how-body{padding:4px 22px 22px;max-height:500px}
+.how-body p{font-size:13.5px;line-height:1.6;color:var(--text-2);margin-bottom:10px;max-width:78ch}
+.how-body strong{color:var(--cream);font-weight:600}
+
+/* segmented control */
+.seg{display:inline-flex;background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-full);padding:4px;gap:2px}
+.seg button{padding:8px 18px;border:none;background:transparent;color:var(--text-2);font-family:inherit;font-size:13px;font-weight:500;
+  border-radius:var(--r-full);cursor:pointer;transition:.18s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--red);color:#1A0A04;font-weight:600;box-shadow:0 0 18px rgba(176,27,24,.4)}
+.seg.mini{padding:3px}
+.seg.mini button{padding:5px 12px;font-size:11.5px}
+
+/* inputs */
+.input-card{padding:26px}
+.input-card .tabs-row{margin-bottom:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.field{display:flex;flex-direction:column;gap:9px;min-width:0}
+.field-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px}
+.field-label{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+.inwrap{position:relative;display:flex;align-items:center;background:var(--glass-1);border:1px solid var(--glass-border);
+  border-radius:var(--r-md);padding:0 16px;transition:.2s var(--ease);backdrop-filter:blur(20px)}
+.inwrap:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(176,27,24,.18)}
+.inwrap input{flex:1;width:100%;background:transparent;border:none;outline:none;color:var(--cream);
+  font-family:var(--font-sans);font-size:20px;font-variant-numeric:tabular-nums;padding:13px 0}
+.inwrap input::placeholder{color:var(--text-3)}
+.inwrap .unit{font-size:14px;color:var(--red-bright);padding-left:10px;white-space:nowrap;font-weight:500}
+.field .hint{font-size:11px;color:var(--text-3);line-height:1.4}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.duo-cell{display:flex;flex-direction:column;gap:5px;min-width:0}
+.microlbl{font-size:10px;letter-spacing:.04em;color:var(--text-3);padding-left:3px}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* empty */
+.empty{text-align:center;padding:40px 20px;color:var(--text-3)}
+.empty .orb{width:120px;height:120px;margin:0 auto 22px;border-radius:50%;background:var(--red-glow);opacity:.55;
+  box-shadow:0 0 60px rgba(176,27,24,.35),0 0 120px rgba(102,155,188,.18);filter:blur(.5px)}
+.empty p{font-size:15px;color:var(--text-3)}
+
+/* warn */
+.warn{display:none;background:rgba(224,70,59,.12);border:1px solid rgba(224,70,59,.4);border-radius:var(--r-lg);
+  padding:20px 24px;margin-bottom:28px;color:var(--cream);font-size:15px;line-height:1.55}
+.warn b{font-family:var(--font-display);font-weight:500;color:var(--error)}
+
+/* headline result */
+.result{display:none}
+.res-headline{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,4vw,40px);line-height:1.1;
+  letter-spacing:-.02em;color:var(--cream);margin-bottom:12px;text-wrap:balance}
+.res-headline b{color:var(--red-bright);font-weight:400}
+.res-sub{font-size:15px;color:var(--text-2);margin-bottom:34px;text-wrap:pretty}
+
+/* bouquets */
+.bouquets{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px}
+.bq{padding:22px 22px 24px}
+.bq-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;gap:10px}
+.bq-name{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.bq-count{font-family:var(--font-display);font-size:26px;font-weight:400;color:var(--cream);font-variant-numeric:tabular-nums}
+.bq-count small{font-size:13px;color:var(--text-3);font-family:var(--font-sans);margin-left:4px}
+.stems{display:flex;flex-wrap:wrap;gap:7px 8px;align-content:flex-start;min-height:96px;margin-bottom:16px}
+.stem{display:flex;flex-direction:column;align-items:center;animation:bloom .4s var(--ease) backwards}
+.stem .bud{width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--blue-light),var(--blue) 70%);
+  box-shadow:0 0 6px rgba(102,155,188,.4)}
+.stem .stalk{width:2px;height:30px;background:linear-gradient(var(--success),rgba(107,212,155,.15));opacity:.55;border-radius:2px}
+.stem.extra .bud{background:radial-gradient(circle at 35% 30%,#FFD9B2,var(--red) 70%);box-shadow:0 0 10px rgba(176,27,24,.7)}
+.stem.extra .stalk{background:linear-gradient(var(--red-bright),rgba(176,27,24,.2));opacity:.8}
+@keyframes bloom{from{opacity:0;transform:translateY(8px) scale(.6)}to{opacity:1;transform:none}}
+.bq-foot{font-size:12.5px;color:var(--text-2);border-top:1px solid var(--glass-border);padding-top:12px;display:flex;justify-content:space-between;gap:10px}
+.bq-foot .v{color:var(--cream);font-variant-numeric:tabular-nums}
+.bq-add{font-size:13px;color:var(--red-bright);text-align:center;margin-bottom:30px}
+.bq-add b{font-family:var(--font-display);font-weight:400}
+
+/* kpi */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.kpi{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.kpi-value{font-family:var(--font-display);font-size:22px;font-weight:400;letter-spacing:-.012em;color:var(--cream);font-variant-numeric:tabular-nums;line-height:1.15}
+.kpi-value small{display:block;font-family:var(--font-sans);font-size:12px;color:var(--text-3);margin-top:3px;font-weight:400}
+
+/* traffic light */
+.light{border-left:3px solid var(--text-3);padding:18px 22px;margin-bottom:24px;border-radius:0 var(--r-md) var(--r-md) 0}
+.light .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.light .chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.light .txt{font-size:15px;line-height:1.55;color:var(--text-1)}
+.light.green{border-color:var(--success);background:rgba(107,212,155,.06)} .light.green .chip{color:var(--success)}
+.light.amber{border-color:var(--warning);background:rgba(240,198,116,.06)} .light.amber .chip{color:var(--warning)}
+.light.red{border-color:var(--error);background:rgba(240,121,94,.06)} .light.red .chip{color:var(--error)}
+
+/* reco boxes */
+.reco{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.box{padding:18px 20px}
+.box h3{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.box .big{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,4vw,30px);color:var(--red-bright);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.box p{font-size:13px;color:var(--text-2);line-height:1.5}
+.alts{display:none;padding:20px 22px;margin-bottom:24px;border:1px dashed var(--glass-border-strong)}
+.alts h3{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-light);margin-bottom:13px}
+.alts ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.alts li{font-size:14px;color:var(--text-2);padding-left:22px;position:relative;line-height:1.45}
+.alts li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+
+.foot{margin-top:48px;padding-top:24px;border-top:1px solid var(--glass-border);font-size:12px;color:var(--text-3);line-height:1.7}
+.foot a{color:var(--red-bright);border-bottom:1px solid rgba(255,184,122,.3)}
+
+@media(max-width:760px){
+  .app{padding:24px 16px 80px}
+  .header{flex-direction:column;align-items:flex-start;gap:14px}
+  .header-meta{align-items:flex-start}
+  .grid{grid-template-columns:1fr}
+  .bouquets{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr}
+  .reco{grid-template-columns:1fr}
+  .corner-micro{display:none}
+}
+</style>
+</head>
+<body>
+<div class="corner-micro tr">AI · <span class="em">для флористов</span></div>
+<div class="corner-micro bl">Мария Андреева</div>
+
+<div class="app">
+
+  <header class="header">
+    <div class="brand">
+      <div class="brand-orb"></div>
+      <div class="brand-text">
+        <div class="brand-title">Расчёт скидки</div>
+        <div class="brand-sub">инструмент для цветочного магазина</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="eyebrow eyebrow-warm">AI-калькулятор</span>
+      <span class="eyebrow">версия 2026.1</span>
+    </div>
+  </header>
+
+  <p class="intro"><span class="hl">Когда вы даёте скидку, с каждого стебля зарабатываете меньше.</span> Чтобы в итоге получить столько же денег, клиент должен купить больше стеблей. Калькулятор показывает — <span class="serif">насколько больше</span> — и подсказывает, стоит ли вообще давать такую скидку.</p>
+
+  <div class="how-card glass">
+    <button class="how-toggle" onclick="this.closest('.how-card').classList.toggle('open')">
+      <span class="how-toggle-text">Как это работает</span>
+      <span class="chev">▾</span>
+    </button>
+    <div class="how-body">
+      <p><strong>Шаг 1.</strong> Введите себестоимость стебля и наценку (или сразу цену продажи).</p>
+      <p><strong>Шаг 2.</strong> Укажите средний размер букета и желаемую скидку.</p>
+      <p><strong>Шаг 3.</strong> Калькулятор посчитает, сколько стеблей должно быть в заказе, чтобы прибыль не упала, нарисует наглядное сравнение букетов и даст рекомендацию — давать скидку или нет.</p>
+    </div>
+  </div>
+
+  <!-- ВВОД -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow eyebrow-warm">Шаг 1</span>
+        <h2 class="section-title">Ваши цифры</h2>
+      </div>
+    </div>
+
+    <div class="input-card glass glass-elevated">
+      <div class="tabs-row">
+        <div class="seg" role="tablist">
+          <button id="tab-pct" aria-selected="true" onclick="setMode('pct')">Скидка в процентах</button>
+          <button id="tab-rub" aria-selected="false" onclick="setMode('rub')">Скидка в рублях</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <div class="field-head"><span class="field-label">Себестоимость одного стебля</span></div>
+          <div class="inwrap"><input type="number" id="S" inputmode="decimal" placeholder="80"><span class="unit">₽</span></div>
+        </div>
+
+        <div class="field">
+          <div class="field-head"><span class="field-label">Наценка</span></div>
+          <div class="duo">
+            <div class="duo-cell">
+              <div class="inwrap"><input type="number" id="K" inputmode="decimal" placeholder="2.5"><span class="unit">×</span></div>
+              <span class="microlbl">коэффициент</span>
+            </div>
+            <div class="duo-cell">
+              <div class="inwrap"><input type="number" id="Pprice" inputmode="decimal" placeholder="200"><span class="unit">₽</span></div>
+              <span class="microlbl">цена продажи стебля</span>
+            </div>
+          </div>
+          <span class="hint">заполните любое — второе посчитается само</span>
+        </div>
+
+        <div class="field">
+          <div class="field-head"><span class="field-label">Среднее кол-во стеблей в букете</span></div>
+          <div class="inwrap"><input type="number" id="Q" inputmode="numeric" placeholder="15"><span class="unit">шт</span></div>
+        </div>
+
+        <div class="field" id="f-pct">
+          <div class="field-head"><span class="field-label">Размер скидки</span></div>
+          <div class="inwrap"><input type="number" id="D" inputmode="decimal" placeholder="10"><span class="unit">%</span></div>
+        </div>
+        <div class="field" id="f-rub" style="display:none">
+          <div class="field-head"><span class="field-label">Размер скидки на один стебель</span></div>
+          <div class="inwrap"><input type="number" id="Dr" inputmode="decimal" placeholder="30"><span class="unit">₽</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- empty -->
+  <div id="empty" class="empty">
+    <div class="orb"></div>
+    <p>Заполните цифры выше — расчёт и сравнение букетов появятся здесь.</p>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="result">
+
+    <div id="warn" class="warn"></div>
+
+    <div class="res-headline" id="res-headline"></div>
+    <div class="res-sub" id="res-sub"></div>
+
+    <!-- букеты -->
+    <section class="section" id="bq-section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow eyebrow-warm">Шаг 2</span>
+          <h2 class="section-title">Сравнение букетов</h2>
+        </div>
+      </div>
+      <div class="bouquets">
+        <div class="bq glass">
+          <div class="bq-top"><span class="bq-name">Без скидки</span><span class="bq-count" id="bq1-count"></span></div>
+          <div class="stems" id="bq1-stems"></div>
+          <div class="bq-foot"><span>Цена букета</span><span class="v" id="bq1-price"></span></div>
+        </div>
+        <div class="bq glass">
+          <div class="bq-top"><span class="bq-name" style="color:var(--red-bright)">Со скидкой</span><span class="bq-count" id="bq2-count"></span></div>
+          <div class="stems" id="bq2-stems"></div>
+          <div class="bq-foot"><span>Цена букета</span><span class="v" id="bq2-price"></span></div>
+        </div>
+      </div>
+      <div class="bq-add" id="bq-add"></div>
+    </section>
+
+    <!-- kpi -->
+    <div class="kpi-grid">
+      <div class="kpi glass"><span class="kpi-label">Рентабельность было / стало</span><span class="kpi-value" id="kpi-margin"></span></div>
+      <div class="kpi glass"><span class="kpi-label">Прибыль с клиента</span><span class="kpi-value" id="kpi-profit"></span></div>
+      <div class="kpi glass"><span class="kpi-label">Нужно стеблей в заказе</span><span class="kpi-value" id="kpi-qmin"></span></div>
+    </div>
+
+    <!-- traffic light -->
+    <div class="light" id="light">
+      <div class="chip" id="light-chip"><span class="dot"></span><span id="light-badge"></span></div>
+      <div class="txt" id="light-txt"></div>
+    </div>
+
+    <!-- reco -->
+    <div class="reco">
+      <div class="box glass">
+        <h3>Безопасный максимум скидки</h3>
+        <div class="big" id="cap-val"></div>
+        <p id="cap-txt"></p>
+      </div>
+      <div class="box glass">
+        <h3>Сколько теряете, если не увеличить заказ</h3>
+        <div class="big" id="loss-val"></div>
+        <p id="loss-txt"></p>
+      </div>
+    </div>
+
+    <div class="alts glass" id="alts">
+      <h3>Что предложить вместо скидки</h3>
+      <ul>
+        <li>Подарок или бонус к букету — клиент чувствует выгоду, ваша прибыль цела.</li>
+        <li>Апсейл: предложите состав побольше, чтобы заказ дорос естественно.</li>
+        <li>Скидка на следующий заказ или программа лояльности — возвращает клиента.</li>
+        <li>Давайте скидку только на бóльший букет, а не на любой.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    Калькулятор считает по вашим цифрам и носит рекомендательный характер. Один из бесплатных AI-инструментов для флористов от Марии Андреевой.<br>
+    <a href="../">← На главную mfandreeva.ru</a>
+  </div>
+
+</div>
+
+<script>
+  var mode='pct', lastMark='K';
+
+  function setMode(m){
+    mode=m;
+    document.getElementById('tab-pct').setAttribute('aria-selected',m==='pct');
+    document.getElementById('tab-rub').setAttribute('aria-selected',m==='rub');
+    document.getElementById('f-pct').style.display=m==='pct'?'flex':'none';
+    document.getElementById('f-rub').style.display=m==='rub'?'flex':'none';
+    calc();
+  }
+  function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v;}
+  function setVal(id,v){document.getElementById(id).value=Math.round(v*100)/100;}
+  // двусторонняя связь: коэффициент ↔ цена продажи через себестоимость
+  function syncMark(src){
+    var S=num('S');
+    if(src==='K'){lastMark='K';var K=num('K');if(S!==null&&S>0&&K!==null)setVal('Pprice',K*S);}
+    else if(src==='price'){lastMark='price';var P=num('Pprice');if(S!==null&&S>0&&P!==null)setVal('K',P/S);}
+    else if(src==='S'&&S!==null&&S>0){
+      if(lastMark==='K'){var k=num('K');if(k!==null)setVal('Pprice',k*S);}
+      else{var p=num('Pprice');if(p!==null)setVal('K',p/S);}
+    }
+  }
+  function rub(x){return Math.round(x).toLocaleString('ru-RU')+' ₽';}
+  function pct(x){return x.toFixed(1).replace('.',',')+'%';}
+  function stemWord(n){n=Math.abs(n)%100;var n1=n%10;if(n>10&&n<20)return'стеблей';if(n1>1&&n1<5)return'стебля';if(n1===1)return'стебель';return'стеблей';}
+
+  document.getElementById('K').addEventListener('input',function(){syncMark('K');calc();});
+  document.getElementById('Pprice').addEventListener('input',function(){syncMark('price');calc();});
+  document.getElementById('S').addEventListener('input',function(){syncMark('S');calc();});
+  ['Q','D','Dr'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+
+  function drawStems(el,total,extraFrom){
+    el.innerHTML='';
+    var cap=Math.min(total,60);
+    for(var i=0;i<cap;i++){
+      var s=document.createElement('div');
+      s.className='stem'+(extraFrom!==null && i>=extraFrom?' extra':'');
+      s.style.animationDelay=(i*18)+'ms';
+      s.innerHTML='<div class="bud"></div><div class="stalk"></div>';
+      el.appendChild(s);
+    }
+    if(total>cap){
+      var more=document.createElement('div');
+      more.style.cssText='align-self:flex-end;font-size:12px;color:var(--text-3);padding-bottom:4px';
+      more.textContent='+'+(total-cap);
+      el.appendChild(more);
+    }
+  }
+
+  function calc(){
+    var S=num('S'),Q=num('Q');
+    var disc=mode==='pct'?num('D'):num('Dr');
+    var K=num('K');
+
+    var ok=S!==null&&S>0&&K!==null&&K>0&&Q!==null&&Q>0&&disc!==null&&disc>0;
+    document.getElementById('empty').style.display=ok?'none':'block';
+    document.getElementById('result').style.display=ok?'block':'none';
+    if(!ok)return;
+
+    var Pb=S*K, Mb=(Pb-S)/Pb, Bb=Pb*Q, profitB=(Pb-S)*Q;
+    var Pc=mode==='pct'?Pb*(1-disc/100):(Pb-disc);
+    var Mc=Pc>0?(Pc-S)/Pc:-1, p1=Pc-S, Bc=Pc*Q;
+    var loss=(Pb-Pc)*Q;
+
+    var warn=document.getElementById('warn');
+    var hl=document.getElementById('res-headline');
+    var sub=document.getElementById('res-sub');
+    var bqSec=document.getElementById('bq-section');
+
+    if(p1<=0){
+      warn.style.display='block';
+      warn.innerHTML='<b>Продажа в убыток.</b> Цена стебля со скидкой ('+rub(Pc)+') не покрывает себестоимость ('+rub(S)+'). Эту скидку давать нельзя — каждый букет приносит убыток.';
+      hl.innerHTML='Такую скидку дать <b>невозможно</b>.';
+      sub.textContent='Уменьшите скидку — ниже подсказан безопасный потолок.';
+      bqSec.style.display='none';
+    } else {
+      warn.style.display='none';
+      bqSec.style.display='block';
+      var Qmin=Math.ceil(profitB/p1), add=Qmin-Q;
+      hl.innerHTML='Чтобы скидка не съела прибыль, в заказе должно быть минимум <b>'+Qmin+' '+stemWord(Qmin)+'</b>.';
+      sub.textContent=add>0
+        ?'Было в среднем '+Q+' '+stemWord(Q)+' → нужно '+Qmin+' (это +'+add+', рост на '+Math.round((Qmin/Q-1)*100)+'%).'
+        :'Прибыль сохраняется даже без увеличения заказа.';
+      // букеты
+      document.getElementById('bq1-count').innerHTML=Q+'<small>шт</small>';
+      document.getElementById('bq2-count').innerHTML=Qmin+'<small>шт</small>';
+      document.getElementById('bq1-price').textContent=rub(Bb);
+      document.getElementById('bq2-price').textContent=rub(Pc*Qmin);
+      drawStems(document.getElementById('bq1-stems'),Q,null);
+      drawStems(document.getElementById('bq2-stems'),Qmin,Q);
+      document.getElementById('bq-add').innerHTML=add>0
+        ?'Оранжевым — <b>+'+add+' '+stemWord(add)+'</b>, которые клиент должен добрать, чтобы вы не потеряли прибыль.'
+        :'Увеличивать заказ не нужно.';
+    }
+
+    var Qm=p1>0?Math.ceil(profitB/p1):Q;
+    var profitAt=p1>0?(Pc-S)*Qm:(Pc-S)*Q;
+    document.getElementById('kpi-margin').innerHTML=pct(Mb*100)+'<small>со скидкой '+(Mc>=0?pct(Mc*100):'убыток')+'</small>';
+    document.getElementById('kpi-profit').innerHTML=rub(profitB)+'<small>при '+(p1>0?Qm+' '+stemWord(Qm):'—')+' → '+(p1>0?rub(profitAt):'убыток')+'</small>';
+    document.getElementById('kpi-qmin').innerHTML=(p1>0?Qm+' шт':'—')+'<small>было '+Q+' шт</small>';
+
+    // светофор
+    var light=document.getElementById('light'),badge=document.getElementById('light-badge'),txt=document.getElementById('light-txt'),alts=document.getElementById('alts');
+    light.className='light';
+    var grow=p1>0?Qm/Q:99;
+    if(p1>0&&grow<=1.3){
+      light.classList.add('green');badge.textContent='Скидка безопасна';
+      var a=Qm-Q;
+      txt.textContent=a<=0?'Прибыль сохраняется даже без увеличения заказа. Скидку можно смело давать.'
+        :'Клиенту достаточно добрать всего '+a+' '+stemWord(a)+' — это легко предложить (зелень, пара цветов). Скидку можно давать.';
+      alts.style.display='none';
+    } else if(p1>0&&grow<=2){
+      light.classList.add('amber');badge.textContent='Скидка рискованная';
+      txt.textContent='Скидка великовата: чтобы не потерять деньги, количество стеблей в заказе пришлось бы увеличить почти вдвое — а это берёт не каждый клиент. Лучше подарить что-то к букету или дать скидку поменьше.';
+      alts.style.display='block';
+    } else {
+      light.classList.add('red');badge.textContent='Скидка опасна';
+      txt.textContent=p1<=0?'Такая скидка работает в убыток. Не давайте её — уменьшите размер скидки.'
+        :'Чтобы отбить такую скидку, количество стеблей в заказе пришлось бы увеличить больше чем вдвое — это нереально. Не давайте её в таком размере.';
+      alts.style.display='block';
+    }
+
+    // безопасный максимум скидки — согласован со светофором (рост заказа ≤30%, остаётся зелёным)
+    var capVal=document.getElementById('cap-val'),capTxt=document.getElementById('cap-txt');
+    var QminMax=Math.floor(1.3*Q); // максимум стеблей при «зелёном» росте
+    if(QminMax<=Q){
+      capVal.textContent='—';
+      capTxt.textContent='Средний букет слишком маленький, чтобы дать скидку без заметного увеличения заказа.';
+    } else {
+      var PcSafe=S+(Pb-S)*Q/QminMax; // цена стебля, при которой рост заказа ровно на пороге зелёного
+      if(mode==='pct'){
+        var Dmax=Math.max(0,Math.floor((1-PcSafe/Pb)*100));
+        capVal.textContent='до '+Dmax+'%';
+      } else {
+        var DmaxR=Math.max(0,Math.floor(Pb-PcSafe));
+        capVal.textContent='до '+rub(DmaxR);
+      }
+      capTxt.textContent='Такую скидку можно дать спокойно: чтобы не потерять прибыль, заказ нужно нарастить совсем чуть-чуть. Больше — и букет придётся сильно увеличивать.';
+    }
+
+    document.getElementById('loss-val').textContent=rub(Math.max(0,loss));
+    document.getElementById('loss-txt').textContent='Столько прибыли вы теряете с каждого букета, если дадите скидку и НЕ увеличите количество стеблей в заказе.';
+  }
+</script>
+</body>
+</html>
