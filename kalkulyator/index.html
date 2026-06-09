@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-калькулятор зарплат для цветочного магазина · Мария Андреева</title>
+<meta name="description" content="Бесплатный AI-калькулятор зарплат флористов. Загружаете 2 таблички — получаете расчёт за 15 минут. Расчётный лист в Excel и PDF.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<style>
+  #root{position:relative;z-index:1}
+  #mx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.5}
+</style>
+</head>
+<body>
+<canvas id="mx"></canvas>
+<div id="root"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<!-- ===== Матрица «поле данных»: цифры на чёрном, слева красноватые, справа голубые, белые вспышки ===== -->
+<script>
+(function(){
+  var c=document.getElementById('mx'), x=c.getContext('2d');
+  var fs=14, cw=10, lh=18, cols=0, rows=0, G=[];
+  var CH='0123456789₽%0123456789'; // чаще цифры — тема денег
+  function pick(){return CH.charAt((Math.random()*CH.length)|0);}
+  function resize(){
+    c.width=window.innerWidth; c.height=window.innerHeight;
+    x.font=fs+'px "Share Tech Mono", monospace';
+    cw=x.measureText('0').width||10;
+    cols=Math.ceil(c.width/cw)+1; rows=Math.ceil(c.height/lh)+1;
+    G=[];
+    for(var r=0;r<rows;r++){var row=[];for(var i=0;i<cols;i++){row.push({ch:pick(),b:Math.random()*0.5});}G.push(row);}
+  }
+  resize(); window.addEventListener('resize',resize);
+  function draw(){
+    x.clearRect(0,0,c.width,c.height);
+    x.font=fs+'px "Share Tech Mono", monospace'; x.textBaseline='top';
+    var cx=c.width/2, cyf, vig;
+    for(var r=0;r<rows;r++){
+      for(var i=0;i<cols;i++){
+        var cell=G[r][i];
+        // обновляем часть ячеек — мерцание
+        if(Math.random()>0.985){ cell.ch=pick(); cell.b=Math.random(); }
+        if(cell.b<=0.04) continue;
+        var px=i*cw, py=r*lh;
+        // виньетка: ярче в центре, гаснет к краям
+        var dx=(px-cx)/cx, dy=(py-c.height*0.5)/(c.height*0.5);
+        vig=1-Math.min(1, dx*dx*0.9 + dy*dy*0.9);
+        if(vig<=0) continue;
+        var a=cell.b*vig;
+        var fx=px/c.width; // 0 слева → 1 справа: красный → marble
+        if(cell.b>0.93){ x.fillStyle='rgba(253,240,213,'+(a).toFixed(3)+')'; } // белая вспышка
+        else{
+          var rr=Math.round(193+(102-193)*fx), gg=Math.round(18+(155-18)*fx), bb=Math.round(31+(188-31)*fx);
+          x.fillStyle='rgba('+rr+','+gg+','+bb+','+(a*0.85).toFixed(3)+')';
+        }
+        x.fillText(cell.ch, px, py);
+      }
+    }
+  }
+  var last=0;
+  function loop(t){ if(t-last>55){ draw(); last=t; } requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<script src="compute.js"></script>
+<script type="text/babel" src="primitives.jsx"></script>
+<script type="text/babel" src="screens.jsx"></script>
+<script type="text/babel" src="Calculator.jsx"></script>
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<App />);
+</script>
+</body>
+</html>

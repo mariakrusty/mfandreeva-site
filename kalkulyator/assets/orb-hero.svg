@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <defs>
+    <radialGradient id="bgG" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3A2A55" stop-opacity=".55"></stop>
+      <stop offset="60%" stop-color="#1A1530" stop-opacity=".25"></stop>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"></stop>
+    </radialGradient>
+    <radialGradient id="sphereG" cx="38%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#FFE4C4"></stop>
+      <stop offset="10%" stop-color="#FFB87A"></stop>
+      <stop offset="32%" stop-color="#E97A3A"></stop>
+      <stop offset="68%" stop-color="#4A2018"></stop>
+      <stop offset="100%" stop-color="#0A0306"></stop>
+    </radialGradient>
+    <radialGradient id="sphereHL" cx="32%" cy="22%" r="18%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-color="#FFFFFF" stop-opacity=".15"></stop>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"></stop>
+    </radialGradient>
+    <radialGradient id="rim" cx="50%" cy="78%" r="40%">
+      <stop offset="0%" stop-color="#FF8A42" stop-opacity=".55"></stop>
+      <stop offset="100%" stop-color="#FF8A42" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <circle cx="160" cy="160" r="155" fill="url(#bgG)"></circle>
+  <circle cx="160" cy="160" r="105" fill="url(#sphereG)"></circle>
+  <ellipse cx="125" cy="115" rx="38" ry="22" fill="url(#sphereHL)" transform="rotate(-18 125 115)"></ellipse>
+  <ellipse cx="160" cy="248" rx="80" ry="22" fill="url(#rim)"></ellipse>
+</svg>

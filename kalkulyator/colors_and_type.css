@@ -1,0 +1,302 @@
+/* ============================================================
+   Калькулятор ЗП — Design Tokens
+   ТЁМНАЯ ТЕМА «КНИГА»: near-black canvas · matrix data-field ·
+   тёплое red-свечение + холодное marble · cream текст
+   Шрифты: Unbounded (дисплей) + Share Tech Mono (текст)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;800;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* === COLOR =============================================== */
+
+  /* Canvas — near-black с лёгким cosmos-подтоном (как референс/книга) */
+  --bg-0:          #000103;   /* внешняя виньетка — самый тёмный */
+  --bg-1:          #03080e;   /* основной холст */
+  --bg-2:          #081420;   /* приподнятый слой */
+
+  /* Glass surfaces — полупрозрачные плашки на тёмном */
+  --glass-1:       rgba(253, 240, 213, 0.04);
+  --glass-2:       rgba(253, 240, 213, 0.07);
+  --glass-3:       rgba(253, 240, 213, 0.11);
+  --glass-border:  rgba(253, 240, 213, 0.10);
+  --glass-border-strong: rgba(253, 240, 213, 0.20);
+
+  /* Тёплый акцент — НАШ КРАСНЫЙ (имена --orange-* сохранены,
+     чтобы не трогать весь styles.css; значения теперь red) */
+  --orange-500:    #C1121F;   /* основное действие / CTA */
+  --orange-300:    #E0463B;   /* свечение / подсветка */
+  --orange-700:    #8E0F14;   /* глубокий красный */
+  --orange-glow:   radial-gradient(circle at 30% 30%,
+                     #F4C9CC 0%,
+                     #E0463B 22%,
+                     #C1121F 55%,
+                     #8E0F14 82%,
+                     #2A0608 100%);
+
+  /* Холодный акцент — НАШ MARBLE/BLUE-LIGHT */
+  --blue-500:      #669BBC;   /* marble */
+  --blue-300:      #A9CDE0;   /* blue-light */
+  --blue-700:      #2C6E94;
+  --blue-deep:     #003049;   /* cosmos */
+
+  /* Cream — основной текст на тёмном (фирменный) */
+  --cream:         #FDF0D5;
+  --cream-soft:    #F6E7C6;
+
+  /* Text */
+  --text-1:        rgba(253, 240, 213, 1.00);  /* основной */
+  --text-2:        rgba(253, 240, 213, 0.66);  /* вторичный */
+  --text-3:        rgba(253, 240, 213, 0.42);  /* третичный / placeholder */
+  --text-4:        rgba(253, 240, 213, 0.24);  /* самый бледный */
+
+  /* Semantic */
+  --success:       #7FC9A6;   /* приглушённый мятный на тёмном */
+  --success-bg:    rgba(127, 201, 166, 0.12);
+  --warning:       #D9A441;   /* янтарь (служебный, не в hero) */
+  --warning-bg:    rgba(217, 164, 65, 0.12);
+  --error:         #E0463B;   /* красный — семья бренда */
+  --error-bg:      rgba(224, 70, 59, 0.12);
+
+  /* Ambient — свечение как на референсе: тёплое red снизу-слева,
+     холодное marble справа, cosmos сверху, на near-black */
+  --ambient: radial-gradient(ellipse 70% 55% at 88% 60%,
+                              rgba(102, 155, 188, 0.16) 0%,
+                              transparent 60%),
+             radial-gradient(ellipse 58% 50% at 6% 92%,
+                              rgba(193, 18, 31, 0.13) 0%,
+                              transparent 58%),
+             radial-gradient(ellipse 100% 90% at 50% 0%,
+                              rgba(0, 48, 73, 0.20) 0%,
+                              transparent 68%),
+             linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+
+  /* === TYPE ================================================ */
+
+  --font-sans:    'Share Tech Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Unbounded', -apple-system, 'Segoe UI', sans-serif;
+  --font-serif:   'Unbounded', Georgia, serif;
+  --font-mono:    'Share Tech Mono', ui-monospace, Menlo, monospace;
+
+  /* Scale */
+  --fs-10: 0.625rem;
+  --fs-11: 0.6875rem;
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-22: 1.375rem;
+  --fs-28: 1.75rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+  --fs-80: 5rem;
+
+  --lh-tight:  1.05;
+  --lh-snug:   1.2;
+  --lh-normal: 1.5;
+  --lh-loose:  1.7;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  --tracking-tight:  -0.025em;
+  --tracking-snug:   -0.012em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-wider:  0.10em;
+  --tracking-widest: 0.18em;
+
+  /* === SPACING (4 px base) =================================== */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 20px;  --sp-6: 24px;  --sp-7: 32px;  --sp-8: 40px;
+  --sp-9: 48px;  --sp-10: 64px; --sp-11: 80px; --sp-12: 96px;
+  --sp-14: 128px;
+
+  /* === RADIUS ============================================== */
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   18px;
+  --r-xl:   28px;
+  --r-2xl:  36px;
+  --r-full: 999px;
+
+  /* === BORDER ============================================== */
+  --border:        1px solid var(--glass-border);
+  --border-strong: 1px solid var(--glass-border-strong);
+
+  /* === SHADOW / GLOW ======================================= */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4),
+               0 0 0 1px rgba(253, 240, 213, 0.04) inset;
+
+  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45),
+               0 0 0 1px rgba(253, 240, 213, 0.04) inset;
+
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6),
+               0 0 0 1px rgba(253, 240, 213, 0.05) inset;
+
+  --glow-orange: 0 0 32px rgba(193, 18, 31, 0.45),
+                 0 0 80px rgba(193, 18, 31, 0.22);
+  --glow-blue:   0 0 40px rgba(102, 155, 188, 0.35),
+                 0 0 100px rgba(102, 155, 188, 0.16);
+
+  /* === BLUR ================================================ */
+  --blur-sm: blur(8px);
+  --blur-md: blur(20px);
+  --blur-lg: blur(40px);
+
+  /* === MOTION ============================================== */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t-fast: 120ms var(--ease);
+  --t-base: 200ms var(--ease);
+  --t-slow: 320ms var(--ease);
+
+  /* === LAYOUT ============================================== */
+  --container-narrow: 640px;
+  --container:        980px;
+  --container-wide:   1400px;
+}
+
+/* ============================================================
+   SEMANTIC TYPE
+   ============================================================ */
+
+html, body {
+  background: var(--bg-1);
+  background-image: var(--ambient);
+  background-attachment: fixed;
+  color: var(--text-1);
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+  font-weight: var(--fw-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-64);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text-1);
+  margin: 0 0 var(--sp-5);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-48);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text-1);
+  margin: 0 0 var(--sp-4);
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-28);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--text-1);
+  margin: 0 0 var(--sp-3);
+}
+
+h4, .h4 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-18);
+  line-height: var(--lh-snug);
+  color: var(--text-1);
+  margin: 0 0 var(--sp-2);
+}
+
+p, .body {
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+  color: var(--text-2);
+  margin: 0 0 var(--sp-3);
+}
+
+.body-sm, small {
+  font-size: var(--fs-14);
+  line-height: var(--lh-normal);
+  color: var(--text-2);
+}
+
+.label {
+  font-size: var(--fs-13);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-2);
+  line-height: var(--lh-snug);
+}
+
+.caption {
+  font-size: var(--fs-12);
+  color: var(--text-3);
+  line-height: var(--lh-snug);
+}
+
+/* Editorial micro-label — corner type, uppercase, widely tracked */
+.micro {
+  font-family: var(--font-sans);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--blue-300);
+}
+
+/* Tabular numerics for money */
+.num,
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.hero-num {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-64);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--cream);
+}
+
+/* Акцентная строка — теперь Unbounded (serif в бренде не используем) */
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+a {
+  color: var(--blue-300);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(169, 205, 224, 0.3);
+  transition: border-color var(--t-base), color var(--t-base);
+}
+a:hover { color: var(--cream); border-color: var(--cream); }
+
+::selection { background: rgba(193, 18, 31, 0.40); color: var(--cream); }
