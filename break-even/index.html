@@ -21,8 +21,8 @@
   --r-md:12px; --r-lg:16px; --r-full:100px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--mono);background:var(--marble);color:var(--cream);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--mono);background:var(--marble);color:var(--cream);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100%}
 
 /* ===== HERO (cosmos блок + код-matrix) ===== */
 .hero{position:relative;background:var(--cosmos);color:var(--cream);overflow:hidden;padding:clamp(28px,4vw,52px) 0 clamp(48px,6vw,80px)}
@@ -82,7 +82,7 @@ body{font-family:var(--mono);background:var(--marble);color:var(--cream);font-si
 .fld{display:flex;flex-direction:column;gap:6px}
 .fld-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
 .ch .inwrap{display:flex;align-items:center;background:rgba(0,48,73,.05);border:1px solid var(--line-2);border-radius:10px;padding:0 12px}
-.ch .inwrap input{flex:1;width:100%;background:transparent;border:none;outline:none;color:var(--t1);font-family:var(--disp);font-weight:500;font-size:22px;font-variant-numeric:tabular-nums;padding:9px 0}
+.ch .inwrap input{flex:1;width:100%;min-width:0;background:transparent;border:none;outline:none;color:var(--t1);font-family:var(--disp);font-weight:500;font-size:22px;font-variant-numeric:tabular-nums;padding:9px 0}
 .ch .inwrap input::placeholder{color:rgba(26,10,4,.26);font-weight:400}
 .ch .inwrap .u{font-family:var(--disp);font-size:20px;font-weight:500;color:var(--cosmos);padding-left:6px}
 .comrow{font-size:11px;color:var(--t3);padding:12px 0 2px;border-top:1px solid var(--line);margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
