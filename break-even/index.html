@@ -314,9 +314,9 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
       <h2 class="step-title">Средний чек и закупка</h2>
       <div class="glass">
         <div class="grid3">
-          <div class="field"><span class="field-lbl">Средний чек (за букет)</span><div class="inwrap"><input id="avg" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
-          <div class="field"><span class="field-lbl">Закупка в месяц: цветы и зелень</span><div class="inwrap"><input id="flowersM" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
-          <div class="field"><span class="field-lbl">Закупка в месяц: упаковка, ленты</span><div class="inwrap"><input id="packM" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Средний чек (за букет)</span><div class="inwrap"><input id="avg" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Закупка в месяц: цветы и зелень</span><div class="inwrap"><input id="flowersM" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Закупка в месяц: упаковка, ленты</span><div class="inwrap"><input id="packM" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
         </div>
       </div>
     </section>
@@ -328,10 +328,10 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
       <p class="step-note">Это самая простая модель — здесь только те расходы, без которых ваш бизнес не сможет существовать. Более сложную модель со своими статьями затрат вы сможете построить после обучения у Марии.</p>
       <div class="glass">
         <div class="grid2">
-          <div class="field"><span class="field-lbl">Аренда</span><div class="inwrap"><input id="rent" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
-          <div class="field"><span class="field-lbl">Зарплаты всем сотрудникам (на руки, в месяц)</span><div class="inwrap"><input id="salary" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
-          <div class="field"><span class="field-lbl">Коммуналка</span><div class="inwrap"><input id="utility" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
-          <div class="field"><span class="field-lbl">Касса и связь</span><div class="inwrap"><input id="cashreg" type="text" inputmode="numeric" value="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Аренда</span><div class="inwrap"><input id="rent" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Зарплаты всем сотрудникам (на руки, в месяц)</span><div class="inwrap"><input id="salary" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Коммуналка</span><div class="inwrap"><input id="utility" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
+          <div class="field"><span class="field-lbl">Касса и связь</span><div class="inwrap"><input id="cashreg" type="text" inputmode="numeric" placeholder="0"><span class="u">₽</span></div></div>
         </div>
         <div class="hint" style="margin-top:16px">Полный расход на зарплаты (с НДФЛ и взносами) посчитается в Шаге 4 — взносы зависят от вашей системы налогообложения.</div>
       </div>
@@ -345,7 +345,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
         <div class="taxopts">
           <label class="taxopt"><input type="radio" name="taxsys" value="ausn8"><span class="tname">АУСН «Доходы»<small>налог с выручки, без НДС</small></span><span class="trate">8% с выручки</span></label>
           <label class="taxopt"><input type="radio" name="taxsys" value="ausndr"><span class="tname">АУСН «Доходы − Расходы»<small>в точке ноль — минимальный налог</small></span><span class="trate">3% с выручки</span></label>
-          <label class="taxopt"><input type="radio" name="taxsys" value="patent"><span class="tname">Патент<small>годовой патент разделите на 12</small></span><span class="pin">сумма <input id="patentSum" type="text" inputmode="numeric" value="0"> ₽/мес</span></label>
+          <label class="taxopt"><input type="radio" name="taxsys" value="patent"><span class="tname">Патент<small>годовой патент разделите на 12</small></span><span class="pin">сумма <input id="patentSum" type="text" inputmode="numeric" placeholder="0"> ₽/мес</span></label>
           <label class="taxopt"><input type="radio" name="taxsys" value="usn6nds"><span class="tname">УСН «Доходы» 6% + НДС 5%<small>НДС выделяется из чека, УСН — с суммы без НДС</small></span><span class="trate">≈ 10,48% с выручки</span></label>
           <label class="taxopt"><input type="radio" name="taxsys" value="usndr15nds"><span class="tname">УСН «Доходы − Расходы» 15% + НДС 5%<small>в точке ноль — мин. УСН 1% + НДС</small></span><span class="trate">≈ 5,71% с выручки</span></label>
         </div>
