@@ -123,13 +123,6 @@ function App() {
 
   return (
     <>
-      {/* Corner editorial micro-labels — borrowed from the style reference */}
-      <div className="corner-micro tl">{'{ Расчёт ЗП }'}</div>
-      <div className="corner-micro tr">
-        AI <span className="em">калькулятор</span><br />
-        Версия &nbsp; <span className="em">2026.1</span>
-      </div>
-
       <div className="app">
         <Header period={kpi.period} count={computed.kpi.activeCount} totalFot={computed.kpi.totalFot} loaded={loaded} />
 
@@ -218,23 +211,13 @@ function App() {
 
 /* -------------- Header -------------- */
 function Header({ period, count, totalFot, loaded }) {
+  if (!loaded) return null;
   return (
-    <header className="header">
-      <div className="brand">
-        <Orb size={56} />
-        <div className="brand-text">
-          <div className="brand-title">Расчёт зарплаты</div>
-          <div className="brand-sub">Калькулятор для цветочного магазина от Андреевой Марии</div>
-        </div>
-      </div>
-      <div className="header-meta">
-        <div className="header-meta-period">{loaded ? capitalize(period) : '—'}</div>
-        <div className="header-meta-stat">
-          {loaded
-            ? `${count} ${plural(count, ['активный', 'активных', 'активных'])} · ФОТ ${fmtMoney(totalFot)}`
-            : 'Демо ожидает загрузки'}
-        </div>
-      </div>
+    <header className="statusbar">
+      <span className="statusbar-period">{capitalize(period)}</span>
+      <span className="statusbar-stat">
+        {count} {plural(count, ['активный', 'активных', 'активных'])} · ФОТ {fmtMoney(totalFot)}
+      </span>
     </header>
   );
 }
@@ -246,7 +229,6 @@ function EmptyHero({ onLoadDemo }) {
     <div className="section">
       <GlassCard>
         <div className="empty">
-          <Orb size={180} />
           <h2 className="empty-title">Загрузите два файла<br />и получите расчёт</h2>
           <p className="empty-body">
             Калькулятор ждёт <strong style={{ color: 'var(--cream)' }}>справочник сотрудников</strong> и <strong style={{ color: 'var(--cream)' }}>табель с выручкой</strong>. Или нажмите ниже — посмотрим, как это выглядит.

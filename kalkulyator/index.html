@@ -9,11 +9,37 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   #root{position:relative;z-index:1}
-  #mx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.5}
+  /* ===== HERO как в остальных инструментах (тёмный мир книги + матрица) ===== */
+  .zp-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#03080e 0%,#000103 100%);border-bottom:1px solid rgba(253,240,213,.08)}
+  .zp-hero #mx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.92}
+  .zp-hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(90% 80% at 2% 100%,rgba(0,16,28,.5) 0%,transparent 60%),
+               linear-gradient(90deg,rgba(0,3,8,.82) 0%,rgba(0,3,8,.35) 44%,transparent 72%),
+               linear-gradient(180deg,rgba(0,3,8,.4) 0%,transparent 22%)}
+  .zp-hero-wrap{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:clamp(26px,4vw,48px) clamp(20px,4vw,32px) clamp(44px,6vw,72px)}
+  .zp-hero-top{display:flex;justify-content:space-between;gap:16px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,240,213,.55);margin-bottom:clamp(30px,6vw,64px)}
+  .zp-hero-top .em{color:#FDF0D5}
+  .zp-eyebrow{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#A9CDE0;margin-bottom:16px}
+  .zp-h1{font-family:'Unbounded',sans-serif;font-weight:800;line-height:.92;letter-spacing:-.02em;text-transform:uppercase;font-size:clamp(40px,7vw,92px);color:#FDF0D5;margin:0}
+  .zp-tagline{font-family:'Share Tech Mono',monospace;font-size:clamp(14px,1.4vw,17px);line-height:1.6;max-width:620px;margin-top:22px;color:rgba(253,240,213,.82)}
+  .zp-tagline b{color:#A9CDE0;font-weight:400}
+  @media(max-width:760px){
+    .zp-h1{font-size:clamp(32px,11vw,56px)}
+    .zp-tagline{font-size:13px;max-width:36ch}
+    .zp-hero #mx{opacity:.6}
+  }
 </style>
 </head>
 <body>
-<canvas id="mx"></canvas>
+<header class="zp-hero">
+  <canvas id="mx"></canvas>
+  <div class="zp-hero-wrap">
+    <div class="zp-hero-top"><span class="em">МАРИЯ АНДРЕЕВА</span><span>AI · ДЛЯ ФЛОРИСТОВ</span></div>
+    <span class="zp-eyebrow">AI-калькулятор · версия 2026.1</span>
+    <h1 class="zp-h1">Расчёт<br>зарплаты</h1>
+    <p class="zp-tagline"><b>Загрузите две таблички</b> — справочник сотрудников и табель с выручкой — и получите готовый расчётный лист по каждому флористу. Excel и PDF на выходе.</p>
+  </div>
+</header>
 <div id="root"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
@@ -26,40 +52,43 @@
 <!-- ===== Матрица «поле данных»: цифры на чёрном, слева красноватые, справа голубые, белые вспышки ===== -->
 <script>
 (function(){
+  var hero=document.querySelector('.zp-hero');
   var c=document.getElementById('mx'), x=c.getContext('2d');
-  var fs=14, cw=10, lh=18, cols=0, rows=0, G=[];
+  var fs=15, cw=10, lh=19, cols=0, rows=0, G=[];
   var CH='0123456789₽%0123456789'; // чаще цифры — тема денег
   function pick(){return CH.charAt((Math.random()*CH.length)|0);}
   function resize(){
-    c.width=window.innerWidth; c.height=window.innerHeight;
+    c.width=hero.offsetWidth||window.innerWidth; c.height=hero.offsetHeight||420;
     x.font=fs+'px "Share Tech Mono", monospace';
     cw=x.measureText('0').width||10;
     cols=Math.ceil(c.width/cw)+1; rows=Math.ceil(c.height/lh)+1;
     G=[];
-    for(var r=0;r<rows;r++){var row=[];for(var i=0;i<cols;i++){row.push({ch:pick(),b:Math.random()*0.5});}G.push(row);}
+    for(var r=0;r<rows;r++){var row=[];for(var i=0;i<cols;i++){row.push({ch:pick(),b:Math.random()});}G.push(row);}
   }
-  resize(); window.addEventListener('resize',resize);
+  resize();
+  window.addEventListener('resize',resize);
+  window.addEventListener('load',resize);
+  if(window.ResizeObserver){ new ResizeObserver(resize).observe(hero); }
   function draw(){
     x.clearRect(0,0,c.width,c.height);
     x.font=fs+'px "Share Tech Mono", monospace'; x.textBaseline='top';
-    var cx=c.width/2, cyf, vig;
+    var topF=c.height*0.12, botF=c.height*0.88;
     for(var r=0;r<rows;r++){
+      var py=r*lh;
+      // мягкое затухание сверху и снизу
+      var fade=1;
+      if(py<topF) fade=py/topF; else if(py>botF) fade=Math.max(0,(c.height-py)/(c.height-botF));
+      if(fade<=0) continue;
       for(var i=0;i<cols;i++){
         var cell=G[r][i];
-        // обновляем часть ячеек — мерцание
-        if(Math.random()>0.985){ cell.ch=pick(); cell.b=Math.random(); }
-        if(cell.b<=0.04) continue;
-        var px=i*cw, py=r*lh;
-        // виньетка: ярче в центре, гаснет к краям
-        var dx=(px-cx)/cx, dy=(py-c.height*0.5)/(c.height*0.5);
-        vig=1-Math.min(1, dx*dx*0.9 + dy*dy*0.9);
-        if(vig<=0) continue;
-        var a=cell.b*vig;
+        if(Math.random()>0.975){ cell.ch=pick(); cell.b=Math.random(); }
+        var px=i*cw;
+        var a=(0.16+cell.b*0.84)*fade;
         var fx=px/c.width; // 0 слева → 1 справа: красный → marble
-        if(cell.b>0.93){ x.fillStyle='rgba(253,240,213,'+(a).toFixed(3)+')'; } // белая вспышка
+        if(cell.b>0.9){ x.fillStyle='rgba(253,240,213,'+a.toFixed(3)+')'; } // белая вспышка
         else{
           var rr=Math.round(193+(102-193)*fx), gg=Math.round(18+(155-18)*fx), bb=Math.round(31+(188-31)*fx);
-          x.fillStyle='rgba('+rr+','+gg+','+bb+','+(a*0.85).toFixed(3)+')';
+          x.fillStyle='rgba('+rr+','+gg+','+bb+','+a.toFixed(3)+')';
         }
         x.fillText(cell.ch, px, py);
       }
