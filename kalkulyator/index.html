@@ -49,53 +49,58 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 
-<!-- ===== Матрица «поле данных»: цифры на чёрном, слева красноватые, справа голубые, белые вспышки ===== -->
+<!-- ===== Матрица как в скидке: падающие цифры в ПРАВОЙ зоне hero (слева под текстом чисто) ===== -->
 <script>
 (function(){
   var hero=document.querySelector('.zp-hero');
   var c=document.getElementById('mx'), x=c.getContext('2d');
-  var fs=15, cw=10, lh=19, cols=0, rows=0, G=[];
-  var CH='0123456789₽%0123456789'; // чаще цифры — тема денег
-  function pick(){return CH.charAt((Math.random()*CH.length)|0);}
+  var chars='0123456789₽%'.split('');
+  function rnd(){return chars[(Math.random()*chars.length)|0];}
+  var fs=16, cols=0, rows=0, glyph=[], baseA=[], drops=[], tint=[], f=0;
   function resize(){
     c.width=hero.offsetWidth||window.innerWidth; c.height=hero.offsetHeight||420;
-    x.font=fs+'px "Share Tech Mono", monospace';
-    cw=x.measureText('0').width||10;
-    cols=Math.ceil(c.width/cw)+1; rows=Math.ceil(c.height/lh)+1;
-    G=[];
-    for(var r=0;r<rows;r++){var row=[];for(var i=0;i<cols;i++){row.push({ch:pick(),b:Math.random()});}G.push(row);}
+    cols=Math.ceil(c.width/fs); rows=Math.ceil(c.height/fs);
+    glyph=[]; baseA=[]; drops=[]; tint=[];
+    for(var i=0;i<cols;i++){
+      glyph[i]=[]; baseA[i]=[];
+      for(var j=0;j<rows;j++){ glyph[i][j]=rnd(); baseA[i][j]=0.05+Math.random()*0.14; }
+      drops[i]=Math.random()*rows*-1;
+      tint[i]=Math.random()<0.32?'blue':'cream'; // часть столбцов голубые (marble), остальные кремовые
+    }
   }
-  resize();
-  window.addEventListener('resize',resize);
-  window.addEventListener('load',resize);
+  resize(); window.addEventListener('resize',resize); window.addEventListener('load',resize);
   if(window.ResizeObserver){ new ResizeObserver(resize).observe(hero); }
+  function col(i,a){ return tint[i]==='blue' ? 'rgba(169,205,224,'+a+')' : 'rgba(253,240,213,'+a+')'; }
   function draw(){
     x.clearRect(0,0,c.width,c.height);
     x.font=fs+'px "Share Tech Mono", monospace'; x.textBaseline='top';
-    var topF=c.height*0.12, botF=c.height*0.88;
-    for(var r=0;r<rows;r++){
-      var py=r*lh;
-      // мягкое затухание сверху и снизу
-      var fade=1;
-      if(py<topF) fade=py/topF; else if(py>botF) fade=Math.max(0,(c.height-py)/(c.height-botF));
-      if(fade<=0) continue;
-      for(var i=0;i<cols;i++){
-        var cell=G[r][i];
-        if(Math.random()>0.975){ cell.ch=pick(); cell.b=Math.random(); }
-        var px=i*cw;
-        var a=(0.16+cell.b*0.84)*fade;
-        var fx=px/c.width; // 0 слева → 1 справа: красный → marble
-        if(cell.b>0.9){ x.fillStyle='rgba(253,240,213,'+a.toFixed(3)+')'; } // белая вспышка
-        else{
-          var rr=Math.round(193+(102-193)*fx), gg=Math.round(18+(155-18)*fx), bb=Math.round(31+(188-31)*fx);
-          x.fillStyle='rgba('+rr+','+gg+','+bb+','+a.toFixed(3)+')';
-        }
-        x.fillText(cell.ch, px, py);
+    var edge=c.width*0.5, feather=c.width*0.16;
+    function fadeAt(colX){ return colX<edge ? 0 : Math.min(1,(colX-edge)/feather); }
+    // тусклый ковёр
+    for(var i=0;i<cols;i++){
+      var fx=fadeAt(i*fs); if(fx<=0) continue;
+      for(var j=0;j<rows;j++){
+        x.fillStyle=col(i,(baseA[i][j]*fx).toFixed(3));
+        x.fillText(glyph[i][j], i*fs, j*fs);
       }
     }
+    // падающие капли с яркой головой
+    for(var i=0;i<cols;i++){
+      var fx2=fadeAt(i*fs); if(fx2<=0){ drops[i]+=0.5; continue; }
+      var head=Math.floor(drops[i]);
+      for(var k=0;k<15;k++){
+        var row=head-k; if(row<0||row>=rows) continue;
+        if(k===0){ x.fillStyle='rgba(255,255,255,'+(0.98*fx2).toFixed(3)+')'; }
+        else { x.fillStyle=col(i,(Math.max(0,0.72-k*0.055)*fx2).toFixed(3)); }
+        x.fillText(glyph[i][row], i*fs, row*fs);
+      }
+      drops[i]+=0.5;
+      if(drops[i]-15>rows && Math.random()>0.93) drops[i]=Math.random()*-12;
+    }
+    if((f++&1)===0) for(var m=0;m<cols;m++){ glyph[(Math.random()*cols)|0][(Math.random()*rows)|0]=rnd(); }
   }
   var last=0;
-  function loop(t){ if(t-last>55){ draw(); last=t; } requestAnimationFrame(loop); }
+  function loop(t){ if(t-last>40){ draw(); last=t; } requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
 })();
 </script>
