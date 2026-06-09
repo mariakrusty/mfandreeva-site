@@ -573,6 +573,18 @@
     .step-back{position:fixed;top:clamp(14px,2.2vh,24px);right:clamp(14px,4vw,26px);z-index:210;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-family:'ShareTechMono';font-size:20px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
     body.step-open .step-back{display:inline-flex;animation:backPop .3s var(--ease) .1s both}
   }
+  /* ===== cookie-баннер (152-ФЗ) ===== */
+  .cookie{position:fixed;left:0;right:0;bottom:0;z-index:300;display:none;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:#120703;border-top:1px solid rgba(253,240,213,.16);color:var(--cream);padding:16px clamp(20px,5vw,56px);box-shadow:0 -10px 40px rgba(0,0,0,.45)}
+  .cookie.show{display:flex}
+  .cookie-text{font-family:'ShareTechMono',monospace;font-size:12.5px;line-height:1.55;max-width:820px;color:rgba(253,240,213,.85)}
+  .cookie-text a{color:var(--cream);text-decoration:underline}
+  .cookie-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .cookie button{font-family:'ShareTechMono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:12px 22px;border-radius:100px;cursor:pointer;border:1.5px solid;transition:.2s}
+  .ck-all{background:var(--red);color:var(--cream);border-color:var(--red)}
+  .ck-all:hover{background:#c81f1c;border-color:#c81f1c}
+  .ck-need{background:transparent;color:var(--cream);border-color:rgba(253,240,213,.4)}
+  .ck-need:hover{background:rgba(253,240,213,.1)}
+  @media(max-width:640px){.cookie{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -803,7 +815,7 @@
           <a href="https://mfandreeva.ru/policy/">Политика конфиденциальности</a>
           <a href="https://mfandreeva.ru/private/">Пользовательское соглашение</a>
         </nav>
-        <div class="footer-copy">© Все права защищены 2026 · Москва</div>
+        <div class="footer-copy">ИП Андреева Мария Фёдоровна · ИНН 143506715455 · ОГРНИП 319673300042170<br>© Все права защищены 2026 · Москва</div>
       </div>
     </div>
   </footer>
@@ -1285,6 +1297,18 @@
     });
     for(var i=1;i<=TOTAL;i++){ var im=new Image(); im.src=src(i); }
   })();
+</script>
+
+<div class="cookie" id="cookie">
+  <div class="cookie-text">Мы используем cookies, чтобы сайт работал корректно и был удобнее. Продолжая пользоваться сайтом, вы соглашаетесь с этим. Подробнее — в <a href="https://mfandreeva.ru/policy/" target="_blank" rel="noopener">политике конфиденциальности</a>.</div>
+  <div class="cookie-btns">
+    <button class="ck-all" onclick="ckSet('all')">Принять все</button>
+    <button class="ck-need" onclick="ckSet('need')">Только необходимые</button>
+  </div>
+</div>
+<script>
+  function ckSet(v){try{localStorage.setItem('ck-consent',v);}catch(e){}document.getElementById('cookie').classList.remove('show');}
+  (function(){var s=false;try{s=!!localStorage.getItem('ck-consent');}catch(e){}if(!s)document.getElementById('cookie').classList.add('show');})();
 </script>
 </body>
 </html>
