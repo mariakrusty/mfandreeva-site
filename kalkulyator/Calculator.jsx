@@ -195,8 +195,6 @@ function App() {
         ) : (
           <EmptyHero onLoadDemo={handleLoadDemo} />
         )}
-
-        <Foot />
       </div>
 
       <SheetModal
