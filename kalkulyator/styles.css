@@ -1,6 +1,6 @@
 /* Калькулятор ЗП — UI Kit styles
    Dark glass · ambient lighting · orange CTA */
-@import url('colors_and_type.css');
+@import url('colors_and_type.css?v=3');
 
 * { box-sizing: border-box; }
 html, body, #root {
