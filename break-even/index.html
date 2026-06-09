@@ -240,6 +240,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 @media(max-width:760px){
   .grid3,.grid2,.channels,.kpi-grid,.reco,.chq-legend{grid-template-columns:1fr}
   .hero-top{margin-bottom:36px}
+  .hero h1{font-size:clamp(26px,7.4vw,44px)}
   .tagline{font-size:13px;line-height:1.5;margin-top:16px;max-width:34ch}
   .mx{opacity:.4}
   .cookie{flex-direction:column;align-items:flex-start}
@@ -511,7 +512,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 
   function balance(src){
     var cash=n('cash'),card=n('card'),sbp=n('sbp');
-    if(src==='cash'){if(cash>100)cash=100;if(cash<0)cash=0;card=100-cash-sbp;if(card<0){card=0;sbp=100-cash;if(sbp<0)sbp=0;}}
+    if(src==='cash'){if(cash>100)cash=100;if(cash<0)cash=0;sbp=100-cash-card;if(sbp<0){sbp=0;card=100-cash;if(card<0)card=0;}}
     else if(src==='card'){if(card>100)card=100;if(card<0)card=0;sbp=100-cash-card;if(sbp<0){sbp=0;card=100-cash;if(card<0)card=0;}}
     else if(src==='sbp'){if(sbp>100)sbp=100;if(sbp<0)sbp=0;card=100-cash-sbp;if(card<0){card=0;cash=100-sbp;if(cash<0)cash=0;}}
     setv('cash',cash);setv('card',card);setv('sbp',sbp);
