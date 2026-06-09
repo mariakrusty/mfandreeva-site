@@ -529,7 +529,11 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     document.getElementById('sp-sbp').textContent=sbp+'%';
     [['seg-cash',cash],['seg-card',card],['seg-sbp',sbp]].forEach(function(p){var sl=document.getElementById(p[0]).querySelector('.sl');if(sl)sl.style.display=p[1]<12?'none':'block';});
     var sum=cash+card+sbp,sl=document.getElementById('sumline');
-    sl.innerHTML = sum===100 ? '<span class="ok">●</span> Сумма долей: 100% — отлично.' : '<span style="color:var(--error)">●</span> Сумма долей: '+sum+'% — должно быть 100%.';
+    if(shareOverflow){
+      sl.innerHTML = '<span style="color:var(--error)">●</span> Доля не может быть больше 100% — это проценты (например 30), а не сумма в рублях.';
+    } else {
+      sl.innerHTML = sum===100 ? '<span class="ok">●</span> Сумма долей: 100% — отлично.' : '<span style="color:var(--error)">●</span> Сумма долей: '+sum+'% — должно быть 100%.';
+    }
 
     // комиссия нужна только если в канале есть оплата — иначе подсказка «впишите %»
     function comHint(share,comId,warnId){
@@ -622,9 +626,11 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     document.getElementById('reco-cogs-txt').textContent='Точка ноль упадёт до '+b3+' '+bword(b3)+' в месяц. Закупка — главный рычаг.';
   }
 
-  document.getElementById('cash').addEventListener('input',function(){balance('cash');});
-  document.getElementById('card').addEventListener('input',function(){balance('card');});
-  document.getElementById('sbp').addEventListener('input',function(){balance('sbp');});
+  var shareOverflow=false;
+  function onShare(src){ shareOverflow = n(src)>100; balance(src); }
+  document.getElementById('cash').addEventListener('input',function(){onShare('cash');});
+  document.getElementById('card').addEventListener('input',function(){onShare('card');});
+  document.getElementById('sbp').addEventListener('input',function(){onShare('sbp');});
   var moneyFields=['avg','flowersM','packM','rent','salary','utility','cashreg'];
   var pctFields=['acq','sbpfee'];
   moneyFields.forEach(function(id){
