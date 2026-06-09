@@ -69,6 +69,24 @@
   window.addEventListener('resize',resize);
   window.addEventListener('load',resize);
   if(window.ResizeObserver){ new ResizeObserver(resize).observe(hero); }
+  // силуэт-бюст (голова + плечи) в правой части — «человек из цифр»
+  function inFigure(px,py){
+    var s=c.height, W=c.width;
+    var cxF=W*0.74;                       // центр фигуры — правая зона
+    var dx=Math.abs(px-cxF);
+    // голова (эллипс)
+    var hx=cxF, hy=0.25*s, hrx=0.088*s, hry=0.12*s;
+    var dxh=(px-hx)/hrx, dyh=(py-hy)/hry;
+    if(dxh*dxh+dyh*dyh<=1) return true;
+    // шея
+    if(dx<0.05*s && py>0.33*s && py<0.42*s) return true;
+    // плечи/торс (бюст): верхний край опускается к плечам
+    if(py>0.40*s){
+      var topEdge=0.40*s + dx*0.42;
+      if(dx<0.30*s && py>topEdge) return true;
+    }
+    return false;
+  }
   function draw(){
     x.clearRect(0,0,c.width,c.height);
     x.font=fs+'px "Share Tech Mono", monospace'; x.textBaseline='top';
@@ -83,12 +101,20 @@
         var cell=G[r][i];
         if(Math.random()>0.975){ cell.ch=pick(); cell.b=Math.random(); }
         var px=i*cw;
-        var a=(0.16+cell.b*0.84)*fade;
-        var fx=px/c.width; // 0 слева → 1 справа: красный → marble
-        if(cell.b>0.9){ x.fillStyle='rgba(253,240,213,'+a.toFixed(3)+')'; } // белая вспышка
-        else{
-          var rr=Math.round(193+(102-193)*fx), gg=Math.round(18+(155-18)*fx), bb=Math.round(31+(188-31)*fx);
-          x.fillStyle='rgba('+rr+','+gg+','+bb+','+a.toFixed(3)+')';
+        var fx=px/c.width; // 0 слева → 1 справа
+        if(inFigure(px,py)){
+          // ФИГУРА — ярче, холодный кремово-голубой «свет»
+          var af=(0.5+cell.b*0.5)*fade;
+          if(cell.b>0.7){ x.fillStyle='rgba(253,240,213,'+af.toFixed(3)+')'; }        // вспышка-кремовая
+          else{ x.fillStyle='rgba(169,205,224,'+(af*0.92).toFixed(3)+')'; }            // blue-light свет
+        } else {
+          // ФОН — тусклое поле: слева красноватое, справа голубоватое
+          var a=(0.09+cell.b*0.4)*fade*0.7;
+          if(cell.b>0.93){ x.fillStyle='rgba(253,240,213,'+a.toFixed(3)+')'; }
+          else{
+            var rr=Math.round(193+(102-193)*fx), gg=Math.round(18+(155-18)*fx), bb=Math.round(31+(188-31)*fx);
+            x.fillStyle='rgba('+rr+','+gg+','+bb+','+a.toFixed(3)+')';
+          }
         }
         x.fillText(cell.ch, px, py);
       }
