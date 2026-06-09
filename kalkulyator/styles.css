@@ -1,6 +1,6 @@
 /* Калькулятор ЗП — UI Kit styles
    Dark glass · ambient lighting · orange CTA */
-@import url('colors_and_type.css?v=3');
+@import url('colors_and_type.css?v=7');
 
 * { box-sizing: border-box; }
 html, body, #root {
@@ -264,8 +264,8 @@ html, body, #root {
   backdrop-filter: blur(12px);
   white-space: nowrap;
 }
-.chip-success { color: var(--success); background: rgba(107, 212, 155, .08); border-color: rgba(107, 212, 155, .25); }
-.chip-warn    { color: var(--warning); background: rgba(240, 198, 116, .08); border-color: rgba(240, 198, 116, .25); }
+.chip-success { color: var(--success); background: rgba(169, 205, 224, .08); border-color: rgba(169, 205, 224, .25); }
+.chip-warn    { color: var(--warning); background: rgba(102, 155, 188, .08); border-color: rgba(102, 155, 188, .25); }
 .chip-error   { color: var(--error);   background: rgba(224, 70, 59, .08);  border-color: rgba(224, 70, 59, .25); }
 .chip-mute    { color: var(--text-3); }
 .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
@@ -289,7 +289,7 @@ html, body, #root {
   border-radius: var(--r-md);
   transition: all 200ms var(--ease);
 }
-.upload-tile.ok { border-style: solid; border-color: rgba(107, 212, 155, .35); background: rgba(107, 212, 155, .04); }
+.upload-tile.ok { border-style: solid; border-color: rgba(169, 205, 224, .35); background: rgba(169, 205, 224, .04); }
 .upload-tile-icon {
   width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
@@ -298,7 +298,7 @@ html, body, #root {
   flex-shrink: 0;
 }
 .upload-tile-icon img { filter: invert(95%) sepia(8%) saturate(40%) hue-rotate(340deg) brightness(105%); }
-.upload-tile.ok .upload-tile-icon { background: rgba(107, 212, 155, .14); }
+.upload-tile.ok .upload-tile-icon { background: rgba(169, 205, 224, .14); }
 .upload-tile-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .upload-tile-name {
   font-size: 13px;
@@ -370,7 +370,7 @@ html, body, #root {
 }
 .kpi-value-sm { font-size: 16px; }
 
-.kpi.success { border-color: rgba(107, 212, 155, .28); background: rgba(107, 212, 155, .06); }
+.kpi.success { border-color: rgba(169, 205, 224, .28); background: rgba(169, 205, 224, .06); }
 .kpi.success .kpi-value { color: var(--success); }
 .kpi.success .kpi-label { color: var(--success); }
 
