@@ -3,252 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Расчёт возможной скидки · Мария Андреева</title>
-<meta name="description" content="Бесплатный AI-калькулятор для флористов: на сколько увеличить заказ, чтобы скидка не съела прибыль.">
+<title>Калькулятор скидки для флористов · Мария Андреева</title>
+<meta name="description" content="Бесплатный AI-калькулятор скидки для цветочного магазина: на сколько увеличить заказ, чтобы скидка не съела прибыль. Расчёт наценки, рентабельности и безопасного размера скидки.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* фирменная палитра сайта mfandreeva.ru */
-  --red:#B01B18; --red-bright:#E0463B; --cream:#FDF0D5; --cosmos:#003049; --blue:#669BBC; --blue-light:#A9CDE0;
-  /* тёмная база на cosmos */
-  --bg-0:#001722; --bg-1:#002032; --bg-2:#003049;
-  --glass-1:rgba(253,240,213,.04); --glass-2:rgba(253,240,213,.07); --glass-3:rgba(253,240,213,.11);
-  --glass-border:rgba(253,240,213,.12); --glass-border-strong:rgba(253,240,213,.20);
-  --red-glow:radial-gradient(circle at 32% 28%,#A9CDE0 0%,#669BBC 26%,#B01B18 72%,#5A0D0C 100%);
-  --text-1:var(--cream); --text-2:rgba(253,240,213,.66); --text-3:rgba(253,240,213,.42); --text-4:rgba(253,240,213,.25);
-  --success:#5FBE8A; --warning:#E0A93B; --error:var(--red-bright);
-  --ambient:radial-gradient(ellipse 80% 60% at 15% 30%,rgba(102,155,188,.18) 0%,transparent 60%),
-            radial-gradient(ellipse 60% 50% at 85% 70%,rgba(176,27,24,.12) 0%,transparent 55%),
-            radial-gradient(ellipse 100% 100% at 50% 100%,rgba(102,155,188,.08) 0%,transparent 70%),
-            linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 100%);
-  --font-sans:'Share Tech Mono',ui-monospace,Menlo,monospace;
-  --font-display:'Unbounded',-apple-system,'Segoe UI',sans-serif;
-  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:28px; --r-full:999px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --red:#B01B18; --crimson:#C1121F; --cream:#FDF0D5; --ink:#1A0A04;
+  --cosmos:#003049; --marble:#669BBC;
+  --success:#5FBE8A; --error:#E0463B;
+  --t1:var(--ink); --t2:rgba(26,10,4,.72); --t3:rgba(26,10,4,.5); --t4:rgba(26,10,4,.34);
+  --line:rgba(26,10,4,.14); --line-2:rgba(26,10,4,.26);
+  --card:#FFFFFF;
+  --mono:'Share Tech Mono',ui-monospace,monospace;
+  --disp:'Unbounded',-apple-system,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r-md:12px; --r-lg:16px; --r-full:100px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{
-  background:var(--bg-1);background-image:var(--ambient);background-attachment:fixed;
-  color:var(--text-1);font-family:var(--font-sans);font-size:16px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;min-height:100vh;
-}
-.app{max-width:1100px;margin:0 auto;padding:40px 28px 96px;position:relative}
+html{scroll-behavior:smooth}
+body{font-family:var(--mono);background:var(--cream);color:var(--t1);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
 
-/* corner micro */
-.corner-micro{position:fixed;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);z-index:1;pointer-events:none}
-.corner-micro.tr{top:22px;right:26px}
-.corner-micro.bl{bottom:22px;left:26px}
-.corner-micro .em{color:var(--text-1)}
+/* ===== HERO (красный блок + matrix) ===== */
+.hero{position:relative;background:var(--red);color:var(--cream);overflow:hidden;padding:clamp(28px,4vw,52px) 0 clamp(48px,6vw,80px)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,64px);position:relative;z-index:3}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(120% 90% at 90% 4%,rgba(102,155,188,.18) 0%,transparent 52%),
+  radial-gradient(90% 80% at 0% 100%,rgba(0,48,73,.42) 0%,transparent 60%)}
+.mx{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.85}
+.hero-top{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:clamp(34px,6vw,76px);font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.hero-top .em{opacity:1}.hero-top span:last-child{opacity:.72}
+.eyebrow{position:relative;z-index:3;display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;margin-bottom:18px}
+.hero h1{position:relative;z-index:3;font-family:var(--disp);font-weight:900;line-height:.9;letter-spacing:-.02em;text-transform:uppercase;font-size:clamp(44px,8.2vw,118px);text-wrap:balance}
+.tagline{position:relative;z-index:3;font-family:var(--mono);font-size:clamp(15px,1.5vw,19px);line-height:1.6;max-width:660px;margin-top:24px;opacity:.94}
+.tagline b{color:var(--ink);font-weight:400}
+.tagline .serif{font-family:var(--disp);font-weight:500;font-size:.92em}
 
-/* header */
-.header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;padding-top:18px}
-.brand{display:flex;align-items:center;gap:18px}
-.brand-orb{width:60px;height:60px;flex-shrink:0;border-radius:50%;background:var(--red-glow);
-  box-shadow:0 0 32px rgba(176,27,24,.45),0 0 80px rgba(176,27,24,.22)}
-.brand-text{display:flex;flex-direction:column;gap:7px}
-.brand-title{font-family:var(--font-display);font-weight:800;font-size:clamp(32px,5.5vw,48px);line-height:1;letter-spacing:-.025em;color:var(--cream)}
-.brand-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
-.header-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;white-space:nowrap}
-.eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
-.eyebrow-warm{color:var(--red-bright)}
-
-/* intro */
-.intro{font-size:clamp(16px,2.4vw,19px);line-height:1.6;color:var(--text-2);margin-bottom:14px;text-wrap:pretty}
-.intro .hl{color:var(--cream)}
-.intro .serif{font-family:var(--font-display);font-weight:500;color:var(--blue-light);font-size:.92em}
-
-/* glass */
-.glass{background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-lg);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.glass-elevated{background:var(--glass-2);border-color:var(--glass-border-strong);box-shadow:0 8px 28px rgba(0,0,0,.35)}
-
-.section{margin-bottom:34px}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;padding:0 4px;flex-wrap:wrap;gap:8px}
-.section-title{font-family:var(--font-display);font-size:clamp(22px,3.6vw,28px);font-weight:400;letter-spacing:-.015em;color:var(--cream)}
+/* ===== ТЕЛО (ink) ===== */
+.body{max-width:1040px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,64px) 90px}
+.bq,.kpi,.box,.alt-card{box-shadow:0 2px 16px rgba(26,10,4,.05)}
 
 /* how accordion */
-.how-card{padding:0;overflow:hidden;margin-bottom:28px}
-.how-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:15px 20px;background:transparent;border:0;cursor:pointer;
-  color:var(--text-2);font-family:inherit;font-size:13.5px;letter-spacing:.04em;transition:.15s}
-.how-toggle:hover{color:var(--cream);background:rgba(255,255,255,.02)}
+.how-card{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:clamp(36px,5vw,56px)}
+.how-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:17px 22px;background:transparent;border:0;cursor:pointer;color:var(--t2);font-family:var(--mono);font-size:14px;letter-spacing:.08em;text-transform:uppercase;transition:.15s}
+.how-toggle:hover{color:var(--t1);background:rgba(26,10,4,.04)}
 .how-toggle-text{flex:1;text-align:left}
-.how-toggle .chev{transition:transform .2s var(--ease);color:var(--text-3)}
-.how-card.open .how-toggle .chev{transform:rotate(180deg)}
+.how-toggle .chev{transition:transform .2s var(--ease);color:var(--t3)}
+.how-card.open .chev{transform:rotate(180deg)}
 .how-body{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .3s var(--ease),padding .3s var(--ease)}
 .how-card.open .how-body{padding:4px 22px 22px;max-height:500px}
-.how-body p{font-size:13.5px;line-height:1.6;color:var(--text-2);margin-bottom:10px;max-width:78ch}
-.how-body strong{color:var(--cream);font-weight:600}
+.how-body p{font-family:var(--mono);font-size:13.5px;line-height:1.65;color:var(--t2);margin-bottom:10px}
+.how-body strong{color:var(--t1);font-weight:400}
 
-/* segmented control */
-.seg{display:inline-flex;background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-full);padding:4px;gap:2px}
-.seg button{padding:8px 18px;border:none;background:transparent;color:var(--text-2);font-family:inherit;font-size:13px;font-weight:500;
-  border-radius:var(--r-full);cursor:pointer;transition:.18s var(--ease);white-space:nowrap}
-.seg button[aria-selected="true"]{background:var(--red);color:#1A0A04;font-weight:600;box-shadow:0 0 18px rgba(176,27,24,.4)}
-.seg.mini{padding:3px}
-.seg.mini button{padding:5px 12px;font-size:11.5px}
+/* section heads */
+.section{margin-bottom:clamp(40px,5vw,60px)}
+.step-eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson);margin-bottom:10px}
+.step-title{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.015em;line-height:.98;font-size:clamp(30px,4.6vw,58px);margin-bottom:28px}
 
-/* inputs */
-.input-card{padding:26px}
-.input-card .tabs-row{margin-bottom:24px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.field{display:flex;flex-direction:column;gap:9px;min-width:0}
-.field-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px}
-.field-label{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
-.inwrap{position:relative;display:flex;align-items:center;background:var(--glass-1);border:1px solid var(--glass-border);
-  border-radius:var(--r-md);padding:0 16px;transition:.2s var(--ease);backdrop-filter:blur(20px)}
-.inwrap:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(176,27,24,.18)}
-.inwrap input{flex:1;width:100%;background:transparent;border:none;outline:none;color:var(--cream);
-  font-family:var(--font-sans);font-size:20px;font-variant-numeric:tabular-nums;padding:13px 0}
-.inwrap input::placeholder{color:var(--text-3)}
-.inwrap .unit{font-size:14px;color:var(--red-bright);padding-left:10px;white-space:nowrap;font-weight:500}
-.field .hint{font-size:11px;color:var(--text-3);line-height:1.4}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.duo-cell{display:flex;flex-direction:column;gap:5px;min-width:0}
-.microlbl{font-size:10px;letter-spacing:.04em;color:var(--text-3);padding-left:3px}
-input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+/* toggle pill */
+.toggle{display:inline-flex;gap:4px;padding:5px;border:1.5px solid var(--line-2);border-radius:var(--r-full);margin-bottom:36px}
+.toggle button{font-family:var(--mono);font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--t1);background:none;border:0;cursor:pointer;padding:12px 24px;border-radius:var(--r-full);transition:.25s var(--ease);white-space:nowrap}
+.toggle button{color:var(--t1)}
+.toggle button[aria-selected="true"]{background:var(--red);color:var(--cream)}
+.toggle button:not([aria-selected="true"]):hover{background:rgba(26,10,4,.06)}
+
+/* fields */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3.4vw,46px)}
+.field{display:flex;flex-direction:column;gap:12px;min-width:0}
+.field-label{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+.inwrap{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--line-2);padding:4px 2px 12px;transition:.25s var(--ease)}
+.inwrap:focus-within{border-color:var(--crimson)}
+.inwrap input{flex:1;width:100%;min-width:0;background:none;border:0;outline:none;color:var(--t1);font-family:var(--disp);font-weight:500;font-size:clamp(28px,3.6vw,42px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.inwrap input::placeholder{color:rgba(26,10,4,.28)}
+.inwrap input::-webkit-outer-spin-button,.inwrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.inwrap .unit{font-family:var(--disp);font-weight:400;font-size:20px;color:var(--crimson);white-space:nowrap}
+.hint{font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo-cell{display:flex;flex-direction:column;gap:6px;min-width:0}
+.duo .inwrap input{font-size:clamp(24px,3vw,32px)}
+.microlbl{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--t3)}
 
 /* empty */
-.empty{text-align:center;padding:40px 20px;color:var(--text-3)}
-.empty .orb{width:120px;height:120px;margin:0 auto 22px;border-radius:50%;background:var(--red-glow);opacity:.55;
-  box-shadow:0 0 60px rgba(176,27,24,.35),0 0 120px rgba(102,155,188,.18);filter:blur(.5px)}
-.empty p{font-size:15px;color:var(--text-3)}
+.empty{text-align:center;padding:50px 20px;color:var(--t3)}
+.empty .orb{width:120px;height:120px;margin:0 auto 22px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#FDF0D5 0%,var(--marble) 30%,var(--red) 70%,#5A0D0C 100%);opacity:.5;
+  box-shadow:0 0 60px rgba(176,27,24,.3)}
+.empty p{font-family:var(--mono);font-size:15px;color:var(--t3)}
 
 /* warn */
-.warn{display:none;background:rgba(224,70,59,.12);border:1px solid rgba(224,70,59,.4);border-radius:var(--r-lg);
-  padding:20px 24px;margin-bottom:28px;color:var(--cream);font-size:15px;line-height:1.55}
-.warn b{font-family:var(--font-display);font-weight:500;color:var(--error)}
+.warn{display:none;background:rgba(224,70,59,.12);border:1px solid rgba(224,70,59,.42);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:30px;color:var(--t1);font-size:15px;line-height:1.55}
+.warn b{font-family:var(--disp);font-weight:500;color:var(--error)}
 
-/* headline result */
+/* result */
 .result{display:none}
-.res-headline{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,4vw,40px);line-height:1.1;
-  letter-spacing:-.02em;color:var(--cream);margin-bottom:12px;text-wrap:balance}
-.res-headline b{color:var(--red-bright);font-weight:400}
-.res-sub{font-size:15px;color:var(--text-2);margin-bottom:34px;text-wrap:pretty}
+.res-headline{font-family:var(--disp);font-weight:400;font-size:clamp(26px,4.2vw,52px);line-height:1.04;letter-spacing:-.02em;color:var(--t1);margin-bottom:14px;text-wrap:balance}
+.res-headline b{color:var(--crimson);font-weight:500}
+.res-sub{font-family:var(--mono);font-size:16px;color:var(--t2);margin-bottom:clamp(34px,4vw,52px);line-height:1.55;text-wrap:pretty}
 
 /* bouquets */
 .bouquets{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px}
-.bq{padding:22px 22px 24px}
-.bq-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;gap:10px}
-.bq-name{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
-.bq-count{font-family:var(--font-display);font-size:26px;font-weight:400;color:var(--cream);font-variant-numeric:tabular-nums}
-.bq-count small{font-size:13px;color:var(--text-3);font-family:var(--font-sans);margin-left:4px}
-.stems{display:flex;flex-wrap:wrap;gap:7px 8px;align-content:flex-start;min-height:96px;margin-bottom:16px}
+.bq{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 24px 26px;display:flex;flex-direction:column}
+.bq-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:20px}
+.bq-name{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+.bq-count{font-family:var(--disp);font-size:30px;font-weight:500;color:var(--t1);font-variant-numeric:tabular-nums}
+.bq-count small{font-family:var(--mono);font-size:13px;color:var(--t3);margin-left:5px}
+.stems{display:flex;flex-wrap:wrap;gap:7px 9px;align-content:flex-start;min-height:96px;margin-bottom:18px;flex:1 1 auto}
 .stem{display:flex;flex-direction:column;align-items:center;animation:bloom .4s var(--ease) backwards}
-.stem .bud{width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--blue-light),var(--blue) 70%);
-  box-shadow:0 0 6px rgba(102,155,188,.4)}
-.stem .stalk{width:2px;height:30px;background:linear-gradient(var(--success),rgba(107,212,155,.15));opacity:.55;border-radius:2px}
-.stem.extra .bud{background:radial-gradient(circle at 35% 30%,#FFD9B2,var(--red) 70%);box-shadow:0 0 10px rgba(176,27,24,.7)}
-.stem.extra .stalk{background:linear-gradient(var(--red-bright),rgba(176,27,24,.2));opacity:.8}
+.stem .bud{width:17px;height:17px;color:var(--marble);filter:drop-shadow(0 0 4px rgba(102,155,188,.45))}
+.stem .stalk{width:2px;height:28px;background:linear-gradient(var(--success),rgba(95,190,138,.12));opacity:.6;border-radius:2px;margin-top:-1px}
+.stem.extra .bud{color:var(--crimson);filter:drop-shadow(0 0 6px rgba(193,18,31,.7))}
+.stem.extra .stalk{background:linear-gradient(var(--crimson),rgba(193,18,31,.15));opacity:.85}
 @keyframes bloom{from{opacity:0;transform:translateY(8px) scale(.6)}to{opacity:1;transform:none}}
-.bq-foot{font-size:12.5px;color:var(--text-2);border-top:1px solid var(--glass-border);padding-top:12px;display:flex;justify-content:space-between;gap:10px}
-.bq-foot .v{color:var(--cream);font-variant-numeric:tabular-nums}
-.bq-add{font-size:13px;color:var(--red-bright);text-align:center;margin-bottom:30px}
-.bq-add b{font-family:var(--font-display);font-weight:400}
+.bq-foot{font-family:var(--mono);font-size:12.5px;color:var(--t2);border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:9px}
+.bq-line{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.bq-foot .v{color:var(--t1);font-variant-numeric:tabular-nums}
+.bq-foot .v.profit{color:var(--marble);font-weight:400}
+.bq-add{font-family:var(--mono);font-size:13px;color:var(--crimson);text-align:center;margin-bottom:34px}
+.bq-add b{font-family:var(--disp);font-weight:400}
 
 /* kpi */
-.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
-.kpi{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
-.kpi-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
-.kpi-value{font-family:var(--font-display);font-size:22px;font-weight:400;letter-spacing:-.012em;color:var(--cream);font-variant-numeric:tabular-nums;line-height:1.15}
-.kpi-value small{display:block;font-family:var(--font-sans);font-size:12px;color:var(--text-3);margin-top:3px;font-weight:400}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;display:flex;flex-direction:column;gap:9px}
+.kpi-label{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+.kpi-value{font-family:var(--disp);font-size:25px;font-weight:400;letter-spacing:-.012em;color:var(--t1);font-variant-numeric:tabular-nums;line-height:1.12}
+.kpi-value small{display:block;font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:4px}
 
 /* traffic light */
-.light{border-left:3px solid var(--text-3);padding:18px 22px;margin-bottom:24px;border-radius:0 var(--r-md) var(--r-md) 0}
-.light .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
-.light .chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.light .txt{font-size:15px;line-height:1.55;color:var(--text-1)}
-.light.green{border-color:var(--success);background:rgba(107,212,155,.06)} .light.green .chip{color:var(--success)}
-.light.amber{border-color:var(--warning);background:rgba(240,198,116,.06)} .light.amber .chip{color:var(--warning)}
-.light.red{border-color:var(--error);background:rgba(240,121,94,.06)} .light.red .chip{color:var(--error)}
+.light{border-left:3px solid var(--t3);padding:20px 24px;margin-bottom:26px;border-radius:0 var(--r-md) var(--r-md) 0;background:var(--card)}
+.light .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;margin-bottom:11px}
+.light .chip .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.light .txt{font-family:var(--mono);font-size:15px;line-height:1.6;color:var(--t1)}
+.light.green{border-color:var(--marble);background:rgba(102,155,188,.08)} .light.green .chip{color:var(--marble)}
+.light.amber{border-color:var(--cosmos);background:rgba(0,48,73,.06)} .light.amber .chip{color:var(--cosmos)}
+.light.red{border-color:var(--error);background:rgba(224,70,59,.07)} .light.red .chip{color:var(--error)}
 
-/* reco boxes */
-.reco{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
-.box{padding:18px 20px}
-.box h3{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
-.box .big{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,4vw,30px);color:var(--red-bright);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.box p{font-size:13px;color:var(--text-2);line-height:1.5}
-.alts{display:none;padding:20px 22px;margin-bottom:24px;border:1px dashed var(--glass-border-strong)}
-.alts h3{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-light);margin-bottom:13px}
-.alts ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.alts li{font-size:14px;color:var(--text-2);padding-left:22px;position:relative;line-height:1.45}
-.alts li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+/* reco */
+.reco{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 24px}
+.box h3{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
+.box .big{font-family:var(--disp);font-weight:500;font-size:clamp(26px,4vw,38px);color:var(--crimson);margin-bottom:8px;font-variant-numeric:tabular-nums;line-height:1}
+.box p{font-family:var(--mono);font-size:13px;color:var(--t2);line-height:1.55}
 
-.foot{margin-top:48px;padding-top:24px;border-top:1px solid var(--glass-border);font-size:12px;color:var(--text-3);line-height:1.7}
-.foot a{color:var(--red-bright);border-bottom:1px solid rgba(255,184,122,.3)}
+/* alts */
+.alts{display:none;margin-bottom:10px}
+.alts h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(22px,3vw,34px);color:var(--t1);margin-bottom:12px}
+.alts-intro{font-family:var(--mono);font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:22px;max-width:760px}
+.alts-intro b{color:var(--t1);font-weight:400}
+.alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.alt-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 22px 20px;overflow:hidden;transition:.2s var(--ease)}
+.alt-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.alt-card:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.alt-card.c1::before{background:var(--crimson)}.alt-card.c2::before{background:var(--marble)}
+.alt-card.c3::before{background:var(--cosmos)}.alt-card.c4::before{background:var(--red)}
+.alt-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.alt-ico svg{width:21px;height:21px;stroke-width:1.7;fill:none;stroke:currentColor}
+.c1 .alt-ico{background:rgba(193,18,31,.2);color:var(--error)}
+.c2 .alt-ico{background:rgba(102,155,188,.2);color:var(--marble)}
+.c3 .alt-ico{background:rgba(0,48,73,.1);color:var(--cosmos)}
+.c4 .alt-ico{background:rgba(176,27,24,.2);color:var(--error)}
+.alt-title{font-family:var(--disp);font-size:16px;font-weight:500;color:var(--t1);margin-bottom:9px;line-height:1.2}
+.alt-text{font-family:var(--mono);font-size:13px;color:var(--t2);line-height:1.6}
+.alt-text b{color:var(--t1);font-weight:400}
+
+/* SEO подвал */
+.seo{margin-top:clamp(56px,7vw,90px);padding-top:clamp(34px,4vw,48px);border-top:1px solid var(--line)}
+.seo h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(20px,2.6vw,30px);color:var(--t1);margin-bottom:18px;line-height:1.05}
+.seo h3{font-family:var(--disp);font-weight:500;font-size:16px;color:var(--t1);margin:24px 0 8px}
+.seo p{font-family:var(--mono);font-size:13.5px;line-height:1.7;color:var(--t2);margin-bottom:12px}
+.seo a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(193,18,31,.4)}
+.seo a:hover{color:var(--t1);border-color:var(--t1)}
+.seo .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.seo .tool-link{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:11px 18px;border:1.5px solid var(--line-2);border-radius:var(--r-full);color:var(--t1);text-decoration:none;transition:.2s var(--ease)}
+.seo .tool-link:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* тёмный футер на всю ширину */
+.site-foot{background:var(--ink);color:var(--cream);padding:clamp(44px,5vw,68px) 0 30px;margin-top:clamp(44px,5vw,64px)}
+.foot-grid{display:grid;grid-template-columns:2.2fr 1fr 1.4fr 1.2fr;gap:36px;padding-bottom:30px;border-bottom:1px solid rgba(253,240,213,.16)}
+.foot-logo{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:21px;margin-bottom:14px}
+.foot-brand p{font-family:var(--mono);font-size:12.5px;line-height:1.65;color:rgba(253,240,213,.62);max-width:42ch}
+.foot-col h4{font-family:var(--mono);font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:.16em;color:rgba(253,240,213,.45);margin-bottom:15px}
+.foot-col a{display:block;font-family:var(--mono);font-size:13px;color:rgba(253,240,213,.85);text-decoration:none;margin-bottom:10px;transition:color .15s var(--ease)}
+.foot-col a:hover{color:var(--cream)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;font-family:var(--mono);font-size:11.5px;color:rgba(253,240,213,.42);letter-spacing:.02em}
+
+/* cookie-баннер */
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  background:var(--ink);color:var(--cream);padding:16px clamp(20px,5vw,48px);box-shadow:0 -10px 36px rgba(0,0,0,.22)}
+.cookie.show{display:flex}
+.cookie-text{font-family:var(--mono);font-size:12.5px;line-height:1.55;max-width:780px;color:rgba(253,240,213,.85)}
+.cookie-text a{color:var(--cream);text-decoration:underline}
+.cookie-btns{display:flex;gap:10px;flex-wrap:wrap}
+.cookie button{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:11px 20px;border-radius:100px;cursor:pointer;border:1.5px solid;transition:.2s var(--ease);white-space:nowrap}
+.ck-all{background:var(--red);color:var(--cream);border-color:var(--red)}
+.ck-all:hover{background:var(--crimson);border-color:var(--crimson)}
+.ck-need{background:transparent;color:var(--cream);border-color:rgba(253,240,213,.4)}
+.ck-need:hover{background:rgba(253,240,213,.1)}
 
 @media(max-width:760px){
-  .app{padding:24px 16px 80px}
-  .header{flex-direction:column;align-items:flex-start;gap:14px}
-  .header-meta{align-items:flex-start}
-  .grid{grid-template-columns:1fr}
-  .bouquets{grid-template-columns:1fr}
-  .kpi-grid{grid-template-columns:1fr}
-  .reco{grid-template-columns:1fr}
-  .corner-micro{display:none}
+  .grid,.duo,.bouquets,.kpi-grid,.reco,.alt-grid{grid-template-columns:1fr}
+  .hero-top{margin-bottom:36px}
+  .cookie{flex-direction:column;align-items:flex-start}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .foot-bottom{flex-direction:column;align-items:flex-start;gap:6px}
 }
 </style>
 </head>
 <body>
-<div class="corner-micro tr">AI · <span class="em">для флористов</span></div>
-<div class="corner-micro bl">Мария Андреева</div>
 
-<div class="app">
-
-  <header class="header">
-    <div class="brand">
-      <div class="brand-orb"></div>
-      <div class="brand-text">
-        <div class="brand-title">Расчёт скидки</div>
-        <div class="brand-sub">инструмент для цветочного магазина</div>
-      </div>
-    </div>
-    <div class="header-meta">
-      <span class="eyebrow eyebrow-warm">AI-калькулятор</span>
-      <span class="eyebrow">версия 2026.1</span>
+  <header class="hero">
+    <canvas class="mx" id="mx"></canvas>
+    <div class="wrap">
+      <div class="hero-top"><span class="em">МАРИЯ АНДРЕЕВА</span><span>AI · ДЛЯ ФЛОРИСТОВ</span></div>
+      <span class="eyebrow">AI-калькулятор · версия 2026.1</span>
+      <h1>Расчёт<br>скидки</h1>
+      <p class="tagline"><b>Когда вы даёте скидку, с каждого стебля зарабатываете меньше.</b> Чтобы получить столько же денег, клиент должен купить больше стеблей — калькулятор покажет, <span class="serif">насколько больше</span>, и подскажет, стоит ли вообще давать такую скидку.</p>
     </div>
   </header>
 
-  <p class="intro"><span class="hl">Когда вы даёте скидку, с каждого стебля зарабатываете меньше.</span> Чтобы в итоге получить столько же денег, клиент должен купить больше стеблей. Калькулятор показывает — <span class="serif">насколько больше</span> — и подсказывает, стоит ли вообще давать такую скидку.</p>
+  <main class="body">
 
-  <div class="how-card glass">
-    <button class="how-toggle" onclick="this.closest('.how-card').classList.toggle('open')">
-      <span class="how-toggle-text">Как это работает</span>
-      <span class="chev">▾</span>
-    </button>
-    <div class="how-body">
-      <p><strong>Шаг 1.</strong> Введите себестоимость стебля и наценку (или сразу цену продажи).</p>
-      <p><strong>Шаг 2.</strong> Укажите средний размер букета и желаемую скидку.</p>
-      <p><strong>Шаг 3.</strong> Калькулятор посчитает, сколько стеблей должно быть в заказе, чтобы прибыль не упала, нарисует наглядное сравнение букетов и даст рекомендацию — давать скидку или нет.</p>
-    </div>
-  </div>
-
-  <!-- ВВОД -->
-  <section class="section">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow eyebrow-warm">Шаг 1</span>
-        <h2 class="section-title">Ваши цифры</h2>
+    <div class="how-card" id="how">
+      <button class="how-toggle" onclick="document.getElementById('how').classList.toggle('open')">
+        <span class="how-toggle-text">Как это работает</span><span class="chev">▾</span>
+      </button>
+      <div class="how-body">
+        <p><strong>Шаг 1.</strong> Введите себестоимость стебля и наценку (или сразу цену продажи).</p>
+        <p><strong>Шаг 2.</strong> Укажите средний размер букета и желаемую скидку.</p>
+        <p><strong>Шаг 3.</strong> Калькулятор посчитает, сколько стеблей должно быть в заказе, чтобы прибыль не упала, нарисует наглядное сравнение букетов и даст рекомендацию — давать скидку или нет.</p>
       </div>
     </div>
 
-    <div class="input-card glass glass-elevated">
-      <div class="tabs-row">
-        <div class="seg" role="tablist">
-          <button id="tab-pct" aria-selected="true" onclick="setMode('pct')">Скидка в процентах</button>
-          <button id="tab-rub" aria-selected="false" onclick="setMode('rub')">Скидка в рублях</button>
-        </div>
+    <!-- ШАГ 1 -->
+    <section class="section">
+      <div class="step-eyebrow">Шаг 01</div>
+      <h2 class="step-title">Ваши цифры</h2>
+
+      <div class="toggle" role="tablist">
+        <button id="tab-pct" aria-selected="true" onclick="setMode('pct')">Скидка в процентах</button>
+        <button id="tab-rub" aria-selected="false" onclick="setMode('rub')">Скидка в рублях</button>
       </div>
 
       <div class="grid">
         <div class="field">
-          <div class="field-head"><span class="field-label">Себестоимость одного стебля</span></div>
+          <span class="field-label">Себестоимость одного стебля</span>
           <div class="inwrap"><input type="number" id="S" inputmode="decimal" placeholder="80"><span class="unit">₽</span></div>
         </div>
-
         <div class="field">
-          <div class="field-head"><span class="field-label">Наценка</span></div>
+          <span class="field-label">Наценка</span>
           <div class="duo">
             <div class="duo-cell">
               <div class="inwrap"><input type="number" id="K" inputmode="decimal" placeholder="2.5"><span class="unit">×</span></div>
@@ -261,111 +264,156 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
           </div>
           <span class="hint">заполните любое — второе посчитается само</span>
         </div>
-
         <div class="field">
-          <div class="field-head"><span class="field-label">Среднее кол-во стеблей в букете</span></div>
+          <span class="field-label">Среднее кол-во стеблей в букете</span>
           <div class="inwrap"><input type="number" id="Q" inputmode="numeric" placeholder="15"><span class="unit">шт</span></div>
         </div>
-
         <div class="field" id="f-pct">
-          <div class="field-head"><span class="field-label">Размер скидки</span></div>
+          <span class="field-label">Размер скидки</span>
           <div class="inwrap"><input type="number" id="D" inputmode="decimal" placeholder="10"><span class="unit">%</span></div>
         </div>
         <div class="field" id="f-rub" style="display:none">
-          <div class="field-head"><span class="field-label">Размер скидки на один стебель</span></div>
+          <span class="field-label">Размер скидки на один стебель</span>
           <div class="inwrap"><input type="number" id="Dr" inputmode="decimal" placeholder="30"><span class="unit">₽</span></div>
         </div>
-
       </div>
-    </div>
-  </section>
-
-  <!-- empty -->
-  <div id="empty" class="empty">
-    <div class="orb"></div>
-    <p>Заполните цифры выше — расчёт и сравнение букетов появятся здесь.</p>
-  </div>
-
-  <!-- RESULT -->
-  <div id="result" class="result">
-
-    <div id="warn" class="warn"></div>
-
-    <div class="res-headline" id="res-headline"></div>
-    <div class="res-sub" id="res-sub"></div>
-
-    <!-- букеты -->
-    <section class="section" id="bq-section">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow eyebrow-warm">Шаг 2</span>
-          <h2 class="section-title">Сравнение букетов</h2>
-        </div>
-      </div>
-      <div class="bouquets">
-        <div class="bq glass">
-          <div class="bq-top"><span class="bq-name">Без скидки</span><span class="bq-count" id="bq1-count"></span></div>
-          <div class="stems" id="bq1-stems"></div>
-          <div class="bq-foot"><span>Цена букета</span><span class="v" id="bq1-price"></span></div>
-        </div>
-        <div class="bq glass">
-          <div class="bq-top"><span class="bq-name" style="color:var(--red-bright)">Со скидкой</span><span class="bq-count" id="bq2-count"></span></div>
-          <div class="stems" id="bq2-stems"></div>
-          <div class="bq-foot"><span>Цена букета</span><span class="v" id="bq2-price"></span></div>
-        </div>
-      </div>
-      <div class="bq-add" id="bq-add"></div>
     </section>
 
-    <!-- kpi -->
-    <div class="kpi-grid">
-      <div class="kpi glass"><span class="kpi-label">Рентабельность было / стало</span><span class="kpi-value" id="kpi-margin"></span></div>
-      <div class="kpi glass"><span class="kpi-label">Прибыль с клиента</span><span class="kpi-value" id="kpi-profit"></span></div>
-      <div class="kpi glass"><span class="kpi-label">Нужно стеблей в заказе</span><span class="kpi-value" id="kpi-qmin"></span></div>
+    <!-- empty -->
+    <div id="empty" class="empty">
+      <div class="orb"></div>
+      <p>Заполните цифры выше — расчёт и сравнение букетов появятся здесь.</p>
     </div>
 
-    <!-- traffic light -->
-    <div class="light" id="light">
-      <div class="chip" id="light-chip"><span class="dot"></span><span id="light-badge"></span></div>
-      <div class="txt" id="light-txt"></div>
-    </div>
+    <!-- RESULT -->
+    <div id="result" class="result">
+      <div id="warn" class="warn"></div>
+      <div class="res-headline" id="res-headline"></div>
+      <div class="res-sub" id="res-sub"></div>
 
-    <!-- reco -->
-    <div class="reco">
-      <div class="box glass">
-        <h3>Безопасный максимум скидки</h3>
-        <div class="big" id="cap-val"></div>
-        <p id="cap-txt"></p>
+      <!-- ШАГ 2 -->
+      <section class="section" id="bq-section">
+        <div class="step-eyebrow">Шаг 02</div>
+        <h2 class="step-title">Сравнение букетов</h2>
+        <div class="bouquets">
+          <div class="bq">
+            <div class="bq-top"><span class="bq-name">Без скидки</span><span class="bq-count" id="bq1-count"></span></div>
+            <div class="stems" id="bq1-stems"></div>
+            <div class="bq-foot">
+              <div class="bq-line"><span>Цена букета</span><span class="v" id="bq1-price"></span></div>
+              <div class="bq-line"><span>Прибыль с букета</span><span class="v profit" id="bq1-profit"></span></div>
+            </div>
+          </div>
+          <div class="bq">
+            <div class="bq-top"><span class="bq-name" style="color:var(--crimson)">Со скидкой</span><span class="bq-count" id="bq2-count"></span></div>
+            <div class="stems" id="bq2-stems"></div>
+            <div class="bq-foot">
+              <div class="bq-line"><span>Цена букета</span><span class="v" id="bq2-price"></span></div>
+              <div class="bq-line"><span>Прибыль с букета</span><span class="v profit" id="bq2-profit"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bq-add" id="bq-add"></div>
+      </section>
+
+      <div class="kpi-grid">
+        <div class="kpi"><span class="kpi-label">Рентабельность было / стало</span><span class="kpi-value" id="kpi-margin"></span></div>
+        <div class="kpi"><span class="kpi-label">Прибыль с клиента</span><span class="kpi-value" id="kpi-profit"></span></div>
+        <div class="kpi"><span class="kpi-label">Нужно стеблей в заказе</span><span class="kpi-value" id="kpi-qmin"></span></div>
       </div>
-      <div class="box glass">
-        <h3>Сколько теряете, если не увеличить заказ</h3>
-        <div class="big" id="loss-val"></div>
-        <p id="loss-txt"></p>
+
+      <div class="light" id="light">
+        <div class="chip" id="light-chip"><span class="dot"></span><span id="light-badge"></span></div>
+        <div class="txt" id="light-txt"></div>
+      </div>
+
+      <div class="reco">
+        <div class="box"><h3>Безопасный максимум скидки</h3><div class="big" id="cap-val"></div><p id="cap-txt"></p></div>
+        <div class="box"><h3>Сколько теряете, если не увеличить заказ</h3><div class="big" id="loss-val"></div><p id="loss-txt"></p></div>
+      </div>
+
+      <div class="alts" id="alts">
+        <h3>Что предложить вместо скидки</h3>
+        <p class="alts-intro">Запомните, котики: скидка — <b>самый дорогой</b> способ обрадовать клиента. Она бьёт прямо по вашей прибыли. А эти приёмы дают то же ощущение выгоды — но деньги оставляют у вас.</p>
+        <div class="alt-grid">
+          <div class="alt-card c1">
+            <span class="alt-ico"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12.5h18M12 8v13"/><path d="M12 8s-1.2-4-4-4-2.6 4 0 4M12 8s1.2-4 4-4 2.6 4 0 4"/></svg></span>
+            <div class="alt-title">Подарок вместо скидки</div>
+            <p class="alt-text">Скидка намекает «букет столько и не стоил». Подарок — открытка, веточка эвкалипта, маленький комплимент — наоборот, добавляет ценности. Клиенту приятно, а вам это копейки в себестоимости. Я, например, всегда советую собрать из обрезков маленький букетик «для ванной комнаты» — стоит вам почти ничего, а клиент в восторге.</p>
+          </div>
+          <div class="alt-card c2">
+            <span class="alt-ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+            <div class="alt-title">Больше, а не дешевле</div>
+            <p class="alt-text">Не «уступлю», а «добавлю». «Давайте добавим ещё пару роз за +400 ₽ — букет заиграет совсем иначе». Клиент получает свой «вау», вы — чек побольше вместо обрезанной прибыли. Поверьте, это работает в разы лучше, чем молча сбросить цену.</p>
+          </div>
+          <div class="alt-card c3">
+            <span class="alt-ico"><svg viewBox="0 0 24 24"><path d="M12 20.5S3.5 15.5 3.5 9.3C3.5 6.4 5.7 4.5 8.2 4.5c1.7 0 3.1 1 3.8 2.2.7-1.2 2.1-2.2 3.8-2.2 2.5 0 4.7 1.9 4.7 4.8 0 6.2-8.5 11.2-8.5 11.2z"/></svg></span>
+            <div class="alt-title">Привяжите к себе</div>
+            <p class="alt-text">Не отдавайте прибыль сегодня. Заведите <b>накопительную скидку</b> — клиент возвращается снова и снова, чтобы её заработать, а вы не теряете ни рубля на первом заказе. Или порадуйте сервисом: бесплатная доставка, личный консьерж, который соберёт букет по одному звонку. Деньги целы, а клиент прирастает к вам — и приносит не один букет, а десятки. Один лояльный клиент дороже десяти случайных.</p>
+          </div>
+          <div class="alt-card c4">
+            <span class="alt-ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17.1 6.8 19.9l1-5.8-4.3-4.1 5.9-.9L12 3z"/></svg></span>
+            <div class="alt-title">Букет недели</div>
+            <p class="alt-text">Не раздавайте скидку на всё подряд. Заведите «букет недели», «букет дня» или «букет месяца» — один заранее просчитанный букет по специальной цене. Так вы держите цифры под контролем: знаете себестоимость и маржу именно этого букета. А клиент получает свою выгоду и лишний повод заглянуть к вам снова.</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="alts glass" id="alts">
-      <h3>Что предложить вместо скидки</h3>
-      <ul>
-        <li>Подарок или бонус к букету — клиент чувствует выгоду, ваша прибыль цела.</li>
-        <li>Апсейл: предложите состав побольше, чтобы заказ дорос естественно.</li>
-        <li>Скидка на следующий заказ или программа лояльности — возвращает клиента.</li>
-        <li>Давайте скидку только на бóльший букет, а не на любой.</li>
-      </ul>
+    <!-- SEO-подвал -->
+    <section class="seo">
+      <h2>Калькулятор скидки для цветочного магазина</h2>
+      <p>Это бесплатный онлайн-калькулятор для флористов и владельцев цветочных студий. Он показывает, как скидка на букет влияет на прибыль и на сколько нужно увеличить заказ, чтобы скидка не съела вашу маржу. Введите себестоимость стебля, наценку, средний размер букета и желаемую скидку — калькулятор рассчитает минимальное количество стеблей в заказе, безопасный размер скидки и наглядно сравнит два букета.</p>
+      <p>Инструмент помогает разобраться в ценообразовании цветочного бизнеса: наценка и коэффициент, рентабельность и маржинальная прибыль, точка безубыточности скидки. Вместо того чтобы давать скидки вслепую и терять деньги, вы принимаете решения по цифрам — и сохраняете прибыль магазина.</p>
+      <h3>Другие AI-инструменты для флористов</h3>
+      <div class="tools">
+        <a class="tool-link" href="../">Все инструменты на mfandreeva.ru</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="foot-logo">Мария Андреева</div>
+          <p>AI-инструменты для флористов. Калькулятор считает по вашим цифрам и носит рекомендательный характер.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Инструменты</h4>
+          <a href="../">Все инструменты</a>
+        </div>
+        <div class="foot-col">
+          <h4>Документы</h4>
+          <a href="https://mfandreeva.ru/policy/">Политика конфиденциальности</a>
+          <a href="https://mfandreeva.ru/private/">Пользовательское соглашение</a>
+        </div>
+        <div class="foot-col">
+          <h4>Контакты</h4>
+          <a href="mailto:hello@andreeva-mf.ru">hello@andreeva-mf.ru</a>
+          <a href="https://mfandreeva.ru/">mfandreeva.ru</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>ИП Андреева Мария Фёдоровна · ИНН 143506715455 · ОГРНИП 319673300042170</span>
+        <span>© 2026 Мария Андреева. Все права защищены.</span>
+      </div>
     </div>
+  </footer>
 
+  <div class="cookie" id="cookie">
+    <div class="cookie-text">Мы используем cookies, чтобы сайт работал корректно и был удобнее. Продолжая пользоваться сайтом, вы соглашаетесь с этим. Подробнее — в <a href="https://mfandreeva.ru/policy/">политике конфиденциальности</a>.</div>
+    <div class="cookie-btns">
+      <button class="ck-all" onclick="ckSet('all')">Принять все</button>
+      <button class="ck-need" onclick="ckSet('need')">Только необходимые</button>
+    </div>
   </div>
-
-  <div class="foot">
-    Калькулятор считает по вашим цифрам и носит рекомендательный характер. Один из бесплатных AI-инструментов для флористов от Марии Андреевой.<br>
-    <a href="../">← На главную mfandreeva.ru</a>
-  </div>
-
-</div>
 
 <script>
+  function ckSet(v){try{localStorage.setItem('ck-consent',v);}catch(e){}document.getElementById('cookie').classList.remove('show');}
+  (function(){var s=false;try{s=!!localStorage.getItem('ck-consent');}catch(e){}if(!s)document.getElementById('cookie').classList.add('show');})();
   var mode='pct', lastMark='K';
-
   function setMode(m){
     mode=m;
     document.getElementById('tab-pct').setAttribute('aria-selected',m==='pct');
@@ -376,7 +424,6 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
   }
   function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v;}
   function setVal(id,v){document.getElementById(id).value=Math.round(v*100)/100;}
-  // двусторонняя связь: коэффициент ↔ цена продажи через себестоимость
   function syncMark(src){
     var S=num('S');
     if(src==='K'){lastMark='K';var K=num('K');if(S!==null&&S>0&&K!==null)setVal('Pprice',K*S);}
@@ -398,16 +445,19 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
   function drawStems(el,total,extraFrom){
     el.innerHTML='';
     var cap=Math.min(total,60);
+    var petals='';
+    for(var a=0;a<6;a++){petals+='<ellipse cx="12" cy="6.4" rx="2.6" ry="4.6" transform="rotate('+(a*60)+' 12 12)"/>';}
+    var flower='<svg class="bud" viewBox="0 0 24 24"><g fill="currentColor">'+petals+'</g><circle cx="12" cy="12" r="3.2" fill="#FDE9C8"/></svg>';
     for(var i=0;i<cap;i++){
       var s=document.createElement('div');
       s.className='stem'+(extraFrom!==null && i>=extraFrom?' extra':'');
       s.style.animationDelay=(i*18)+'ms';
-      s.innerHTML='<div class="bud"></div><div class="stalk"></div>';
+      s.innerHTML=flower+'<div class="stalk"></div>';
       el.appendChild(s);
     }
     if(total>cap){
       var more=document.createElement('div');
-      more.style.cssText='align-self:flex-end;font-size:12px;color:var(--text-3);padding-bottom:4px';
+      more.style.cssText='align-self:flex-end;font-size:12px;color:var(--t3);padding-bottom:4px';
       more.textContent='+'+(total-cap);
       el.appendChild(more);
     }
@@ -417,7 +467,6 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     var S=num('S'),Q=num('Q');
     var disc=mode==='pct'?num('D'):num('Dr');
     var K=num('K');
-
     var ok=S!==null&&S>0&&K!==null&&K>0&&Q!==null&&Q>0&&disc!==null&&disc>0;
     document.getElementById('empty').style.display=ok?'none':'block';
     document.getElementById('result').style.display=ok?'block':'none';
@@ -447,15 +496,16 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
       sub.textContent=add>0
         ?'Было в среднем '+Q+' '+stemWord(Q)+' → нужно '+Qmin+' (это +'+add+', рост на '+Math.round((Qmin/Q-1)*100)+'%).'
         :'Прибыль сохраняется даже без увеличения заказа.';
-      // букеты
       document.getElementById('bq1-count').innerHTML=Q+'<small>шт</small>';
       document.getElementById('bq2-count').innerHTML=Qmin+'<small>шт</small>';
       document.getElementById('bq1-price').textContent=rub(Bb);
       document.getElementById('bq2-price').textContent=rub(Pc*Qmin);
+      document.getElementById('bq1-profit').textContent=rub(profitB);
+      document.getElementById('bq2-profit').textContent=rub(p1*Qmin);
       drawStems(document.getElementById('bq1-stems'),Q,null);
       drawStems(document.getElementById('bq2-stems'),Qmin,Q);
       document.getElementById('bq-add').innerHTML=add>0
-        ?'Оранжевым — <b>+'+add+' '+stemWord(add)+'</b>, которые клиент должен добрать, чтобы вы не потеряли прибыль.'
+        ?'Красным — <b>+'+add+' '+stemWord(add)+'</b>, которые клиент должен добрать, чтобы вы не потеряли прибыль.'
         :'Увеличивать заказ не нужно.';
     }
 
@@ -465,7 +515,6 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     document.getElementById('kpi-profit').innerHTML=rub(profitB)+'<small>при '+(p1>0?Qm+' '+stemWord(Qm):'—')+' → '+(p1>0?rub(profitAt):'убыток')+'</small>';
     document.getElementById('kpi-qmin').innerHTML=(p1>0?Qm+' шт':'—')+'<small>было '+Q+' шт</small>';
 
-    // светофор
     var light=document.getElementById('light'),badge=document.getElementById('light-badge'),txt=document.getElementById('light-txt'),alts=document.getElementById('alts');
     light.className='light';
     var grow=p1>0?Qm/Q:99;
@@ -486,14 +535,13 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
       alts.style.display='block';
     }
 
-    // безопасный максимум скидки — согласован со светофором (рост заказа ≤30%, остаётся зелёным)
     var capVal=document.getElementById('cap-val'),capTxt=document.getElementById('cap-txt');
-    var QminMax=Math.floor(1.3*Q); // максимум стеблей при «зелёном» росте
+    var QminMax=Math.floor(1.3*Q);
     if(QminMax<=Q){
       capVal.textContent='—';
       capTxt.textContent='Средний букет слишком маленький, чтобы дать скидку без заметного увеличения заказа.';
     } else {
-      var PcSafe=S+(Pb-S)*Q/QminMax; // цена стебля, при которой рост заказа ровно на пороге зелёного
+      var PcSafe=S+(Pb-S)*Q/QminMax;
       if(mode==='pct'){
         var Dmax=Math.max(0,Math.floor((1-PcSafe/Pb)*100));
         capVal.textContent='до '+Dmax+'%';
@@ -507,6 +555,56 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
     document.getElementById('loss-val').textContent=rub(Math.max(0,loss));
     document.getElementById('loss-txt').textContent='Столько прибыли вы теряете с каждого букета, если дадите скидку и НЕ увеличите количество стеблей в заказе.';
   }
+
+  // плотный matrix-ковёр цифр в hero (правая зона)
+  (function(){
+    var c=document.getElementById('mx'), x=c.getContext('2d');
+    var chars='0123456789'.split('');
+    function rnd(){return chars[(Math.random()*chars.length)|0];}
+    var fs=17, cols=0, rows=0, glyph=[], baseA=[], drops=[], f=0;
+    function resize(){
+      c.width=c.offsetWidth; c.height=c.offsetHeight;
+      cols=Math.ceil(c.width/fs); rows=Math.ceil(c.height/fs);
+      glyph=[]; baseA=[]; drops=[];
+      for(var i=0;i<cols;i++){
+        glyph[i]=[]; baseA[i]=[];
+        for(var j=0;j<rows;j++){ glyph[i][j]=rnd(); baseA[i][j]=0.05+Math.random()*0.14; }
+        drops[i]=Math.random()*rows*-1;
+      }
+    }
+    resize(); window.addEventListener('resize',resize); window.addEventListener('load',resize);
+    function draw(){
+      x.clearRect(0,0,c.width,c.height);
+      x.font=fs+'px "Share Tech Mono", monospace'; x.textBaseline='top';
+      var edge=c.width*0.5, feather=c.width*0.16;
+      function fadeAt(colX){ return colX<edge ? 0 : Math.min(1,(colX-edge)/feather); }
+      for(var i=0;i<cols;i++){
+        var fx=fadeAt(i*fs); if(fx<=0) continue;
+        for(var j=0;j<rows;j++){
+          x.fillStyle='rgba(253,240,213,'+(baseA[i][j]*fx).toFixed(3)+')';
+          x.fillText(glyph[i][j], i*fs, j*fs);
+        }
+      }
+      for(var i=0;i<cols;i++){
+        var fx2=fadeAt(i*fs); if(fx2<=0){ drops[i]+=0.5; continue; }
+        var head=Math.floor(drops[i]);
+        for(var k=0;k<15;k++){
+          var row=head-k; if(row<0||row>=rows) continue;
+          if(k===0){ x.fillStyle='rgba(255,255,255,'+(0.98*fx2).toFixed(3)+')'; }
+          else { x.fillStyle='rgba(253,240,213,'+(Math.max(0,0.72-k*0.055)*fx2).toFixed(3)+')'; }
+          x.fillText(glyph[i][row], i*fs, row*fs);
+        }
+        drops[i]+=0.5;
+        if(drops[i]-15>rows && Math.random()>0.93) drops[i]=Math.random()*-12;
+      }
+      if((f++&1)===0) for(var m=0;m<cols;m++){ glyph[(Math.random()*cols)|0][(Math.random()*rows)|0]=rnd(); }
+    }
+    var last=0;
+    function loop(t){ if(t-last>40){ draw(); last=t; } requestAnimationFrame(loop); }
+    requestAnimationFrame(loop);
+  })();
+
+  setMode('pct');
 </script>
 </body>
 </html>
