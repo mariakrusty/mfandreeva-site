@@ -923,9 +923,28 @@
   window.addEventListener('resize', fabTone);
   fabTone();
 
-  /* форма подписки (временно — без отправки, показываем «Спасибо») */
+  /* форма подписки — отправка через Web3Forms на hello@andreeva-mf.ru */
   var subForm = document.getElementById('subForm');
-  if(subForm){ subForm.addEventListener('submit', function(e){ e.preventDefault(); subForm.classList.add('sent'); }); }
+  if(subForm){ subForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var emailEl = subForm.querySelector('input[type="email"]');
+    var email = emailEl ? emailEl.value.trim() : '';
+    var btn = subForm.querySelector('button[type="submit"]');
+    if(btn) btn.disabled = true;
+    fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        access_key:'f840fbf9-7e71-4c15-a672-31930d14675e',
+        subject:'Новая подписка с сайта mfandreeva.ru',
+        from_name:'Сайт mfandreeva.ru',
+        email: email
+      })
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d && d.success){ subForm.classList.add('sent'); }
+      else { if(btn) btn.disabled=false; alert('Не удалось отправить. Попробуйте ещё раз чуть позже.'); }
+    }).catch(function(){ if(btn) btn.disabled=false; alert('Ошибка сети. Проверьте интернет и попробуйте снова.'); });
+  }); }
 
   var GLYPHS = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ#%@&*0123456789";
   var timers = [];
