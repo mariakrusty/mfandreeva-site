@@ -3,3 +3,15 @@
 !index.html
 assets/book-pages/_orig/
 .DS_Store
+
+# служебное и незалитое
+*.zip
+*.bak
+_АРХИВ/
+_ЗАЛИТЬ/
+ЧИТАЙ-МЕНЯ.md
+ai/*.md
+# закрытая часть — НЕ публиковать, пока нет пароля
+ai/klub/
+# PHP-подписка — не для GitHub Pages
+subscribe/

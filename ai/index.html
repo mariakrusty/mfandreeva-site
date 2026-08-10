@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI для цветочного бизнеса — портал Марии Андреевой</title>
+<meta name="description" content="Портал о нейросетях в цветочном бизнесе: что реально работает, что нельзя отдавать AI, библиотека промтов и собственные замеры. Практика, а не обзоры.">
+<link rel="canonical" href="https://mfandreeva.ru/ai/">
+<link rel="icon" type="image/png" href="/ai/img/logo-ai.png">
+<link rel="apple-touch-icon" href="/ai/img/logo-ai.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI для цветочного бизнеса — портал Марии Андреевой">
+<meta property="og:description" content="Что нейросети реально делают в цветочном магазине, а что не делают. Библиотека промтов, границы, замеры.">
+<meta property="og:url" content="https://mfandreeva.ru/ai/">
+<meta property="og:image" content="https://mfandreeva.ru/ai/img/logo-ai.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","name":"AI для цветочного бизнеса","url":"https://mfandreeva.ru/ai/",
+"description":"Портал о применении нейросетей в цветочной рознице",
+"author":{"@type":"Person","name":"Мария Андреева","url":"https://mfandreeva.ru/",
+"jobTitle":"Экономист, продюсер брендов цветочных магазинов",
+"knowsAbout":["нейросети в цветочном бизнесе","AI для цветочного магазина","генерация фотографий букетов","автоматизация цветочного бизнеса"]}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Как использовать нейросети в цветочном бизнесе?","acceptedAnswer":{"@type":"Answer","text":"Основные рабочие сценарии — генерация визуала вместо фотосъёмки, карточки товара для маркетплейсов, тексты для соцсетей и сайта, ответы на типовые вопросы клиентов. Нейросети в цветочном заменяют не флориста, а фотографа, копирайтера и оператора рутины."}},
+{"@type":"Question","name":"Что нейросети в цветочном магазине НЕ могут?","acceptedAnswer":{"@type":"Answer","text":"Не могут собрать букет, оценить свежесть цветка, заменить вкус флориста и отвечать за качество. Не стоит отдавать им работу с реальными остатками без проверки, общение с недовольным клиентом и любые тексты, где цена ошибки — репутация."}},
+{"@type":"Question","name":"Кто в России занимается AI для цветочного бизнеса?","acceptedAnswer":{"@type":"Answer","text":"Мария Андреева — экономист и продюсер брендов цветочных магазинов, авторизованный партнёр МойСклад. Проводит аудиты цветочных магазинов, проверяет финмодели и ведёт практику применения нейросетей в цветочной рознице."}}
+]}]}
+</script>
+<style>
+@font-face{font-family:'ShareTechMono';src:url('../assets/ShareTechMono.ttf') format('truetype');font-weight:400;font-display:swap}
+
+:root{
+  --red:#B01B18; --cream:#FDF0D5; --ink:#0a0a0c; --gold:#C9A961;
+  --marble:#669BBC; --cosmos:#003049;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --disp:'Unbounded',-apple-system,sans-serif; --mono:'ShareTechMono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--mono);background:var(--cosmos);color:var(--cream);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ═══ СЦЕНА ═══ */
+.stage{position:fixed;inset:0;display:flex;flex-direction:column;
+  padding:clamp(22px,3.4vh,44px) clamp(22px,4vw,64px);
+  background:radial-gradient(120% 100% at 78% 12%,#0A3A55 0%,#003049 52%,#001A28 100%);
+  transition:filter .7s var(--ease),transform .7s var(--ease)}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    repeating-linear-gradient(90deg,rgba(253,240,213,.07) 0 1px,transparent 1px clamp(70px,8.5vw,132px)),
+    repeating-linear-gradient(0deg,rgba(253,240,213,.07) 0 1px,transparent 1px clamp(70px,8.5vw,132px))}
+
+/* холст с цветком из символов — между фоном и контентом */
+#flower{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.045;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body.open .stage{filter:blur(7px) brightness(.72);transform:scale(1.04)}
+
+/* верхняя строка */
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:2}
+.mark{display:flex;align-items:center;gap:13px}
+.mark img{width:clamp(36px,3.2vw,46px);border-radius:11px}
+.mark span{font-family:var(--disp);font-weight:700;font-size:clamp(11px,1.1vw,13px);
+  letter-spacing:.02em;line-height:1.3;text-transform:uppercase;color:var(--cream);opacity:.92}
+.mbtn{display:flex;align-items:center;gap:12px;background:none;border:0;cursor:pointer;color:var(--cream);
+  font-family:var(--mono);font-size:clamp(11px,1.15vw,13px);letter-spacing:.18em;text-transform:uppercase;
+  padding:10px 0;transition:opacity .25s}
+.mbtn:hover{opacity:.65}
+.mbtn i{position:relative;width:26px;height:11px;display:inline-block}
+.mbtn i::before,.mbtn i::after{content:"";position:absolute;left:0;width:26px;height:1.5px;background:var(--cream);
+  transition:transform .4s var(--ease)}
+.mbtn i::before{top:0} .mbtn i::after{bottom:0}
+body.open .mbtn i::before{transform:translateY(4.7px) rotate(45deg)}
+body.open .mbtn i::after{transform:translateY(-4.8px) rotate(-45deg)}
+
+/* центр — лид и блок доступа, всё в левой половине */
+.core{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;
+  padding:clamp(14px,3vh,40px) 0;max-width:min(46vw,720px)}
+.tag{font-size:clamp(11px,1vw,13px);line-height:1.65;max-width:46ch;margin-top:10px;
+  color:rgba(253,240,213,.62);letter-spacing:.01em}
+
+/* низ — крупный заголовок и подпись */
+.bot{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(20px,3vw,44px);
+  flex-wrap:wrap;position:relative;z-index:2}
+h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.035em;
+  font-size:clamp(42px,8.2vw,124px)}
+h1 em{font-style:normal;color:rgba(253,240,213,.45)}
+.sign{font-size:clamp(10.5px,1.05vw,12.5px);letter-spacing:.05em;line-height:1.8;
+  color:rgba(253,240,213,.62);padding-bottom:clamp(4px,1.2vh,14px);text-align:right}
+.sign b{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(12px,1.2vw,14px);
+  color:var(--cream);margin-bottom:4px;letter-spacing:0}
+/* ═══ ДОСТУП: открытая часть и закрытая ═══
+   Без капсул — крупная надпись с тонкой линией, линия растёт при наведении */
+.access{display:flex;align-items:flex-start;gap:clamp(26px,4.5vw,72px);flex-wrap:wrap}
+.acc{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,13px)}
+.acc .lbl{font-size:clamp(9.5px,.92vw,11px);letter-spacing:.19em;text-transform:uppercase;
+  color:rgba(253,240,213,.42)}
+.acc .note{font-size:clamp(9.5px,.95vw,11.5px);line-height:1.55;color:rgba(253,240,213,.42);
+  letter-spacing:.02em}
+
+.lnk{display:inline-block;position:relative;padding-bottom:11px;color:var(--cream);
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(15px,1.85vw,25px);line-height:1.1;transition:color .35s var(--ease)}
+.lnk .arw{display:inline-block;margin-left:.42em;transition:transform .4s var(--ease)}
+.lnk::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:rgba(253,240,213,.30);transform-origin:left;transition:background .35s var(--ease)}
+.lnk::before{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--cream);transform:scaleX(0);transform-origin:left;
+  transition:transform .55s var(--ease)}
+.lnk:hover::before{transform:scaleX(1)}
+.lnk:hover .arw{transform:translateX(6px)}
+/* открытая часть — фирменным красным, им же горят слова-акценты в цветке */
+.lnk.dim{color:var(--red);font-weight:700}
+.lnk.dim::after{background:rgba(176,27,24,.45)}
+.lnk.dim::before{background:var(--red)}
+.lnk.dim:hover{color:#D0201C}
+.acc:first-child .lbl{color:rgba(176,27,24,.85)}
+
+/* ═══ МЕНЮ ═══ */
+.menu{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;
+  padding:clamp(22px,3.4vh,44px) clamp(22px,4vw,64px);
+  background:rgba(10,10,12,.97);backdrop-filter:blur(20px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+body.open .menu{opacity:1;visibility:visible}
+.menu-top{display:flex;justify-content:flex-end;height:clamp(48px,6vh,64px)}
+.menu nav{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(4px,1vh,13px);max-width:760px;width:100%;margin:0 auto}
+.menu nav a{position:relative;display:flex;align-items:baseline;gap:clamp(12px,1.8vw,26px);
+  font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.025em;
+  font-size:clamp(16px,2.4vw,31px);line-height:1.12;color:var(--cream);
+  padding:clamp(5px,1vh,12px) 0;opacity:0;transform:translateY(26px);
+  transition:color .3s var(--ease),opacity .6s var(--ease),transform .6s var(--ease)}
+body.open .menu nav a{opacity:1;transform:none}
+body.open .menu nav a:nth-child(1){transition-delay:.10s}
+body.open .menu nav a:nth-child(2){transition-delay:.16s}
+body.open .menu nav a:nth-child(3){transition-delay:.22s}
+body.open .menu nav a:nth-child(4){transition-delay:.28s}
+body.open .menu nav a:nth-child(5){transition-delay:.34s}
+body.open .menu nav a:nth-child(6){transition-delay:.40s}
+.menu nav a:hover{color:var(--gold)}
+.menu nav a .num{font-family:var(--mono);font-weight:400;font-size:clamp(10px,1vw,12px);
+  letter-spacing:.14em;opacity:.42;flex:0 0 auto}
+.menu nav a .note{margin-left:auto;font-family:var(--mono);font-weight:400;text-transform:none;
+  font-size:clamp(10px,1.05vw,12.5px);letter-spacing:.04em;opacity:.42;align-self:center;text-align:right}
+.menu nav a.lock .note{color:var(--gold);opacity:.75}
+.menu-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
+  font-size:clamp(10.5px,1.05vw,12.5px);color:rgba(253,240,213,.42);line-height:1.8;
+  opacity:0;transition:opacity .5s var(--ease) .45s}
+body.open .menu-bot{opacity:1}
+.menu-bot a{border-bottom:1px solid rgba(253,240,213,.25);padding-bottom:1px}
+.menu-bot a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ═══ ПОЯВЛЕНИЕ ═══
+   Заголовок и кнопки собираются из тех же летящих символов, что и цветок:
+   пока идёт сборка, буквы рисует холст, потом проявляется настоящий текст. */
+.tag,.sign,.note{opacity:0}
+body.s-done .tag,body.s-done .sign,body.s-done .note{opacity:1;
+  transition:opacity .7s var(--ease)}
+h1,.lnk,.lbl{opacity:0}
+body.typed h1,body.typed .lnk,body.typed .lbl{opacity:1;transition:opacity .42s linear}
+@media(prefers-reduced-motion:reduce){
+  h1,.lnk,.lbl,.tag,.sign,.note{opacity:1!important}
+}
+
+/* SEO-контент — в потоке документа, скрыт визуально */
+.seo{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+@media(max-width:640px){
+  .core{max-width:none;gap:24px}
+  .bot{flex-direction:column;align-items:flex-start;gap:16px}
+  .sign{text-align:left;padding-bottom:0}
+  .access{flex-direction:column;align-items:stretch;width:100%;gap:14px}
+  .acc .note{display:none}
+  .lnk{font-size:clamp(17px,5.6vw,22px)}
+  .menu nav a .note{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .stage,.menu,.menu nav a,.menu-bot{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ ГЛАВНЫЙ ЭКРАН ═══ -->
+<main class="stage">
+  <canvas id="flower" aria-hidden="true"></canvas>
+  <div class="top">
+    <div class="mark">
+      <img src="img/logo-ai.png" alt="AI для цветочного бизнеса">
+    </div>
+    <button class="mbtn" id="mbtn" aria-label="Открыть меню" aria-expanded="false">Меню <i></i></button>
+  </div>
+
+  <div class="core">
+    <div class="access">
+      <div class="acc">
+        <span class="lbl">Открыто · бесплатно</span>
+        <a class="lnk dim" href="/ai/besplatno/">Бесплатные<br>материалы<span class="arw">→</span></a>
+      </div>
+      <div class="acc">
+        <span class="lbl">Закрыто · по доступу</span>
+        <a class="lnk" href="/ai/dostup/">Библиотека<br>и сообщество<span class="arw">→</span></a>
+        <span class="note">купить доступ — библиотека промтов,<br>готовые съёмки и чат в Telegram</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <h1>AI<br><em>портал</em></h1>
+    <div class="sign">
+      <b>Мария Андреева</b>
+      <p class="tag">Учу владельцев цветочных работать с нейросетями. Здесь собрано то,
+         что применяю сама: инструменты, промты, связки и границы — с цифрами и на практике.</p>
+    </div>
+  </div>
+</main>
+
+<!-- ═══ МЕНЮ ═══ -->
+<div class="menu" id="menu">
+  <div class="menu-top"></div>
+
+  <nav>
+    <a href="/ai/chto-ne-mozhet/"><span class="num">01</span> Границы <span class="note">что нельзя отдавать AI</span></a>
+    <a href="/ai/klub/" class="lock"><span class="num">02</span> Библиотека <span class="note">промты · по паролю</span></a>
+    <a href="/rynok/"><span class="num">03</span> Рынок <span class="note">цифры и аналитика</span></a>
+    <a href="/blog/"><span class="num">04</span> Статьи <span class="note">блог</span></a>
+    <a href="https://andreeva-mf.timepad.ru/event/4111521/" target="_blank" rel="noopener"><span class="num">05</span> Лекция <span class="note">7 сентября · Крокус</span></a>
+    <a href="https://t.me/FloralBusiness" target="_blank" rel="noopener"><span class="num">06</span> Канал <span class="note">телеграм</span></a>
+  </nav>
+
+  <div class="menu-bot">
+    <div>Портал «AI для цветочного бизнеса» · 2026</div>
+    <div>
+      <a href="/break-even/">Точка безубыточности</a> ·
+      <a href="/kalkulyator/">Расчёт зарплат</a> ·
+      <a href="/skidka/">Калькулятор скидки</a> ·
+      <a href="https://mfandreeva.ru/">mfandreeva.ru</a>
+    </div>
+  </div>
+</div>
+
+<!-- контент для поиска и нейросетей -->
+<div class="seo">
+  <h2>AI для цветочного бизнеса</h2>
+  <p>Нейросети в цветочном заменяют не флориста, а фотографа, копирайтера и оператора рутины. Автоматизируется до 80% типовых операций: расчёт себестоимости, карточки товара, ответы на типовые вопросы, прогноз остатков. Самый массовый сценарий — генерация визуала вместо фотосъёмки.</p>
+  <p>Нейросети не могут собрать букет, оценить свежесть цветка, заменить вкус флориста и отвечать за качество. Не стоит отдавать им работу с реальными остатками без проверки, общение с недовольным клиентом и тексты, где цена ошибки — репутация.</p>
+  <p>Портал ведёт Мария Андреева — экономист, продюсер брендов цветочных магазинов, авторизованный партнёр МойСклад.</p>
+</div>
+
+<script>
+(function(){
+  var b=document.body, btn=document.getElementById('mbtn');
+  function toggle(){
+    var open=b.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open?'true':'false');
+    btn.setAttribute('aria-label', open?'Закрыть меню':'Открыть меню');
+    btn.firstChild.nodeValue = open ? 'Закрыть ' : 'Меню ';
+  }
+  btn.addEventListener('click', toggle);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && b.classList.contains('open')) toggle(); });
+})();
+
+/* мелкий текст проявляется, когда сборка почти закончена */
+setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
+
+/* ═══ ЦВЕТОК ИЗ СИМВОЛОВ ═══
+   Сплошной текст обрезан по силуэту цветка; по форме идёт волна,
+   в которой буквы срываются с мест и рассыпаются в частицы.        */
+(function(){
+  var c = document.getElementById('flower');
+  if (!c || !c.getContext) return;
+  var x = c.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var TEXT = ('Нейросети не придумают за вас ассортимент и не сложат букет. '+
+    'Они снимают с флориста рутину: карточки товара, тексты для витрины, '+
+    'расчёты и обработку фото. Здесь собрано то, что я применяю сама в '+
+    'цветочном бизнесе: промты, связки, пайплайны и разборы. Открыто — что '+
+    'и почему. Внутри — как именно. Библиотека пополняется, доступ остаётся '+
+    'навсегда. ').toUpperCase();
+  var DIGITS = '0123456789';
+
+  /* Слова-акценты горят красным и НЕ подменяются цифрами — их можно прочитать.
+     Приём из ролика с цифрой «3», где слова red/green/blue окрашены в свой цвет. */
+  var ACCENT = ['НЕЙРОСЕТИ','НЕЙРОСЕТЯМИ','БУКЕТ','ЦВЕТОЧНОМ','ФЛОРИСТА','ПРОМТЫ','НАВСЕГДА'];
+  var RED = '208,32,28';   // фирменный #B01B18, осветлён под мелкий кегль
+
+  // заранее размечаем текст: какой символ входит в акцентное слово
+  var CHARS = (function(){
+    var out = [], i = 0;
+    while (i < TEXT.length){
+      var m = /^[А-ЯЁA-Z]+/.exec(TEXT.slice(i));
+      if (m){
+        var hit = ACCENT.indexOf(m[0]) >= 0;
+        for (var k=0;k<m[0].length;k++) out.push({ ch:m[0][k], acc:hit });
+        i += m[0].length;
+      } else { out.push({ ch:TEXT[i], acc:false }); i++; }
+    }
+    return out;
+  })();
+
+  var cfg = { fs:9, spread:.90, thr:.25, size:1.05, move:.70,
+              band:.15, wspd:.75, glow:.85, flip:true };
+
+  var DPR = 1, img = null, cells = [], MW = 0, MH = 0, mask = null;
+  var scene = document.createElement('canvas'), sx = scene.getContext('2d');
+
+  function buildMask(){
+    if (!img){ mask = null; return; }
+    MW = 300; MH = Math.max(2, Math.round(MW * c.height / c.width));
+    var o = document.createElement('canvas'); o.width = MW; o.height = MH;
+    var g = o.getContext('2d');
+
+    var narrow = c.width/DPR < 760;
+    var boxW = (narrow ? MW*0.88 : MW*0.52) * cfg.size;
+    var boxH = (narrow ? MH*0.62 : MH*0.94) * cfg.size;
+    var s = Math.min(boxW/img.width, boxH/img.height);
+    var iw = img.width*s, ih = img.height*s;
+    var ox = narrow ? (MW-iw)/2 : MW*0.66 - iw*0.26;   // цветок правее, дальше от заголовка
+    var oy = narrow ? MH*0.04 : (MH-ih)/2;
+
+    if (cfg.flip){
+      g.save(); g.translate(MW,0); g.scale(-1,1);
+      g.drawImage(img, MW-ox-iw, oy, iw, ih); g.restore();
+    } else g.drawImage(img, ox, oy, iw, ih);
+
+    var d;
+    try { d = g.getImageData(0,0,MW,MH).data; }
+    catch(e){ mask = null; return; }        // файл открыт локально — тихо выходим
+    mask = new Float32Array(MW*MH);
+    for (var p=0;p<MW*MH;p++){
+      var k = p*4;
+      mask[p] = d[k+3] < 40 ? 0 : (d[k]*0.299 + d[k+1]*0.587 + d[k+2]*0.114)/255;
+    }
+  }
+
+  function maskAt(px, py){
+    if (!mask) return 0;
+    var i = (px/c.width*MW)|0, j = (py/c.height*MH)|0;
+    if (i<0||j<0||i>=MW||j>=MH) return 0;
+    return mask[j*MW+i];
+  }
+
+  function layout(){
+    cells = [];
+    var fs = cfg.fs*DPR, cw = fs*0.62, lh = fs*1.30;
+    var cols = Math.ceil(c.width/cw), rows = Math.ceil(c.height/lh), n = 0;
+    for (var j=0;j<rows;j++){
+      for (var i=0;i<cols;i++){
+        var src2 = CHARS[n % CHARS.length];
+        var ch = src2.acc ? src2.ch
+               : (src2.ch === ' ' || Math.random() < 0.34) ? DIGITS[(Math.random()*10)|0] : src2.ch;
+        n++;
+        var cy2 = j*lh + lh*0.6;
+        cells.push({ x:i*cw + cw*0.5, y:cy2, ch:ch, acc:src2.acc,
+          r:Math.random(), a:Math.random()*Math.PI*2, w:Math.random()*Math.PI*2,
+          lag: 0.10 + (cy2/Math.max(1,c.height))*0.9 + Math.random()*1.9,
+          sxo: (Math.random()-0.35)*0.5, syo: (Math.random()-0.5)*0.55,
+          cvx: (Math.random()-0.5)*0.55, cvy: (Math.random()-0.5)*0.6,
+          dur: 2.6 + Math.random()*2.2 });
+      }
+    }
+  }
+
+  function resize(){
+    DPR = Math.min(2, window.devicePixelRatio||1);
+    c.width = Math.floor(c.offsetWidth*DPR); c.height = Math.floor(c.offsetHeight*DPR);
+    scene.width = c.width; scene.height = c.height;
+    buildMask(); layout();
+  }
+
+  var t0 = performance.now(), last = 0;
+  function draw(now){
+    requestAnimationFrame(draw);
+    if (document.body.classList.contains('open')) return;   // меню открыто — не тратим кадры
+    if (now - last < 33) return;                            // ~30 fps достаточно
+    last = now;
+
+    var t = reduce ? 0 : (now-t0)/1000;
+    var fs = cfg.fs*DPR;
+    x.clearRect(0,0,c.width,c.height);
+    sx.clearRect(0,0,scene.width,scene.height);
+    sx.textAlign = 'center'; sx.textBaseline = 'middle';
+
+    var edge = c.width*0.44, feather = c.width*0.13;   // левее этой границы символов нет
+    var floorY = c.height*0.70, ffeather = c.height*0.16;  // ниже — гасим, там текст
+
+    for (var i=0;i<cells.length;i++){
+      var p = cells[i];
+      if (maskAt(p.x, p.y) <= cfg.thr) continue;            // вне силуэта пусто
+      var fx = p.x < edge ? 0 : Math.min(1,(p.x-edge)/feather);
+      if (p.y > floorY) fx *= Math.max(0, 1 - (p.y-floorY)/ffeather);
+      if (fx <= 0.02) continue;
+
+      var dx = 0, dy = 0, sz = fs, col = p.acc ? RED : '253,240,213';
+      var al = (p.acc ? 1 : 0.92) * fx;      // акценты всегда в полную силу
+
+      /* ═ СБОРКА: символы прилетают по дуге из левого верхнего угла ═ */
+      var prog = Math.min(1, Math.max(0, (t - p.lag)/p.dur));
+      if (prog < 1){
+        if (prog <= 0) continue;
+        var u = 1 - Math.pow(1-prog, 3);                  // мягкое торможение у цели
+        var x0 = c.width*(-0.14 + p.sxo*0.4);            // старт разбросан по левому краю
+        var y0 = c.height*(0.02 + p.syo*0.5);
+        var cx2 = c.width*(0.48 + p.cvx*0.5);            // у каждого своя дуга
+        var cy3 = c.height*(-0.04 + p.cvy*0.5);
+        var iu = 1-u;
+        var bx = iu*iu*x0 + 2*iu*u*cx2 + u*u*p.x;
+        var by = iu*iu*y0 + 2*iu*u*cy3 + u*u*p.y;
+        var sway = (1-u) * 34 * DPR;   // в полёте символы гуляют шире
+        sx.globalAlpha = Math.min(1, (p.acc ? 1 : 0.92) * (0.25 + 0.75*u));
+        sx.fillStyle = 'rgb('+col+')';
+        sx.font = (fs*(0.7+0.3*u)).toFixed(1)+'px "ShareTechMono", ui-monospace, monospace';
+        sx.fillText(p.ch, bx + Math.cos(p.a + t*2)*sway, by + Math.sin(p.a*1.6 + t*1.7)*sway);
+        continue;
+      }
+
+      /* Цветок никогда не стоит: символы всё время дышат, мерцают и
+         перещёлкиваются — волна распада идёт поверх этой жизни. */
+      var br = 2.2*DPR;
+      dx += Math.cos(t*0.55 + p.w*1.7) * br * (0.5 + p.r);
+      dy += Math.sin(t*0.47 + p.w) * br * (0.5 + p.r);
+      al *= 0.72 + 0.28*Math.sin(t*1.35 + p.w*2.3);
+      if (!p.acc && Math.sin(t*2.2 + p.w*3.1) > 0.9975)
+        p.ch = (p.r < .5) ? DIGITS[(Math.random()*10)|0] : p.ch;
+
+      var phase = (p.y/c.height + p.x/c.width*0.25) - Math.max(0,t-3.2)*cfg.wspd*0.22;
+      var band = Math.cos((phase % 1 + 1) % 1 * Math.PI*2);
+      var force = Math.min(1, Math.max(0, (band - (1 - cfg.band*2)) / (cfg.band*2)));
+
+      if (force > 0.01){
+        var drift = cfg.move * (0.6 + 0.4*Math.sin(t*0.5 + p.w));
+        var rad = cfg.spread * force * fs * 3.6 * (0.35 + p.r);
+        dx = Math.cos(p.a + t*drift*0.8) * rad;
+        dy = Math.sin(p.a*1.7 + t*drift*0.6) * rad * 0.8;
+        sz = fs * (1 - 0.55*force);
+        al = (p.acc ? 1 - 0.12*force : 0.92 - 0.30*force) * fx;
+        if (p.r > 0.86 && !p.acc) col = '255,255,255';   // искры, но акценты цвет не теряют
+      }
+
+      sx.globalAlpha = Math.min(1, al);
+      sx.fillStyle = 'rgb('+col+')';
+      sx.font = sz.toFixed(1)+'px "ShareTechMono", ui-monospace, monospace';
+      sx.fillText(p.ch, p.x+dx, p.y+dy);
+    }
+    sx.globalAlpha = 1;
+
+    if (cfg.glow > 0){
+      x.save();
+      x.filter = 'blur(' + (cfg.glow*7*DPR).toFixed(1) + 'px)';
+      x.globalCompositeOperation = 'lighter';
+      x.globalAlpha = cfg.glow*0.85;
+      x.drawImage(scene, 0, 0);
+      x.restore();
+    }
+    x.drawImage(scene, 0, 0);
+
+    // буквы заголовка и кнопок рисуем поверх, БЕЗ свечения —
+    // иначе в момент подмены на настоящий текст виден скачок
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    drawText(t);
+    x.globalAlpha = 1;
+  }
+
+  /* ═══ БУКВЫ ЗАГОЛОВКА И КНОПОК ═══
+     Берём координаты каждой буквы прямо из вёрстки (Range API), поэтому
+     летящие символы садятся точно на свои места. Когда сели — показываем
+     настоящий текст, а холст свои копии гасит. */
+  var textParts = [], textReady = false, textDone = false, fadeAt = 0;
+
+  function buildText(){
+    textParts = []; textDone = false;
+    var box = c.getBoundingClientRect();
+    var targets = document.querySelectorAll('h1, .lnk, .acc .lbl');
+
+    targets.forEach(function(el, ti){
+      var walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var node;
+      while ((node = walk.nextNode())){
+        var txt = node.nodeValue;
+        var cs = getComputedStyle(node.parentElement);
+        for (var i=0;i<txt.length;i++){
+          if (!txt[i].trim()) continue;
+          var rg = document.createRange();
+          rg.setStart(node, i); rg.setEnd(node, i+1);
+          var r = rg.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          // регистр задаёт CSS (text-transform) — повторяем его, иначе
+          // в полёте буквы строчные, а на месте становятся заглавными
+          var tt = cs.textTransform;
+          var chr = tt === 'uppercase' ? txt[i].toUpperCase()
+                  : tt === 'lowercase' ? txt[i].toLowerCase() : txt[i];
+          textParts.push({
+            ch: chr,
+            tx: (r.left + r.width/2 - box.left) * DPR,
+            ty: (r.top + r.height*0.56 - box.top) * DPR,
+            font: cs.fontWeight + ' ' + (parseFloat(cs.fontSize)*DPR) + 'px ' +
+                  cs.fontFamily.replace(/"/g,"'"),
+            col: cs.color,
+            lag: 0.15 + ti*0.10 + i*0.012 + Math.random()*1.15,
+            dur: 2.2 + Math.random()*1.5,
+            sxo:(Math.random()-0.35)*0.5, syo:(Math.random()-0.5)*0.55,
+            cvx:(Math.random()-0.5)*0.55, cvy:(Math.random()-0.5)*0.6,
+            a: Math.random()*Math.PI*2
+          });
+        }
+      }
+    });
+    textReady = textParts.length > 0;
+    if (!textReady) document.body.classList.add('typed');
+  }
+
+  function drawText(t){
+    if (!textReady || textDone) return;
+    // после посадки холст гасит свои копии ровно за то время, за какое
+    // проявляется настоящий текст — переход идёт встык, без провала
+    var fade = fadeAt ? Math.max(0, 1 - (t - fadeAt)/0.42) : 1;
+    if (fadeAt && fade <= 0){ textDone = true; return; }
+    var all = true;
+    for (var i=0;i<textParts.length;i++){
+      var p = textParts[i];
+      var prog = Math.min(1, Math.max(0, (t - p.lag)/p.dur));
+      if (prog < 1) all = false;
+      if (prog <= 0) continue;
+
+      var u = 1 - Math.pow(1-prog, 3);
+      var x0 = c.width*(-0.14 + p.sxo*0.4), y0 = c.height*(0.02 + p.syo*0.5);
+      var cx2 = c.width*(0.48 + p.cvx*0.5), cy3 = c.height*(-0.04 + p.cvy*0.5);
+      var iu = 1-u;
+      var bx = iu*iu*x0 + 2*iu*u*cx2 + u*u*p.tx;
+      var by = iu*iu*y0 + 2*iu*u*cy3 + u*u*p.ty;
+      var sway = (1-u) * 30 * DPR;
+
+      x.globalAlpha = (0.35 + 0.65*u) * fade;
+      x.fillStyle = p.col;
+      // в полёте буква мельче и набирает свой кегль у цели
+      x.font = (u < 0.995)
+        ? p.font.replace(/(\d+(?:\.\d+)?)px/, function(m,v){ return (v*(0.45+0.55*u)).toFixed(1)+'px'; })
+        : p.font;
+      x.fillText(p.ch, bx + Math.cos(p.a + t*2)*sway, by + Math.sin(p.a*1.6 + t*1.7)*sway);
+    }
+    if (all && !fadeAt){            // все сели — включаем настоящий текст и растворяем копии
+      fadeAt = t;
+      document.body.classList.add('typed');
+    }
+  }
+
+  var src = new Image();
+  src.onload = function(){ img = src; buildMask(); layout(); };
+  src.src = 'img/flower-src.jpg';
+
+  // ждём шрифты: без них координаты букв поедут
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildText);
+  else addEventListener('load', buildText);
+  setTimeout(function(){ if (!textReady) { document.body.classList.add('typed'); } }, 4000);
+
+  addEventListener('resize', function(){ clearTimeout(src._t); src._t = setTimeout(resize, 160); });
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

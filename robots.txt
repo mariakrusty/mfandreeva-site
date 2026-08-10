@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /private/
+Disallow: /ai/klub/
+
+Sitemap: https://mfandreeva.ru/sitemap.xml
+Sitemap: https://mfandreeva.ru/sitemap_index.xml

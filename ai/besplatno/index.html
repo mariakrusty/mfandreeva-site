@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Искусственный интеллект для магазина цветов: что работает, а что нет</title>
+<meta name="description" content="Как использовать ИИ в цветочном магазине: съёмка букета без фотографа, карточки товара, видео из фото. Разборы с замерами времени и денег, границы применения. Открыто и бесплатно.">
+<link rel="canonical" href="https://mfandreeva.ru/ai/besplatno/">
+<link rel="icon" type="image/png" href="/ai/img/logo-ai.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI для цветочного бизнеса — открытая часть">
+<meta property="og:description" content="Разборы с замерами, карта делегирования и тест на границы нейросетей.">
+<meta property="og:url" content="https://mfandreeva.ru/ai/besplatno/">
+<meta property="og:image" content="https://mfandreeva.ru/ai/img/logo-ai.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Искусственный интеллект для магазина цветов: что работает, а что нет",
+   "description": "Как использовать нейросети в цветочном магазине: съёмка букета без фотографа, карточки товара, видео из фото. Разборы с замерами времени и денег, границы применения.",
+   "datePublished": "2026-08-10",
+   "dateModified": "2026-08-10",
+   "inLanguage": "ru-RU",
+   "mainEntityOfPage": "https://mfandreeva.ru/ai/besplatno/",
+   "author": {
+    "@type": "Person",
+    "name": "Мария Андреева",
+    "url": "https://mfandreeva.ru/",
+    "jobTitle": "Экономист, продюсер брендов цветочных магазинов",
+    "knowsAbout": [
+     "нейросети в цветочном бизнесе",
+     "искусственный интеллект для магазина цветов",
+     "генерация фото букета",
+     "автоматизация цветочного магазина",
+     "карточки товара для цветов"
+    ]
+   },
+   "publisher": {
+    "@type": "Person",
+    "name": "Мария Андреева"
+   }
+  },
+  {
+   "@type": "HowTo",
+   "name": "Как сделать фото букета для карточки товара с помощью нейросети",
+   "description": "Правильный порядок: снять реальный букет и обработать снимок, а не генерировать букет с нуля.",
+   "step": [
+    {
+     "@type": "HowToStep",
+     "position": 1,
+     "name": "Снять реальный букет",
+     "text": "Сфотографируйте собранный букет при ровном свете, без лишних предметов в кадре. Это ваш товар: сорта, спираль и пропорции должны быть настоящими."
+    },
+    {
+     "@type": "HowToStep",
+     "position": 2,
+     "name": "Обработать снимок в нейросети",
+     "text": "Задайте нейросети фон, свет и окружение. Сам букет остаётся неизменным, меняется только сцена вокруг него."
+    },
+    {
+     "@type": "HowToStep",
+     "position": 3,
+     "name": "Проверить результат",
+     "text": "Убедитесь, что состав букета не изменился и в композиции нет невозможных элементов. Только после этого ставьте кадр в карточку товара."
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Как сделать фото букета с помощью нейросети",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Снимите реальный букет на телефон при ровном свете, без лишних предметов в кадре. Дальше нейросеть меняет фон, свет и окружение, сохраняя сам букет. Генерировать букет с нуля не нужно: тогда получатся несуществующие сорта и композиция, которую невозможно собрать."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Как магазины делают фото букетов в руках одних и тех же людей",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Это метод якоря: одно фото модели становится опорным, и нейросеть подставляет к нему разные букеты, сохраняя лицо, руки и стиль. Так магазин получает серию кадров с узнаваемым персонажем без повторных съёмок."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Можно ли доверить нейросети описание букета для карточки товара",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Да, при двух условиях: вы задаёте состав и цену, а готовый текст проверяете. Без запретов нейросеть скатывается в «нежное облако чувств», а состав может придумать. Проверка занимает минуту, написание с нуля — десять."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Какая нейросеть лучше рисует цветы",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Для съёмки букета как товара подходят те, что работают по референсу и сохраняют объект: Nano Banana, Midjourney с опорным изображением. Для видео из снимка — Seedance. Для текстов — GPT. Универсальной нейросети для флориста не существует, под каждую задачу свой инструмент."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Клиент принёс картинку из нейросети и просит такой букет. Что делать",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Разберите картинку по частям: какие сорта изображены и существуют ли они, есть ли в композиции вода, реален ли размер и вес. Часть таких картинок собрать нельзя в принципе — там смешаны живые и искусственные цветы или нарушена физика. Покажите клиенту, что именно невозможно, и предложите ближайший реальный аналог."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Заменит ли нейросеть флориста",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Она заменяет фотографа, копирайтера и оператора рутины. Сборка букета, оценка свежести, вкус и ответственность за результат остаются за человеком."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+@font-face{font-family:'ShareTechMono';src:url('../../assets/ShareTechMono.ttf') format('truetype');font-weight:400;font-display:swap}
+
+/* переходы между страницами без перезагрузки — нативно */
+@view-transition{ navigation: auto }
+::view-transition-old(root){animation:vtOut .32s var(--ease) both}
+::view-transition-new(root){animation:vtIn .42s var(--ease) both}
+@keyframes vtOut{to{opacity:0;filter:blur(6px)}}
+@keyframes vtIn{from{opacity:0;filter:blur(6px)}}
+
+:root{
+  --red:#B01B18; --crimson:#C1121F; --cream:#FDF0D5; --paper:#8FBDD8;
+  --gold:#C9A961; --cosmos:#003049; --marble:#669BBC; --ice:#A9CDE0;
+  --line:rgba(0,48,73,.28);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --disp:'Unbounded',-apple-system,sans-serif; --mono:'ShareTechMono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--mono);color:var(--cosmos);line-height:1.55;
+  background:radial-gradient(120% 90% at 82% 0%,#A9CDE0 0%,#8FBDD8 46%,#669BBC 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.pad{padding:0 clamp(22px,4.4vw,72px)}
+.mono{font-family:var(--mono);font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;
+  text-transform:uppercase}
+
+/* ─── верхняя строка: как у Detroit, разделы разнесены по краям ─── */
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;
+  gap:clamp(14px,3vw,54px);padding:clamp(12px,1.8vh,20px) clamp(22px,4.4vw,72px);
+  background:rgba(143,189,216,.88);backdrop-filter:blur(12px)}
+.bar img{width:30px;border-radius:7px}
+.bar nav{display:flex;gap:clamp(12px,2.4vw,40px)}
+.bar nav a{font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(0,48,73,.62);transition:color .25s}
+.bar nav a:hover{color:var(--cosmos)}
+.bar .right{margin-left:auto;display:flex;gap:clamp(12px,2.4vw,40px);align-items:center}
+.bar .kt{font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red)}
+
+.mbtn{background:none;border:0;cursor:pointer;font-family:var(--mono);color:var(--cosmos);
+  font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;padding:4px}
+.overlay{position:fixed;inset:0;z-index:70;background:#8FBDD8;display:flex;flex-direction:column;
+  justify-content:space-between;padding:clamp(70px,12vh,130px) clamp(22px,4.4vw,72px) clamp(24px,4vh,44px);
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+body.menu .overlay{opacity:1;visibility:visible}
+.overlay nav{display:flex;flex-direction:column;gap:clamp(2px,.6vh,8px)}
+.overlay nav a{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
+  font-size:clamp(22px,4.4vw,62px);line-height:1.02;opacity:0;transform:translateY(24px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s}
+body.menu .overlay nav a{opacity:1;transform:none}
+.overlay nav a:hover{color:var(--red)}
+body.menu .overlay nav a:nth-child(1){transition-delay:.06s}
+body.menu .overlay nav a:nth-child(2){transition-delay:.12s}
+body.menu .overlay nav a:nth-child(3){transition-delay:.18s}
+body.menu .overlay nav a:nth-child(4){transition-delay:.24s}
+body.menu .overlay nav a:nth-child(5){transition-delay:.30s}
+body.menu .overlay nav a:nth-child(6){transition-delay:.36s}
+.ov-bot{display:flex;justify-content:space-between;gap:16px;color:rgba(0,48,73,.55)}
+
+/* ─── первый экран ─── */
+.hero{position:absolute;left:0;top:0;right:0;z-index:5;
+  padding:clamp(76px,12vh,140px) clamp(22px,4.4vw,72px) 0;pointer-events:none}
+h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:1.06;
+  letter-spacing:-.03em;font-size:clamp(24px,3.4vw,52px);margin-left:0}
+.sub{margin-top:clamp(18px,3vh,30px);font-family:var(--disp);font-weight:700;
+  text-transform:uppercase;font-size:clamp(11px,1.15vw,16px);line-height:1.4;
+  letter-spacing:-.01em;max-width:46ch;color:var(--cosmos)}
+.sub .by{display:block;margin-top:clamp(10px,1.6vh,16px);max-width:44ch;
+  font-family:var(--mono);font-weight:400;text-transform:none;
+  font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.03em;line-height:1.6;
+  color:rgba(0,48,73,.62)}
+.hero .desc{margin-top:clamp(16px,2.6vh,28px);max-width:44ch;
+  font-size:clamp(10px,.9vw,12px);letter-spacing:.1em;text-transform:uppercase;line-height:1.85;
+  color:rgba(0,48,73,.72)}
+.hero .desc b{color:var(--red);font-weight:400}
+
+/* pin как у референса: секция «залипает» на экране, прокрутка не двигает
+   страницу, а проигрывает горизонтальный ход ленты (scrub). Кадры внутри
+   карточек сменяются сами — второй, независимый слой движения. */
+.hero-pin{height:220vh;position:relative}
+.hero-stick{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden}
+.lane-w{position:absolute;left:0;right:0;bottom:0;height:clamp(360px,83vh,900px);
+  overflow:hidden}
+.lane{position:absolute;left:0;top:0;right:0;height:114%}
+.it{display:block;position:absolute;left:0;bottom:0;width:var(--w);height:var(--h);
+  margin:0;overflow:visible;transition:none;will-change:transform}
+.it .frame{position:absolute;inset:0;overflow:hidden;background:#7FB0CB}
+.it .sl{position:absolute;inset:0;opacity:0;transition:opacity 1.15s var(--ease)}
+.it .sl.on{opacity:1}
+.it .sl img{position:absolute;inset:0;width:108%;max-width:none;height:114%;
+  object-fit:cover;transform:translate(-3%,-6%);will-change:transform}
+.it .tag{position:absolute;left:8px;bottom:calc(100% + 6px);display:inline-flex;align-items:center;
+  gap:7px;font-size:clamp(9px,.78vw,11px);letter-spacing:.13em;text-transform:uppercase;
+  white-space:nowrap;color:rgba(0,48,73,.75);z-index:3}
+.it .tag s{width:7px;height:7px;border-radius:50%;background:var(--cosmos);display:block;
+  text-decoration:none}
+.it .tag.lock s{background:var(--red)}
+
+/* заголовки собираются по буквам — тот же приём, что на главной портала */
+/* ⚠️ line-height НЕ задавать своим числом — иначе строки заголовка разъезжаются
+   (буквы становятся inline-block и диктуют высоту строки вместо h2) */
+.split .ch{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:inherit;
+  padding-bottom:.2em;margin-bottom:-.2em}
+.split .ch i{display:inline-block;font-style:inherit;transform:translateY(105%);
+  transition:transform .95s cubic-bezier(.22,1,.36,1)}
+.split.on .ch i{transform:none}
+@media(prefers-reduced-motion:reduce){ .split .ch i{transform:none} }
+
+
+/* ─── текстовый слой: крупная типографика, заявления вместо абзацев ─── */
+/* три уровня голоса: h2 (заголовок) → .claim (заявление, вдвое мельче и со
+   сдвигом вправо — рождается диагональ) → текст. Красный ровно один раз
+   на уровень, иначе капс начинает кричать. --off = общий сдвиг колонки. */
+.geo{--off:clamp(0px,15vw,260px);margin-top:clamp(26px,5vh,60px)}
+.claim{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.035em;
+  line-height:1.06;font-size:clamp(19px,2.7vw,42px);max-width:21ch;
+  margin:0 0 clamp(26px,4.6vh,58px) var(--off)}
+.claim em{font-style:normal;color:var(--red)}
+.geo .body{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:clamp(18px,2.4vw,44px);max-width:min(880px,100%);margin-left:var(--off)}
+.geo .body p{font-size:clamp(13px,1.06vw,15.5px);line-height:1.72;color:rgba(0,48,73,.82);
+  margin-bottom:13px}
+.geo .body p b{font-weight:400;color:var(--cosmos);border-bottom:1px solid rgba(176,27,24,.55)}
+
+/* умеет / не умеет — строками, как считалки */
+.rows{margin-top:clamp(34px,6vh,80px)}
+.rows-sep{padding:0 0 clamp(9px,1.4vh,14px);border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(0,48,73,.55)}
+.rows-sep+.row-i{border-top:none}
+.rows-sep.off{margin-top:clamp(34px,5.4vh,70px);color:rgba(176,27,24,.75)}
+.row-i{display:flex;flex-wrap:wrap;gap:clamp(10px,2vw,34px);align-items:baseline;
+  padding:clamp(13px,2.2vh,24px) 0;border-bottom:1px solid var(--line);
+  transition:padding-left .45s var(--ease)}
+.row-i:hover{padding-left:clamp(8px,1.4vw,20px)}
+.row-i .n{font-family:var(--mono);font-size:clamp(10px,.88vw,12px);letter-spacing:.14em;
+  color:var(--red);min-width:30px}
+.row-i .n.no{color:rgba(0,48,73,.38)}
+.row-i b{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
+  font-size:clamp(14px,1.9vw,30px);line-height:1.04;flex:1 1 260px}
+.row-i p{font-size:clamp(11.5px,.98vw,13.5px);line-height:1.65;color:rgba(0,48,73,.62);
+  max-width:36ch;flex:1 1 220px;margin:0}
+.upd{margin-top:clamp(34px,5vh,60px);padding-top:clamp(9px,1.4vh,14px);
+  border-top:1px solid var(--line);font-family:var(--mono);
+  font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(0,48,73,.5)}
+
+/* вопросы — крупными строками, раскрываются без гармошки */
+.faq{--off:clamp(0px,15vw,260px);margin-top:clamp(26px,4.4vh,54px);border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:clamp(15px,2.4vh,26px) 0;
+  font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
+  font-size:clamp(14px,2vw,30px);line-height:1.06;display:flex;gap:clamp(12px,2vw,28px);
+  align-items:baseline;transition:padding-left .45s var(--ease)}
+.faq summary:hover{padding-left:clamp(8px,1.4vw,20px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:attr(data-n);font-family:var(--mono);font-weight:400;
+  font-size:clamp(10px,.88vw,12px);letter-spacing:.14em;color:var(--red);flex:none;min-width:30px}
+.faq details[open] summary{color:var(--red)}
+/* ответ встаёт на ту же вертикаль, что и заявление — страница держит одну сетку */
+.faq p{padding:0 0 clamp(20px,3vh,34px);margin:0 0 0 var(--off);
+  font-size:clamp(13px,1.06vw,15.5px);line-height:1.72;color:rgba(0,48,73,.78);max-width:52ch}
+
+/* ─── общие секции ─── */
+/* ⚠️ .pad задаёт padding-шорткатом и глушит вертикальные отступы секций —
+   поэтому правило именно section.pad, не section */
+section.pad{padding-top:clamp(52px,12vh,150px);padding-bottom:clamp(52px,12vh,150px)}
+h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
+  line-height:.86;font-size:clamp(26px,5.2vw,84px)}
+h2 em{font-style:normal;color:var(--red)}
+.two{display:grid;grid-template-columns:1fr minmax(0,34ch);gap:clamp(18px,4vw,70px);
+  align-items:end}
+.two .txt{font-size:clamp(10px,.88vw,11.8px);letter-spacing:.1em;text-transform:uppercase;
+  line-height:1.9;color:rgba(0,48,73,.7)}
+
+/* ─── карта делегирования: бизнес в центре, процессы вокруг ─── */
+.pin{height:260vh;position:relative}
+.web{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;margin-top:0}
+.web svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+/* ⚠️ vector-effect:non-scaling-stroke здесь НЕЛЬЗЯ: dasharray начинает
+   считаться в экранных px, а getTotalLength — в юнитах viewBox → нить
+   обрывается на двух третях. Толщину держим юнитами. */
+.web svg path{fill:none;stroke:rgba(0,48,73,.6);stroke-width:1.4;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+
+.web .kick{position:relative;z-index:2;font-family:var(--mono);text-align:center;
+  font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:clamp(10px,1.8vh,18px)}
+/* заголовок-гигант в центре, нить проходит ЗА ним */
+.web h2{position:relative;z-index:2;text-align:center;max-width:14ch;
+  font-size:clamp(28px,5.4vw,88px);line-height:.9}
+/* узел-капсула как у Detroit: круглое фото + имя процесса, скруглённая рамка */
+.node{position:absolute;z-index:3;display:flex;align-items:center;gap:clamp(8px,1vw,14px);
+  background:var(--cream);border:1.5px solid var(--cosmos);border-radius:100px;
+  padding:clamp(5px,.6vw,8px);padding-right:clamp(16px,1.8vw,26px);
+  opacity:0;transform:translateY(16px);cursor:default;
+  transition:background .3s var(--ease),color .3s var(--ease)}
+.web.on .node{opacity:1;transform:none}
+.node .av{width:clamp(34px,3.4vw,52px);aspect-ratio:1;border-radius:50%;flex:none;
+  overflow:hidden;background:var(--cosmos)}
+.node .av img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block}
+.node b{font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  letter-spacing:.01em;font-size:clamp(10.5px,1.05vw,15.5px);line-height:1.1;
+  white-space:nowrap}
+.node:hover{background:var(--cosmos);color:var(--cream)}
+/* пояснение процесса: на десктопе — карточка при наведении, на мобиле — видимый текст */
+.node .tip{position:absolute;top:calc(100% + 10px);left:14px;width:max-content;max-width:250px;
+  background:var(--cosmos);color:var(--cream);padding:11px 14px;
+  font-size:11.5px;line-height:1.55;letter-spacing:.02em;
+  opacity:0;pointer-events:none;transition:opacity .3s;z-index:5}
+.node:hover .tip{opacity:1}
+.node.n1{top:9%;left:29%}
+.node.n2{top:13%;right:9%}
+.node.n3{top:36%;left:5%}
+.node.n4{top:48%;right:3%}
+.node.n5{bottom:25%;left:11%}
+.node.n6{bottom:15%;right:12%}
+.node.n7{bottom:5%;left:33%}
+
+/* ─── разборы: список слева, стопка превью справа ─── */
+.list{position:relative;margin-top:clamp(20px,4vh,48px)}
+.li{display:flex;align-items:baseline;gap:clamp(10px,2vw,28px);padding:clamp(12px,2.4vh,26px) 0;
+  border-bottom:1px solid var(--line);position:relative;z-index:2;
+  transition:padding-left .5s var(--ease),color .35s var(--ease)}
+.li:first-child{border-top:1px solid var(--line)}
+.li:hover{padding-left:clamp(10px,1.8vw,26px)}
+.li b{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
+  font-size:clamp(17px,3.2vw,48px);line-height:1;flex:1 1 auto;transition:opacity .35s}
+.list:hover .li b{opacity:.32}
+.list .li:hover b{opacity:1}
+.li .m{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,48,73,.5);
+  white-space:nowrap}
+.li .m i{font-style:normal;color:var(--red)}
+.li .m i.k{color:rgba(0,48,73,.45)}
+
+/* стопка превью — идёт за курсором */
+/* ⏸ стопка-превью ОТКЛЮЧЕНА до реальных кадров разборов (Мария: «всплывает
+   какая-то странная картинка») — вернуть, убрав display:none */
+.peek{display:none;position:fixed;z-index:40;width:clamp(180px,20vw,300px);aspect-ratio:4/5;pointer-events:none;
+  opacity:0;transform:translate(-50%,-50%) scale(.94);transition:opacity .3s var(--ease),transform .4s var(--ease)}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.peek .p{position:absolute;inset:0;overflow:hidden;background:#EFE8D6}
+.peek .p:nth-child(1){transform:rotate(-7deg) translate(-9px,7px)}
+.peek .p:nth-child(2){transform:rotate(5deg) translate(8px,-5px)}
+.peek .p:nth-child(3){transform:none}
+.peek img{width:100%;height:100%;object-fit:cover}
+.peek .stub{position:absolute;inset:0}
+@media(hover:none){ .peek{display:none} }
+
+/* ─── тест ─── */
+.game{margin-top:clamp(20px,4vh,44px);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);padding:clamp(24px,5vh,64px) 0}
+.gtop{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.gtop .score{font-family:var(--disp);font-weight:700;color:var(--red);
+  font-size:clamp(11px,1.1vw,15px);letter-spacing:.02em}
+.q{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.045em;
+  line-height:.94;font-size:clamp(19px,3.4vw,52px);margin:clamp(16px,3vh,32px) 0;
+  max-width:19ch;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.verdict{max-width:60ch;font-size:clamp(11px,.95vw,13.5px);letter-spacing:.06em;line-height:1.8;
+  text-transform:uppercase;color:rgba(0,48,73,.72);min-height:3.6em;opacity:0;
+  transition:opacity .35s}
+.verdict.on{opacity:1}
+.verdict b{color:var(--red);font-weight:400}
+.gbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:clamp(16px,3vh,30px)}
+.gb{cursor:pointer;border:1px solid var(--cosmos);background:transparent;color:var(--cosmos);
+  border-radius:100px;font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  letter-spacing:.02em;font-size:clamp(11px,1.1vw,15px);padding:13px 36px;transition:.3s var(--ease)}
+.gb:hover{background:var(--cosmos);color:var(--cream)}
+.gb.next{background:var(--red);border-color:var(--red);color:var(--cream)}
+.gb.next:hover{background:var(--crimson);border-color:var(--crimson)}
+.pg{display:flex;gap:4px;margin-top:clamp(16px,3vh,28px)}
+.pg i{width:26px;height:2px;background:var(--line)}
+.pg i.ok{background:var(--marble)}
+.pg i.no{background:var(--red)}
+
+/* ─── считалки ─── */
+.tools{margin-top:clamp(18px,3.4vh,40px);border-top:1px solid var(--line)}
+.tool{display:flex;flex-wrap:wrap;gap:clamp(10px,2vw,32px);align-items:baseline;
+  padding:clamp(13px,2.2vh,24px) 0;border-bottom:1px solid var(--line);
+  transition:padding-left .45s var(--ease)}
+.tool:hover{padding-left:clamp(8px,1.4vw,20px)}
+.tool .n{font-size:9.5px;letter-spacing:.18em;color:var(--red);min-width:28px}
+.tool b{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.035em;
+  font-size:clamp(14px,2vw,30px);line-height:1.05;flex:1 1 240px}
+.tool p{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,48,73,.55);
+  max-width:32ch;flex:1 1 190px}
+.tool .go{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,48,73,.45)}
+.tool:hover .go{color:var(--red)}
+
+/* ─── финал ─── */
+.end{background:var(--cosmos);color:var(--cream);padding:clamp(38px,9vh,120px) clamp(18px,4vw,70px);
+  display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,64px);align-items:flex-end;justify-content:space-between}
+.end h2{color:var(--cream)}
+.end p{font-size:10px;letter-spacing:.1em;text-transform:uppercase;line-height:1.9;
+  color:rgba(253,240,213,.62);max-width:40ch;margin-top:16px}
+.end .go{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:var(--cream);
+  border-radius:100px;padding:16px 34px;font-family:var(--disp);font-weight:700;
+  text-transform:uppercase;font-size:clamp(10.5px,1vw,13px);letter-spacing:.03em;
+  transition:.3s var(--ease);white-space:nowrap}
+.end .go:hover{background:var(--crimson)}
+.foot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  padding:clamp(20px,3.4vh,36px) 0 clamp(28px,5vh,56px);
+  font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,48,73,.45)}
+
+@media(max-width:860px){
+  .bar nav{display:none}
+  .bar .right{margin-left:auto}
+  /* зоны нажатия ≥44px: паддинг + компенсирующий margin, вёрстка не сдвигается */
+  .mbtn,.kt{padding:14px 12px;margin:-14px -12px}
+  .kt{margin-right:2px}
+  .gb{padding:14px 26px}
+
+  /* hero: лента ниже и крупнее, чтобы не накрывала подзаголовок;
+     размеры карточек (--w в vw) домножаются — иначе на телефоне крохи */
+  .hero-pin{height:200vh}
+  .hero{padding-top:calc(56px + 3vh)}
+  h1{font-size:clamp(30px,9vw,44px)}
+  .sub{font-size:clamp(12px,3.6vw,15px);max-width:none}
+  .lane-w{height:52vh;height:52dvh}
+  .it{width:calc(var(--w)*1.9)}
+  .it .tag{font-size:10px}
+
+  .geo,.faq{--off:0px}
+  .two{grid-template-columns:1fr}
+  .w,.w.wide{flex:1 1 100%}
+  .strip{height:230px} .strip .f,.strip:hover .f{flex-basis:20%}
+  .pin{height:auto}
+  .web{position:static;height:auto;min-height:auto;flex-direction:column;
+    align-items:flex-start;gap:26px;padding:20px 0}
+  .web .kick,.web h2{text-align:left;align-self:flex-start}
+  .web svg{display:none}
+  .node{position:static!important;opacity:1;transform:none;max-width:none;
+    flex-wrap:wrap;border-radius:26px;padding:10px 16px 12px 10px}
+  .node .tip{position:static;opacity:1;pointer-events:auto;background:none;
+    color:rgba(0,48,73,.65);padding:0;max-width:none;flex:1 1 100%}
+  .node:hover{background:var(--cream);color:inherit}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a href="/ai/"><img src="../img/logo-ai.png" alt="AI портал"></a>
+  <nav>
+    <a href="#karta">что делегировать</a>
+    <a href="#chto-eto">как это работает</a>
+    <a href="#razbory">разборы</a>
+    <a href="#test">сможет или нет</a>
+  </nav>
+  <div class="right">
+    <a class="kt" href="/ai/dostup/">картотека</a>
+    <button class="mbtn" id="mbtn">меню</button>
+  </div>
+</div>
+
+<div class="overlay" id="ovl">
+  <nav>
+    <a href="#karta">Что делегировать</a>
+    <a href="#razbory">Разборы</a>
+    <a href="#test">Сможет или нет</a>
+    <a href="#faq">Вопросы</a>
+    <a href="/ai/dostup/">Картотека</a>
+    <a href="/ai/">На портал</a>
+  </nav>
+  <div class="ov-bot">
+    <span class="mono">Мария Андреева · 2026</span>
+    <a class="mono" href="https://t.me/FloralBusiness" target="_blank" rel="noopener">Telegram →</a>
+  </div>
+</div>
+
+<!-- ═══ ПЕРВЫЙ ЭКРАН ═══ -->
+<div class="hero-pin" id="heroPin"><div class="hero-stick">
+
+<div class="pad hero">
+  <h1>AI Портал<br>для цветочного</h1>
+  <p class="sub">Как использовать нейросети в цветочном бизнесе:<br>
+     разборы и примеры.
+     <span class="by">от Марии Андреевой — автора цифрового контента
+       и эксперта в цветочном бизнесе</span></p>
+</div>
+
+<div class="lane-w"><div class="lane" id="lane">
+    <a class="it" style="--w:23vw;--h:44%" href="/ai/dostup/"><span class="tag lock"><s></s>Оживление фото</span><span class="frame"><span class="sl on"><img src="../img/hero/p4.jpg" alt="Оживление фото букета"></span><span class="sl"><img loading="lazy" src="../img/hero/p1.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:30vw;--h:56%" href="/ai/dostup/"><span class="tag lock"><s></s>Витрина сезона</span><span class="frame"><span class="sl on"><img src="../img/hero/p5.jpg" alt="Витрина сезона"></span><span class="sl"><img loading="lazy" src="../img/hero/p2.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:37vw;--h:70%" href="#"><span class="tag"><s></s>Карточка товара</span><span class="frame"><span class="sl on"><img src="../img/hero/p3.jpg" alt="Карточка товара для букета"></span><span class="sl"><img loading="lazy" src="../img/hero/p5.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:31vw;--h:86%" href="#"><span class="tag"><s></s>Лукбук</span><span class="frame"><span class="sl on"><img src="../img/hero/p1.jpg" alt="Лукбук, снятый нейросетью"></span><span class="sl"><img loading="lazy" src="../img/hero/p3.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:42vw;--h:100%" href="/ai/dostup/"><span class="tag lock"><s></s>Свадебная серия</span><span class="frame"><span class="sl on"><img src="../img/hero/p2.jpg" alt="Свадебная серия без модели"></span><span class="sl"><img loading="lazy" src="../img/hero/p4.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:27vw;--h:52%" href="/ai/dostup/"><span class="tag lock"><s></s>Оживление фото</span><span class="frame"><span class="sl on"><img src="../img/hero/p4.jpg" alt=""></span><span class="sl"><img loading="lazy" src="../img/hero/p2.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:35vw;--h:66%" href="#"><span class="tag"><s></s>Карточка товара</span><span class="frame"><span class="sl on"><img src="../img/hero/p5.jpg" alt=""></span><span class="sl"><img loading="lazy" src="../img/hero/p3.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:28vw;--h:80%" href="#"><span class="tag"><s></s>Лукбук</span><span class="frame"><span class="sl on"><img src="../img/hero/p1.jpg" alt=""></span><span class="sl"><img loading="lazy" src="../img/hero/p4.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:39vw;--h:92%" href="/ai/dostup/"><span class="tag lock"><s></s>Витрина сезона</span><span class="frame"><span class="sl on"><img src="../img/hero/p3.jpg" alt=""></span><span class="sl"><img loading="lazy" src="../img/hero/p1.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:46vw;--h:100%" href="/ai/dostup/"><span class="tag lock"><s></s>Свадебная серия</span><span class="frame"><span class="sl on"><img src="../img/hero/p5.jpg" alt=""></span><span class="sl"><img loading="lazy" src="../img/hero/p2.jpg" alt=""></span></span></a>
+  </div>
+</div>
+
+</div></div><!-- /hero-pin -->
+
+
+<!-- ═══ КАРТА ДЕЛЕГИРОВАНИЯ ═══ -->
+<section id="karta" class="pad">
+  <div class="pin"><div class="web" id="web">
+    <!-- одна непрерывная «нить» с петлями, как у Detroit: рисуется по скроллу -->
+    <svg viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+      <!-- нить строится S-сегментами: каждый стык гладкий (C1), петли —
+           обход точек по кругу; координаты в viewBox 1000×620 = % экрана -->
+      <path d="M-80,340
+               C 20,300 80,275 132,232
+               S 235,115 380,95
+               S 640,45 795,110
+               S 1030,180 945,300
+               S 900,450 820,435
+               S 715,350 815,262
+               S 935,275 895,365
+               S 810,520 750,505
+               S 555,605 430,565
+               S 250,545 195,455
+               S 110,395 175,345
+               S 290,330 275,415
+               S 220,520 120,540
+               S 0,560 -80,520"/>
+    </svg>
+
+    <p class="kick">Карта делегирования</p>
+    <h2>Цветочный<br><em>бизнес</em></h2>
+
+    <div class="node n1"><span class="av"><img loading="lazy" src="../img/hero/p1.jpg" alt="Съёмка букета нейросетью"></span><b>Съёмка букетов</b>
+      <span class="tip">Серия кадров из одного фото реального букета — без студии и фотографа</span></div>
+    <div class="node n2"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Карточка товара для букета"></span><b>Карточки товара</b>
+      <span class="tip">Названия, описания, подписи — десятки за вечер</span></div>
+    <div class="node n3"><span class="av"><img loading="lazy" src="../img/hero/p4.jpg" alt="Видео из фото букета"></span><b>Видео для сторис</b>
+      <span class="tip">Пять секунд движения из готового снимка</span></div>
+    <div class="node n4"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Сезонная витрина"></span><b>Витрина к сезону</b>
+      <span class="tip">Кампания к празднику из ваших же кадров</span></div>
+    <div class="node n5"><span class="av"><img loading="lazy" src="../img/hero/p2.jpg" alt="Посты и рассылки"></span><b>Посты и рассылки</b>
+      <span class="tip">Тексты вашим голосом — по фактуре, которую даёте вы</span></div>
+    <div class="node n6"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Расшифровка голосовых"></span><b>Голосовые и планёрки</b>
+      <span class="tip">Расшифровка в заказы и задачи — ничего не теряется</span></div>
+    <div class="node n7"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Расчёты по выгрузкам"></span><b>Себестоимость и наценка</b>
+      <span class="tip">Расчёты по выгрузкам из учётной системы</span></div>
+  </div></div>
+</section>
+
+<!-- ═══ КАК ЭТО РАБОТАЕТ ═══ -->
+<section id="chto-eto" class="pad">
+  <div class="two">
+    <h2>Как это<br><em>работает</em></h2>
+    <p class="txt">Главное правило, из-за которого у большинства не получается.</p>
+  </div>
+
+  <div class="geo">
+    <p class="claim">Нейросеть не должна придумывать ваш букет.
+      Она должна показать ваш <em>настоящий</em> букет так, чтобы его купили.</p>
+
+    <div class="body">
+      <div>
+        <p>Флористы жалуются, что нейросеть рисует нереализуемое: несуществующие сорта,
+           букеты без воды в вазе, композиции, которые невозможно собрать. Причина одна —
+           букет просят <b>сгенерировать с нуля</b>.</p>
+      </div>
+      <div>
+        <p>Правильный порядок обратный: сначала снимаете реальный букет как товар, потом
+           обрабатываете снимок. Сорта, спираль сборки и пропорции остаются настоящими —
+           это ваш товар из холодильника. Меняются фон, свет, руки модели и окружение.</p>
+      </div>
+    </div>
+
+    <div class="rows">
+      <div class="rows-sep">Что берёт на себя</div>
+      <div class="row-i"><span class="n">01</span><b>Съёмка без фотографа</b>
+        <p>Серия кадров с одним букетом: фон, свет, модель, сезон</p></div>
+      <div class="row-i"><span class="n">02</span><b>Карточки товара</b>
+        <p>Название, описание, подписи — десятки за вечер вместо недели</p></div>
+      <div class="row-i"><span class="n">03</span><b>Видео из фотографии</b>
+        <p>Пять секунд движения для сторис из одного снимка</p></div>
+      <div class="row-i"><span class="n">04</span><b>Расчёты и рутина</b>
+        <p>Себестоимость, наценка, разбор выгрузок из учётной системы</p></div>
+      <div class="rows-sep off">Чего не сделает</div>
+      <div class="row-i"><span class="n no">—</span><b>Не соберёт букет по спирали</b>
+        <p>Не оценит свежесть по фото и не проверит реальные остатки</p></div>
+      <div class="row-i"><span class="n no">—</span><b>Не отвечает за результат</b>
+        <p>Решает, что есть 13 розовых тюльпанов, и берёт за них оплату</p></div>
+    </div>
+
+    <p class="upd">Обновлено 10.08.2026 · Мария Андреева, экономист, продюсер брендов
+       цветочных магазинов, авторизованный партнёр МойСклад</p>
+  </div>
+</section>
+
+<!-- ═══ ВОПРОСЫ ═══ -->
+<section id="faq" class="pad">
+  <div class="two">
+    <h2>Вопросы</h2>
+    <p class="txt">То, что чаще всего спрашивают в цветочных чатах.</p>
+  </div>
+  <div class="faq">
+    <details><summary data-n="01">Как сделать фото букета с помощью нейросети</summary>
+      <p>Снимите реальный букет на телефон при ровном свете, без лишних предметов в кадре.
+         Дальше нейросеть меняет фон, свет и окружение, сохраняя сам букет. Генерировать
+         букет с нуля не нужно: тогда получатся несуществующие сорта и композиция,
+         которую невозможно собрать.</p></details>
+    <details><summary data-n="02">Как магазины делают фото букетов в руках одних и тех же людей</summary>
+      <p>Это метод якоря: одно фото модели становится опорным, и нейросеть подставляет
+         к нему разные букеты, сохраняя лицо, руки и стиль. Так магазин получает серию
+         кадров с узнаваемым персонажем без повторных съёмок.</p></details>
+    <details><summary data-n="03">Можно ли доверить нейросети описание букета для карточки товара</summary>
+      <p>Да, при двух условиях: вы задаёте состав и цену, а готовый текст проверяете.
+         Без запретов нейросеть скатывается в «нежное облако чувств», а состав может
+         придумать. Проверка занимает минуту, написание с нуля — десять.</p></details>
+    <details><summary data-n="04">Какая нейросеть лучше рисует цветы</summary>
+      <p>Для съёмки букета как товара подходят те, что работают по референсу и сохраняют
+         объект: Nano Banana, Midjourney с опорным изображением. Для видео из снимка —
+         Seedance. Для текстов — GPT. Универсальной «нейросети для флориста» не существует,
+         под каждую задачу свой инструмент.</p></details>
+    <details><summary data-n="05">Клиент принёс картинку из нейросети и просит такой букет. Что делать</summary>
+      <p>Разберите картинку по частям: какие сорта изображены и существуют ли они, есть ли
+         в композиции вода, реален ли размер и вес. Часть таких картинок собрать нельзя
+         в принципе — там смешаны живые и искусственные цветы или нарушена физика.
+         Покажите клиенту, что именно невозможно, и предложите ближайший реальный аналог.</p></details>
+    <details><summary data-n="06">Заменит ли нейросеть флориста</summary>
+      <p>Нет. Она заменяет фотографа, копирайтера и оператора рутины. Сборка букета,
+         оценка свежести, вкус и ответственность за результат остаются за человеком.</p></details>
+  </div>
+</section>
+
+<!-- ═══ КОМАНДА ИЗ НЕЙРОСЕТЕЙ ═══ -->
+<!-- ═══ РАЗБОРЫ ═══ -->
+<section id="razbory">
+  <div class="pad two">
+    <h2>Разборы</h2>
+    <p class="txt">Что делали, сколько времени заняло и сколько стоило.
+       Часть открыта целиком, часть лежит в картотеке — вместе с промтами.</p>
+  </div>
+
+  <div class="pad list" id="list">
+    <a class="li" href="#" data-img="../klub/img/iceland.jpg">
+      <b>Лукбук вместо съёмки</b><span class="m"><i>открыто</i> · 8 кадров · 2 часа</span></a>
+    <a class="li" href="#" data-img="">
+      <b>Сорок карточек за вечер</b><span class="m"><i>открыто</i> · 40 шт · 1 промт</span></a>
+    <a class="li" href="/ai/dostup/" data-img="">
+      <b>Букет, который двигается</b><span class="m"><i class="k">в картотеке</i> · 5 секунд</span></a>
+    <a class="li" href="/ai/dostup/" data-img="">
+      <b>Витрина к 8 марта</b><span class="m"><i class="k">в картотеке</i> · 12 кадров</span></a>
+    <a class="li" href="/ai/dostup/" data-img="">
+      <b>Свадебная серия без модели</b><span class="m"><i class="k">в картотеке</i> · 1 день</span></a>
+  </div>
+
+  <div class="peek" id="peek">
+    <div class="p"><div class="stub"></div></div>
+    <div class="p"><div class="stub"></div></div>
+    <div class="p" id="peek-main"><div class="stub"></div></div>
+  </div>
+
+</section>
+
+<!-- ═══ ТЕСТ ═══ -->
+<section id="test" class="pad">
+  <div class="two">
+    <h2>Сможет<br><em>или нет</em></h2>
+    <p class="txt">Десять задач из обычного дня цветочного магазина.
+       Отвечайте — и сразу узнаете, где проходит граница.<br>
+       <a href="/ai/chto-ne-mozhet/" style="color:var(--red);border-bottom:1px solid rgba(176,27,24,.4)">Все семь границ подробно →</a></p>
+  </div>
+
+  <div class="game">
+    <div class="gtop">
+      <span class="mono" id="qn" style="color:rgba(0,48,73,.5)">Задача 1 из 10</span>
+      <span class="score" id="sc">0 / 0</span>
+    </div>
+    <div class="q" id="q">Написать описания для сорока букетов на сайт</div>
+    <div class="verdict" id="vd"></div>
+    <div class="gbtns" id="gb">
+      <button class="gb" data-a="1">Сможет</button>
+      <button class="gb" data-a="0">Не сможет</button>
+    </div>
+    <div class="pg" id="pg"></div>
+  </div>
+</section>
+
+<!-- ═══ СЧИТАЛКИ ═══ -->
+<section class="pad">
+  <div class="two">
+    <h2>Считалки</h2>
+    <p class="txt">Считают по вашим данным. Бесплатно и без регистрации.</p>
+  </div>
+  <div class="tools">
+    <a class="tool" href="/break-even/"><span class="n">01</span><b>Точка безубыточности</b>
+      <p>Сколько продать, чтобы выйти в ноль</p><span class="go">Открыть →</span></a>
+    <a class="tool" href="/skidka/"><span class="n">02</span><b>Скидка без потерь</b>
+      <p>Какую скидку можно дать спокойно</p><span class="go">Открыть →</span></a>
+    <a class="tool" href="/kalkulyator/"><span class="n">03</span><b>Расчёт зарплат</b>
+      <p>Зарплаты флористов, выгрузка в Excel</p><span class="go">Открыть →</span></a>
+    <a class="tool" href="/rynok/"><span class="n">04</span><b>Рынок цветов</b>
+      <p>Объёмы, сезонность, спрос и цены</p><span class="go">Открыть →</span></a>
+  </div>
+</section>
+
+<!-- ═══ ФИНАЛ ═══ -->
+<div class="pad">
+  <div class="end">
+    <div>
+      <h2>Картотека</h2>
+      <p>Промты по разделам, съёмки сериями, пайплайны и чат.
+         Доступ навсегда, картотека пополняется.</p>
+    </div>
+    <a class="go" href="/ai/dostup/">Что внутри →</a>
+  </div>
+  <div class="foot">
+    <div>Портал «AI для цветочного бизнеса» · 2026</div>
+    <div><a href="/ai/">На портал</a></div>
+  </div>
+</div>
+
+<script>
+/* ─── лента-кольцо: колесо ведёт её по кругу, конца нет (как у референса).
+   Каждая карточка позиционируется сама; уехав за левый край, выныривает справа.
+   Размер и параллакс внутри рамки зависят от места на экране — отсюда объём. ─── */
+(function(){
+  var lane = document.getElementById('lane');
+  if(!lane) return;
+
+  var pin = document.getElementById('heroPin');
+  var cards = [].slice.call(lane.children);
+  var offs = [], W = 0, maxW = 0, cur = 0;
+
+  function measure(){
+    W = 0; maxW = 0;
+    for (var i = 0; i < cards.length; i++){
+      var w = cards[i].offsetWidth;
+      offs[i] = W; W += w;
+      if (w > maxW) maxW = w;
+    }
+  }
+
+  function layout(x){
+    for (var i = 0; i < cards.length; i++){
+      var c = cards[i], w = c.offsetWidth;
+      // позиция на кольце: за левым краем — выныриваем справа
+      var sx = (((offs[i] - x + maxW) % W) + W) % W - maxW;
+      c.style.transform = 'translateX(' + sx.toFixed(1) + 'px)';
+      var cx = sx + w * 0.5;
+      if (cx < -innerWidth * 0.2 || cx > innerWidth * 1.4) continue;
+      var t = Math.min(1, Math.max(0, cx / innerWidth));
+      var e = t * t * (3 - 2 * t);                             // плавная кривая
+      c.style.height = (46 + e * 54).toFixed(1) + '%';         // 46% → 100%
+
+      // объём: картинка в рамке едет в противофазе и «оседает» из глубины
+      if (!c._imgs) c._imgs = c.querySelectorAll('img');
+      var pan = (-6.5 * t).toFixed(2);
+      var zoom = (1 + 0.11 * e).toFixed(3);
+      for (var k = 0; k < c._imgs.length; k++)
+        c._imgs[k].style.transform = 'translate(' + pan + '%,-6%) scale(' + zoom + ')';
+    }
+  }
+
+  measure(); layout(0);
+  addEventListener('resize', function(){ measure(); layout(cur); });
+
+  function frame(){
+    var r = pin.getBoundingClientRect();
+    var travel = pin.offsetHeight - innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / (travel || 1)));
+    var target = p * W * 1.15;              // за проезд секции — чуть больше круга
+    cur += (target - cur) * 0.16;           // инерционный выбег
+    layout(cur);
+    requestAnimationFrame(frame);
+  }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frame);
+
+  // слайдшоу внутри карточек — вразнобой; лента при этом стоит
+  [].slice.call(lane.children).forEach(function(card, i){
+    var sl = card.querySelectorAll('.sl');
+    if (sl.length < 2) return;
+    var n = 0;
+    setInterval(function(){
+      sl[n].classList.remove('on');
+      n = (n+1) % sl.length;
+      sl[n].classList.add('on');
+    }, 3800 + (i % 5) * 750);
+  });
+})();
+
+/* ─── заголовки по буквам (аналог SplitText) ─── */
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, {threshold:.3});
+  // страховка: если наблюдатель не сработал, буквы всё равно выезжают
+  setTimeout(function(){
+    document.querySelectorAll('.split:not(.on)').forEach(function(h){
+      var r = h.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) h.classList.add('on');
+    });
+  }, 1600);
+
+  document.querySelectorAll('h1, h2').forEach(function(h){
+    var html = '', i = 0;
+    // разбираем на символы, сохраняя переносы и вложенный <em>
+    [].forEach.call(h.childNodes, function(n){
+      if (n.nodeType === 3){
+        html += n.nodeValue.split('').map(function(c){
+          return c.trim()
+            ? '<span class="ch"><i style="transition-delay:'+(i++*0.045)+'s">'+c+'</i></span>' : c;
+        }).join('');
+      } else if (n.nodeName === 'BR'){ html += '<br>'; }
+      else if (n.nodeName === 'EM'){
+        html += '<em>' + n.textContent.split('').map(function(c){
+          return c.trim()
+            ? '<span class="ch"><i style="transition-delay:'+(i++*0.045)+'s">'+c+'</i></span>' : c;
+        }).join('') + '</em>';
+      }
+    });
+    h.innerHTML = html; h.classList.add('split');
+    io.observe(h);
+  });
+})();
+
+/* ─── меню-оверлей ─── */
+(function(){
+  var b=document.body, btn=document.getElementById('mbtn');
+  btn.onclick=function(){ var on=b.classList.toggle('menu'); btn.textContent=on?'закрыть':'меню'; };
+  document.querySelectorAll('.overlay nav a').forEach(function(a){
+    a.onclick=function(){ b.classList.remove('menu'); btn.textContent='меню'; };
+  });
+  addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&b.classList.contains('menu')){ b.classList.remove('menu'); btn.textContent='меню'; }
+  });
+})();
+
+/* ─── стопка превью идёт за курсором по списку разборов ─── */
+(function(){
+  var list=document.getElementById('list'), peek=document.getElementById('peek');
+  if(!list||!peek) return;
+  var main=document.getElementById('peek-main'), tx=0, ty=0, cx=0, cy=0, on=false;
+  list.querySelectorAll('.li').forEach(function(li){
+    li.addEventListener('mouseenter',function(){
+      on=true; peek.classList.add('on');
+      var src=li.dataset.img;
+      main.innerHTML = src ? '<img src="'+src+'" alt="">' : '<div class="stub"></div>';
+    });
+    li.addEventListener('mouseleave',function(){ on=false; peek.classList.remove('on'); });
+  });
+  addEventListener('mousemove',function(e){ tx=e.clientX+130; ty=e.clientY; });
+  (function loop(){ cx+=(tx-cx)*.12; cy+=(ty-cy)*.12;
+    peek.style.left=cx+'px'; peek.style.top=cy+'px'; requestAnimationFrame(loop); })();
+})();
+
+/* ─── созвездие: линии рисуются при появлении ─── */
+(function(){
+  var web = document.getElementById('web');
+  web.querySelectorAll('svg path').forEach(function(p){
+    var L = p.getTotalLength();
+    p.style.setProperty('--len', L);
+  });
+  // секция закреплена: прокрутка проигрывает сборку схемы, а не двигает страницу
+  var pin = web.parentElement, nodes = web.querySelectorAll('.node'),
+      paths = web.querySelectorAll('svg path');
+  function frame(){
+    var r = pin.getBoundingClientRect();
+    var total = pin.offsetHeight - innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / (total || 1)));
+    web.classList.toggle('on', p > 0.02);
+    paths.forEach(function(path, i){
+      var k = Math.min(1, Math.max(0, (p - i*0.05) / 0.34));
+      path.style.strokeDashoffset = (1-k) * parseFloat(path.style.getPropertyValue('--len'));
+    });
+    nodes.forEach(function(n, i){
+      var k = Math.min(1, Math.max(0, (p - 0.10 - i*0.075) / 0.2));
+      n.style.opacity = k;
+      n.style.transform = 'translateY(' + ((1-k)*16) + 'px)';
+    });
+    requestAnimationFrame(frame);
+  }
+  if (matchMedia('(min-width:861px)').matches) requestAnimationFrame(frame);
+  else { web.classList.add('on'); nodes.forEach(function(n){ n.style.opacity=1; }); }
+})();
+
+/* ─── тест «сможет или нет» ─── */
+(function(){
+  var Q = [
+    ['Написать описания для сорока букетов на сайт', 1,
+     'Сможет. Один промт — сорок описаний за вечер. Править придётся, но это правки, а не письмо с нуля.'],
+    ['Собрать букет из того, что осталось к вечеру', 0,
+     'Не сможет. Пропорции и то, как цветок стоит в руке, — работа флориста.'],
+    ['Снять лукбук без фотографа и модели', 1,
+     'Сможет. Серия кадров за пару часов. Слабое место — удержать один букет во всех кадрах.'],
+    ['Понять по фото, что роза уже поплыла', 0,
+     'Не сможет. Свежесть — только руками и глазами.'],
+    ['Оживить фото букета для сторис', 1,
+     'Сможет. Из снимка — пять секунд движения. Одно действие на клип.'],
+    ['Ответить клиенту, у которого завял букет', 0,
+     'Не сможет. Нужен человек с полномочиями решать, а не вежливый текст.'],
+    ['Посчитать себестоимость по вашим остаткам', 0,
+     'Не сможет без ваших данных. Цифры из воздуха выглядят правдоподобно и потому опасны.'],
+    ['Придумать название для нового букета', 1,
+     'Сможет — как генератор вариантов. Выбирать вам: у неё усреднённый вкус.'],
+    ['Заменить фон на фото букета', 1,
+     'Сможет, сохранив сам букет. По референсу, за пару минут.'],
+    ['Отвечать за качество и сроки', 0,
+     'Не сможет. Ответственность остаётся на вас — всегда.']
+  ];
+  var i=0, ok=0, done=0;
+  var q=document.getElementById('q'), vd=document.getElementById('vd'), gb=document.getElementById('gb'),
+      sc=document.getElementById('sc'), qn=document.getElementById('qn'), pg=document.getElementById('pg');
+  Q.forEach(function(){ pg.appendChild(document.createElement('i')); });
+
+  function show(){
+    q.style.opacity=0; q.style.transform='translateY(10px)';
+    setTimeout(function(){
+      q.textContent=Q[i][0]; q.style.opacity=1; q.style.transform='none';
+      qn.textContent='Задача '+(i+1)+' из '+Q.length;
+      vd.classList.remove('on'); vd.textContent='';
+      gb.innerHTML='<button class="gb" data-a="1">Сможет</button><button class="gb" data-a="0">Не сможет</button>';
+      bind();
+    },200);
+  }
+  function answer(a){
+    var right = a===Q[i][1];
+    if(right) ok++;
+    done++;
+    pg.children[i].className = right?'ok':'no';
+    sc.textContent = ok+' / '+done;
+    vd.innerHTML = (right?'<b>Верно. </b>':'<b>А вот и нет. </b>')+Q[i][2];
+    vd.classList.add('on');
+    gb.innerHTML = i<Q.length-1 ? '<button class="gb next" data-n="1">Дальше →</button>'
+                                : '<button class="gb next" data-n="2">Пройти заново</button>';
+    if(i===Q.length-1){
+      var res = ok>=8 ? 'Вы понимаете, где проходит граница — лучше большинства.'
+              : ok>=5 ? 'Половина. Границу чувствуете, но не везде.'
+              : 'Пока мимо. Зато теперь понятно, чему доверять, а чему нет.';
+      vd.innerHTML += '<br><br><b>Итог: '+ok+' из '+Q.length+'. </b>'+res;
+    }
+    bind();
+  }
+  function bind(){
+    gb.querySelectorAll('button').forEach(function(b){
+      b.onclick = function(){
+        if(b.dataset.n==='1'){ i++; show(); }
+        else if(b.dataset.n==='2'){ i=0;ok=0;done=0;sc.textContent='0 / 0';
+          [].forEach.call(pg.children,function(el){el.className='';}); show(); }
+        else answer(+b.dataset.a);
+      };
+    });
+  }
+  bind();
+})();
+
+</script>
+<script src="../../assets/lib/webfont.js"></script>
+<script src="../../assets/lib/gsap.min.js"></script>
+<script src="../../assets/lib/lenis.min.js"></script>
+<script src="../../assets/lib/taxi.min.js"></script>
+
+</body>
+</html>
