@@ -458,24 +458,18 @@ h2 em{font-style:normal;color:var(--red)}
   .w,.w.wide{flex:1 1 100%}
   .strip{height:230px} .strip .f,.strip:hover .f{flex-basis:20%}
   .pin{height:auto}
-  .web{position:static;height:auto;min-height:auto;flex-direction:column;
-    align-items:stretch;gap:0;padding:20px 0}
-  .web .kick,.web h2{text-align:left;align-self:flex-start}
-  .web h2{margin-bottom:clamp(20px,4vh,34px)}
-  .web svg{display:none}
-  /* на мобиле карта = строки с линиями (как считалки), а не капсулы-плашки:
-     круглое фото · имя · подпись, разделители на всю ширину */
-  .node{position:static!important;opacity:1;transform:none;max-width:none;
-    display:grid;grid-template-columns:52px 1fr;column-gap:14px;align-items:center;
-    background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--line);
-    padding:15px 0}
-  .node:first-of-type{border-top:1px solid var(--line)}
-  .node .av{width:52px}
-  .node b{font-size:clamp(15px,4.4vw,19px);white-space:normal;line-height:1.08}
-  .node .tip{position:static;opacity:1;pointer-events:auto;background:none;
-    color:rgba(0,48,73,.62);padding:4px 0 0;max-width:none;
-    grid-column:2;font-size:11.5px}
-  .node:hover{background:transparent;color:inherit}
+  /* мобильная карта = тот же характер: капсулы зигзагом + нить-змейка,
+     которую JS прокладывает через их реальные центры (mobileThread) */
+  .web{position:relative;height:auto;min-height:auto;flex-direction:column;
+    align-items:flex-start;gap:clamp(26px,4.6vh,40px);padding:20px 0 34px}
+  .web .kick,.web h2{text-align:left}
+  .web h2{margin-bottom:clamp(6px,1.4vh,14px)}
+  .web svg{display:block;position:absolute;inset:0;z-index:1}
+  .node{position:static!important;opacity:1;transform:none;z-index:3;
+    max-width:86%;padding:6px 18px 6px 6px}
+  .node b{white-space:normal;line-height:1.1;font-size:clamp(11.5px,3.4vw,14px)}
+  .node.n2,.node.n4,.node.n6{align-self:flex-end}
+  .node .tip{display:none}
 }
 </style>
 </head>
@@ -913,7 +907,43 @@ h2 em{font-style:normal;color:var(--red)}
     requestAnimationFrame(frame);
   }
   if (matchMedia('(min-width:861px)').matches) requestAnimationFrame(frame);
-  else { web.classList.add('on'); nodes.forEach(function(n){ n.style.opacity=1; }); }
+  else { web.classList.add('on'); nodes.forEach(function(n){ n.style.opacity=1; }); mobileThread(); }
+
+  /* мобиле нить строится по фактическим центрам капсул: змейка из гладких
+     S-сегментов с заходом сверху и выбегом вниз; рисуется при появлении */
+  function mobileThread(){
+    var svg = web.querySelector('svg'), path = svg.querySelector('path');
+    function build(){
+      var wr = web.getBoundingClientRect();
+      svg.setAttribute('viewBox','0 0 '+Math.round(wr.width)+' '+Math.round(wr.height));
+      svg.setAttribute('preserveAspectRatio','none');
+      var pts = [];
+      for (var i=0;i<nodes.length;i++){
+        var r = nodes[i].getBoundingClientRect();
+        pts.push({x:r.left-wr.left+r.width/2, y:r.top-wr.top+r.height/2});
+      }
+      var lead = 70;
+      var d='M'+(pts[0].x-40)+','+(pts[0].y-lead)+
+        ' C'+(pts[0].x+50)+','+(pts[0].y-lead*0.5)+' '+pts[0].x+','+(pts[0].y-30)+' '+pts[0].x+','+pts[0].y;
+      for (var i=1;i<pts.length;i++) d+=' S'+pts[i].x+','+(pts[i].y-60)+' '+pts[i].x+','+pts[i].y;
+      var last=pts[pts.length-1];
+      d+=' S'+(last.x+60)+','+(last.y+lead*0.7)+' '+(last.x-30)+','+(last.y+lead);
+      path.setAttribute('d',d);
+      var L = path.getTotalLength();
+      path.style.setProperty('--len', L);
+      return L;
+    }
+    var L = build();
+    addEventListener('resize', function(){ L = build(); });
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+      path.style.strokeDashoffset = 0; return;
+    }
+    new IntersectionObserver(function(es,o){
+      if (!es[0].isIntersecting) return; o.disconnect();
+      path.style.transition = 'stroke-dashoffset 3s cubic-bezier(.22,1,.36,1)';
+      requestAnimationFrame(function(){ path.style.strokeDashoffset = 0; });
+    }, {threshold:.12}).observe(web);
+  }
 })();
 
 /* ─── тест «сможет или нет» ─── */
