@@ -242,7 +242,7 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
 /* три уровня голоса: h2 (заголовок) → .claim (заявление, вдвое мельче и со
    сдвигом вправо — рождается диагональ) → текст. Красный ровно один раз
    на уровень, иначе капс начинает кричать. --off = общий сдвиг колонки. */
-.geo{--off:clamp(0px,15vw,260px);margin-top:clamp(26px,5vh,60px)}
+.geo{--off:0px;margin-top:clamp(26px,5vh,60px)}
 .claim{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.035em;
   line-height:1.06;font-size:clamp(19px,2.7vw,42px);max-width:21ch;
   margin:0 0 clamp(26px,4.6vh,58px) var(--off)}
@@ -277,7 +277,7 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
   color:rgba(0,48,73,.5)}
 
 /* вопросы — крупными строками, раскрываются без гармошки */
-.faq{--off:clamp(0px,15vw,260px);margin-top:clamp(26px,4.4vh,54px);border-top:1px solid var(--line)}
+.faq{--off:0px;margin-top:clamp(26px,4.4vh,54px);border-top:1px solid var(--line)}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;list-style:none;padding:clamp(15px,2.4vh,26px) 0;
   font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
@@ -631,10 +631,13 @@ h2 em{font-style:normal;color:var(--red)}
       <div class="row-i"><span class="n">04</span><b>Расчёты и рутина</b>
         <p>Себестоимость, наценка, разбор выгрузок из учётной системы</p></div>
       <div class="rows-sep off">Чего не сделает</div>
-      <div class="row-i"><span class="n no">—</span><b>Не соберёт букет по спирали</b>
-        <p>Не оценит свежесть по фото и не проверит реальные остатки</p></div>
+      <div class="row-i"><span class="n no">—</span><b>Не соберёт букет за флориста</b>
+        <p>Нарисовать — нарисует, и какой угодно. Но повторить его вживую флорист,
+           скорее всего, не сможет: несуществующие сорта, нарушенная физика,
+           композиция без воды. С эскизами для клиентов — внимательно</p></div>
       <div class="row-i"><span class="n no">—</span><b>Не отвечает за результат</b>
-        <p>Решает, что есть 13 розовых тюльпанов, и берёт за них оплату</p></div>
+        <p>Ошибётся в составе, цене или наличии — а извиняться перед клиентом
+           будете вы. Всё, что вышло из нейросети, проверяет человек</p></div>
     </div>
 
     <p class="upd">Обновлено 10.08.2026 · Мария Андреева, экономист, продюсер брендов
@@ -683,21 +686,22 @@ h2 em{font-style:normal;color:var(--red)}
 <section id="razbory">
   <div class="pad two">
     <h2>Разборы</h2>
-    <p class="txt">Что делали, сколько времени заняло и сколько стоило.
-       Часть открыта целиком, часть лежит в картотеке — вместе с промтами.</p>
+    <p class="txt">Что делали, сколько времени и денег ушло, что получилось.
+       Внутри каждого разбора — кнопка за инструкцией: промты,
+       готовая связка и алгоритм.</p>
   </div>
 
   <div class="pad list" id="list">
     <a class="li" href="#" data-img="../klub/img/iceland.jpg">
-      <b>Лукбук вместо съёмки</b><span class="m"><i>открыто</i> · 8 кадров · 2 часа</span></a>
+      <b>Лукбук вместо съёмки</b><span class="m">8 кадров · 2 часа · <i>читать →</i></span></a>
     <a class="li" href="#" data-img="">
-      <b>Сорок карточек за вечер</b><span class="m"><i>открыто</i> · 40 шт · 1 промт</span></a>
-    <a class="li" href="/ai/dostup/" data-img="">
-      <b>Букет, который двигается</b><span class="m"><i class="k">в картотеке</i> · 5 секунд</span></a>
-    <a class="li" href="/ai/dostup/" data-img="">
-      <b>Витрина к 8 марта</b><span class="m"><i class="k">в картотеке</i> · 12 кадров</span></a>
-    <a class="li" href="/ai/dostup/" data-img="">
-      <b>Свадебная серия без модели</b><span class="m"><i class="k">в картотеке</i> · 1 день</span></a>
+      <b>Сорок карточек за вечер</b><span class="m">40 шт · 1 промт · <i>читать →</i></span></a>
+    <a class="li" href="#" data-img="">
+      <b>Букет, который двигается</b><span class="m">5 секунд · <i>читать →</i></span></a>
+    <a class="li" href="#" data-img="">
+      <b>Витрина к 8 марта</b><span class="m">12 кадров · <i>читать →</i></span></a>
+    <a class="li" href="#" data-img="">
+      <b>Свадебная серия без модели</b><span class="m">1 день · <i>читать →</i></span></a>
   </div>
 
   <div class="peek" id="peek">
@@ -735,7 +739,7 @@ h2 em{font-style:normal;color:var(--red)}
 <!-- ═══ СЧИТАЛКИ ═══ -->
 <section class="pad">
   <div class="two">
-    <h2>Считалки</h2>
+    <h2>Бесплатные<br><em>AI-инструменты</em></h2>
     <p class="txt">Считают по вашим данным. Бесплатно и без регистрации.</p>
   </div>
   <div class="tools">
@@ -745,8 +749,6 @@ h2 em{font-style:normal;color:var(--red)}
       <p>Какую скидку можно дать спокойно</p><span class="go">Открыть →</span></a>
     <a class="tool" href="/kalkulyator/"><span class="n">03</span><b>Расчёт зарплат</b>
       <p>Зарплаты флористов, выгрузка в Excel</p><span class="go">Открыть →</span></a>
-    <a class="tool" href="/rynok/"><span class="n">04</span><b>Рынок цветов</b>
-      <p>Объёмы, сезонность, спрос и цены</p><span class="go">Открыть →</span></a>
   </div>
 </section>
 
