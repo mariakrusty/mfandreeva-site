@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Своя модель для съёмок: как сделать постоянное лицо бренда нейросетью</title>
+<meta name="description" content="Разбор: как создать собственную модель для съёмок цветочного магазина — генерация, апскейл, одежда, паспорт модели в ракурсах и работа с букетами. По шагам, с кадрами и граблями.">
+<link rel="canonical" href="https://mfandreeva.ru/ai/razbory/model/">
+<link rel="icon" type="image/png" href="../../img/logo-ai.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Своя модель для съёмок — разбор">
+<meta property="og:description" content="Постоянное лицо бренда без фотографа и модели: шесть шагов, паспорт модели и грабли.">
+<meta property="og:url" content="https://mfandreeva.ru/ai/razbory/model/">
+<meta property="og:image" content="https://mfandreeva.ru/ai/img/razbory/model/5-buket.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Своя модель для съёмок: как сделать постоянное лицо бренда нейросетью",
+   "description": "Разбор создания собственной модели для съёмок цветочного магазина: генерация, апскейл, подбор одежды, паспорт модели в ракурсах, работа с букетами.",
+   "datePublished": "2026-08-11",
+   "dateModified": "2026-08-11",
+   "inLanguage": "ru-RU",
+   "mainEntityOfPage": "https://mfandreeva.ru/ai/razbory/model/",
+   "image": "https://mfandreeva.ru/ai/img/razbory/model/5-buket.jpg",
+   "author": {
+    "@type": "Person",
+    "name": "Мария Андреева",
+    "url": "https://mfandreeva.ru/",
+    "jobTitle": "Экономист, продюсер брендов цветочных магазинов",
+    "knowsAbout": [
+     "нейросети в цветочном бизнесе",
+     "генерация модели для съёмок",
+     "паспорт модели",
+     "карточки товара для цветов"
+    ]
+   },
+   "publisher": {"@type": "Person", "name": "Мария Андреева"}
+  },
+  {
+   "@type": "HowTo",
+   "name": "Как создать свою модель для съёмок цветочного магазина",
+   "description": "Порядок работы: сгенерировать лицо, зафиксировать и апскейлить, одеть, собрать паспорт модели в ракурсах и только потом добавлять букеты.",
+   "step": [
+    {"@type":"HowToStep","position":1,"name":"Сгенерировать модель",
+     "text":"Получите портрет крупно на нейтральном фоне при ровном свете. Это будущее лицо бренда — выбирайте внимательно, менять его потом дорого."},
+    {"@type":"HowToStep","position":2,"name":"Зафиксировать и апскейлить",
+     "text":"Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются кожа, волосы и мелкие детали. Без него лицо выглядит нарисованным."},
+    {"@type":"HowToStep","position":3,"name":"Подобрать одежду",
+     "text":"Оденьте модель в тот образ, в котором она будет работать на ваших площадках. Для карточек товара одежда должна быть одинаковой во всех кадрах, иначе витрина рябит."},
+    {"@type":"HowToStep","position":4,"name":"Собрать паспорт модели: лицо",
+     "text":"Сделайте лицо крупно в нескольких ракурсах — фас, три четверти, профиль. Паспорт нужен, чтобы модель держала форму и не менялась от кадра к кадру."},
+    {"@type":"HowToStep","position":5,"name":"Собрать паспорт модели: полный рост",
+     "text":"Повторите те же ракурсы в полный рост: фас, три четверти, профиль и спина. Это вторая половина паспорта."},
+    {"@type":"HowToStep","position":6,"name":"Добавить букеты",
+     "text":"К готовой модели с паспортом добавляйте букеты. Букет должен быть вашим настоящим товаром, иначе получите красивую картинку, которую невозможно собрать."}
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {"@type":"Question","name":"Что такое паспорт модели?",
+     "acceptedAnswer":{"@type":"Answer","text":"Паспорт модели — это набор кадров одного лица в разных ракурсах, который вы прикладываете к каждой новой генерации. Он состоит из двух частей: лицо крупно и полный рост. Паспорт нужен, чтобы модель не менялась и не искажалась от кадра к кадру."}},
+    {"@type":"Question","name":"Зачем нужен апскейл модели?",
+     "acceptedAnswer":{"@type":"Answer","text":"Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются кожа, волосы и мелкие детали. Без апскейла лицо остаётся гладким и выглядит нарисованным, и это видно в карточке товара."}},
+    {"@type":"Question","name":"Можно ли использовать одну модель для всех карточек товара?",
+     "acceptedAnswer":{"@type":"Answer","text":"Да, в этом и смысл. Один человек в одной одежде во всех карточках делает витрину спокойной. Если менять одежду от кадра к кадру, страница начинает рябить и внимание уходит с букета."}},
+    {"@type":"Question","name":"Заменяет ли своя модель съёмку букета?",
+     "acceptedAnswer":{"@type":"Answer","text":"Нет. Модель — это человек в кадре, а букет остаётся вашим настоящим товаром: сорта, спираль и пропорции должны быть реальными. Нейросеть меняет окружение и человека, а не состав букета."}}
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"AI-портал","item":"https://mfandreeva.ru/ai/"},
+    {"@type":"ListItem","position":2,"name":"Разборы","item":"https://mfandreeva.ru/ai/razbory/"},
+    {"@type":"ListItem","position":3,"name":"Своя модель для съёмок","item":"https://mfandreeva.ru/ai/razbory/model/"}
+   ]
+  }
+ ]
+}
+</script>
+
+<style>
+@font-face{font-family:'ShareTechMono';src:url('../../../assets/ShareTechMono.ttf') format('truetype');font-weight:400;font-display:swap}
+
+@view-transition{ navigation: auto }
+::view-transition-old(root){animation:vtOut .32s var(--ease) both}
+::view-transition-new(root){animation:vtIn .42s var(--ease) both}
+@keyframes vtOut{to{opacity:0;filter:blur(6px)}}
+@keyframes vtIn{from{opacity:0;filter:blur(6px)}}
+
+:root{
+  --red:#B01B18; --crimson:#C1121F; --cream:#FDF0D5; --paper:#8FBDD8;
+  --cosmos:#003049; --marble:#669BBC; --ice:#A9CDE0;
+  --line:rgba(0,48,73,.28);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --disp:'Unbounded',-apple-system,sans-serif; --mono:'ShareTechMono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--mono);color:var(--cosmos);line-height:1.55;
+  background:
+    repeating-linear-gradient(90deg,rgba(0,48,73,.05) 0 1px,transparent 1px clamp(70px,8.5vw,132px)),
+    repeating-linear-gradient(0deg,rgba(0,48,73,.05) 0 1px,transparent 1px clamp(70px,8.5vw,132px)),
+    radial-gradient(120% 90% at 82% 0%,#A9CDE0 0%,#8FBDD8 46%,#669BBC 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.pad{padding:0 clamp(22px,4.4vw,72px)}
+.mono{font-family:var(--mono);font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;
+  text-transform:uppercase}
+
+/* ─── шапка ─── */
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;
+  gap:clamp(14px,3vw,54px);padding:clamp(12px,1.8vh,20px) clamp(22px,4.4vw,72px);
+  background:rgba(143,189,216,.88);backdrop-filter:blur(12px)}
+.bar img{width:30px;border-radius:7px}
+.bar nav{display:flex;gap:clamp(12px,2.4vw,40px)}
+.bar nav a{font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(0,48,73,.62);transition:color .25s}
+.bar nav a:hover{color:var(--cosmos)}
+.bar .right{margin-left:auto;display:flex;gap:clamp(12px,2.4vw,40px);align-items:center}
+.bar .kt{font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red)}
+.mbtn{background:none;border:0;cursor:pointer;font-family:var(--mono);color:var(--cosmos);
+  font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;padding:4px}
+.overlay{position:fixed;inset:0;z-index:70;background:#8FBDD8;display:flex;flex-direction:column;
+  justify-content:space-between;padding:clamp(70px,12vh,130px) clamp(22px,4.4vw,72px) clamp(24px,4vh,44px);
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+body.menu .overlay{opacity:1;visibility:visible}
+.overlay nav{display:flex;flex-direction:column;gap:clamp(2px,.6vh,8px)}
+.overlay nav a{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
+  font-size:clamp(22px,4.4vw,62px);line-height:1.02;opacity:0;transform:translateY(24px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s}
+body.menu .overlay nav a{opacity:1;transform:none}
+.overlay nav a:hover{color:var(--red)}
+body.menu .overlay nav a:nth-child(1){transition-delay:.06s}
+body.menu .overlay nav a:nth-child(2){transition-delay:.12s}
+body.menu .overlay nav a:nth-child(3){transition-delay:.18s}
+body.menu .overlay nav a:nth-child(4){transition-delay:.24s}
+body.menu .overlay nav a:nth-child(5){transition-delay:.30s}
+.ov-bot{display:flex;justify-content:space-between;gap:16px;color:rgba(0,48,73,.55)}
+
+/* ─── шапка разбора ─── */
+.head{padding-top:clamp(96px,15vh,168px);padding-bottom:clamp(26px,4.4vh,52px)}
+.crumb{display:flex;gap:10px;align-items:center;color:rgba(0,48,73,.5);margin-bottom:clamp(20px,3.4vh,38px)}
+.crumb a:hover{color:var(--red)}
+.kicker{color:var(--red);margin-bottom:clamp(14px,2.2vh,22px)}
+h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.96;
+  letter-spacing:-.038em;font-size:clamp(30px,6.6vw,96px);max-width:16ch}
+.lead{margin-top:clamp(20px,3.2vh,34px);max-width:60ch;font-size:clamp(13px,1.28vw,17px);
+  line-height:1.62}
+.lead b{font-weight:400;color:var(--red)}
+.by{margin-top:clamp(18px,2.8vh,28px);display:flex;flex-wrap:wrap;gap:8px 26px;
+  color:rgba(0,48,73,.55)}
+
+/* ─── замер ─── */
+.meter{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  margin:clamp(30px,5vh,60px) 0}
+.meter div{background:transparent;padding:clamp(18px,2.8vh,30px) clamp(14px,1.6vw,24px)}
+.meter b{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(22px,3.4vw,44px);
+  line-height:1;letter-spacing:-.03em}
+.meter span{display:block;margin-top:10px;font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(0,48,73,.55)}
+.meter .todo b{color:var(--red);opacity:.55}
+
+/* ─── общий текстовый блок ─── */
+section{padding-top:clamp(16px,3vh,38px);padding-bottom:clamp(34px,6vh,78px)}
+h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
+  font-size:clamp(20px,3.1vw,42px);line-height:1.04;margin-bottom:clamp(18px,2.8vh,30px)}
+.txt{max-width:62ch;font-size:clamp(12.5px,1.18vw,15.5px);line-height:1.66}
+.txt + .txt{margin-top:clamp(12px,1.8vh,18px)}
+.def{border-left:2px solid var(--red);padding:clamp(12px,1.8vh,18px) 0 clamp(12px,1.8vh,18px) clamp(16px,2vw,26px);
+  margin:clamp(20px,3vh,32px) 0;max-width:62ch;font-size:clamp(13px,1.22vw,16px);line-height:1.6}
+
+/* ─── шаги ─── */
+.step{border-top:1px solid var(--line);padding:clamp(24px,4vh,52px) 0;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(22px,4vw,64px);
+  align-items:start}
+.step .n{font-family:var(--disp);font-weight:800;font-size:clamp(46px,7.6vw,104px);line-height:.8;
+  letter-spacing:-.05em;color:var(--cosmos);opacity:.16;margin-bottom:clamp(12px,1.8vh,18px)}
+.step h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(15px,1.9vw,25px);line-height:1.14;margin-bottom:clamp(10px,1.6vh,16px)}
+.step p{font-size:clamp(12.5px,1.14vw,15px);line-height:1.64;max-width:52ch}
+.step p + p{margin-top:10px}
+.step .rule{margin-top:clamp(12px,1.8vh,18px);font-size:clamp(11px,1vw,13px);
+  color:var(--red);line-height:1.5;max-width:46ch}
+.shot{margin:0}
+.shot img{width:100%;height:auto}
+.shot figcaption{margin-top:10px;font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(0,48,73,.5)}
+.wide{grid-column:1/-1}
+.step.solo{grid-template-columns:1fr}
+
+/* ─── результат ─── */
+.result{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(22px,4vw,64px);
+  align-items:center}
+
+/* ─── грабли ─── */
+.trap{border-top:1px solid var(--line);padding:clamp(18px,2.8vh,28px) 0;
+  display:grid;grid-template-columns:minmax(0,22ch) minmax(0,1fr);gap:clamp(14px,2.6vw,44px)}
+.trap b{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:-.01em;
+  font-size:clamp(12.5px,1.32vw,17px);line-height:1.2}
+.trap p{font-size:clamp(12px,1.1vw,14.5px);line-height:1.62;max-width:56ch}
+
+/* ─── воронка в картотеку ─── */
+.end{background:var(--cosmos);color:var(--cream);border-radius:2px;
+  padding:clamp(28px,5vh,64px) clamp(22px,4vw,64px);
+  display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,48px);align-items:center;
+  justify-content:space-between;margin-bottom:clamp(30px,5vh,60px)}
+.end h2{color:var(--cream);margin-bottom:14px;max-width:18ch}
+.end p{color:rgba(253,240,213,.66);max-width:42ch;font-size:clamp(12px,1.1vw,14.5px)}
+.end .go{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:var(--cream);
+  border-radius:100px;padding:16px 34px;font-family:var(--disp);font-weight:700;
+  text-transform:uppercase;font-size:clamp(10.5px,1vw,13px);letter-spacing:.03em;
+  transition:.3s var(--ease);white-space:nowrap}
+.end .go:hover{background:var(--crimson)}
+
+/* ─── faq ─── */
+.q{border-top:1px solid var(--line);padding:clamp(16px,2.4vh,24px) 0}
+.q b{font-family:var(--disp);font-weight:700;font-size:clamp(13px,1.32vw,17px);line-height:1.25;
+  display:block;margin-bottom:10px}
+.q p{max-width:62ch;font-size:clamp(12px,1.1vw,14.5px);line-height:1.64}
+
+/* ─── дальше ─── */
+.next{display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,36px);border-top:1px solid var(--line);
+  padding-top:clamp(20px,3vh,32px)}
+.next a{font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  font-size:clamp(12px,1.28vw,16px);letter-spacing:-.01em;transition:color .25s}
+.next a:hover{color:var(--red)}
+
+.foot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  padding:clamp(20px,3.4vh,36px) 0 clamp(28px,5vh,56px);
+  font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,48,73,.45)}
+
+@media(max-width:860px){
+  .bar nav{display:none}
+  .mbtn,.kt{padding:14px 12px;margin:-14px -12px}
+  .kt{margin-right:2px}
+  .meter{grid-template-columns:repeat(2,1fr)}
+  .step{grid-template-columns:1fr;gap:clamp(16px,3vh,24px)}
+  .step .n{font-size:clamp(40px,15vw,72px)}
+  .result{grid-template-columns:1fr}
+  .trap{grid-template-columns:1fr;gap:8px}
+  .end{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a href="../../"><img src="../../img/logo-ai.png" alt="AI портал"></a>
+  <nav>
+    <a href="../../besplatno/#karta">что делегировать</a>
+    <a href="../">разборы</a>
+    <a href="../../besplatno/#test">сможет или нет</a>
+  </nav>
+  <div class="right">
+    <a class="kt" href="../../dostup/">картотека</a>
+    <button class="mbtn" id="mbtn">меню</button>
+  </div>
+</div>
+
+<div class="overlay" id="ovl">
+  <nav>
+    <a href="../">Разборы</a>
+    <a href="../../besplatno/#karta">Что делегировать</a>
+    <a href="../../besplatno/#test">Сможет или нет</a>
+    <a href="../../dostup/">Картотека</a>
+    <a href="../../">На портал</a>
+  </nav>
+  <div class="ov-bot">
+    <span class="mono">Мария Андреева · 2026</span>
+    <a class="mono" href="https://t.me/FloralBusiness" target="_blank" rel="noopener">Telegram →</a>
+  </div>
+</div>
+
+<!-- ═══ ШАПКА РАЗБОРА ═══ -->
+<div class="pad head">
+  <div class="crumb mono">
+    <a href="../../">Портал</a> · <a href="../">Разборы</a> · <span>Своя модель</span>
+  </div>
+  <div class="kicker mono">Разбор 01 · Съёмка</div>
+  <h1>Своя модель для съёмок</h1>
+  <p class="lead"><b>Своя модель — это постоянный человек в кадре, которого вы создаёте один раз
+     и дальше используете во всех съёмках.</b> Её не нужно искать, оплачивать почасово и ловить
+     в графике: она всегда одна и та же, в одной и той же одежде, и поэтому карточки товара
+     складываются в спокойную витрину, а не в набор случайных фотографий.</p>
+  <div class="by mono">
+    <span>Мария Андреева · экономист, продюсер брендов цветочных магазинов</span>
+    <span>Обновлено 11.08.2026</span>
+  </div>
+</div>
+
+<!-- ═══ ЗАМЕР ═══ -->
+<div class="pad">
+  <div class="meter">
+    <div><b>6</b><span>шагов в пайплайне</span></div>
+    <div><b>8</b><span>кадров паспорта</span></div>
+    <div class="todo"><b>—</b><span>времени на модель</span></div>
+    <div class="todo"><b>—</b><span>стоимость</span></div>
+  </div>
+</div>
+
+<!-- ═══ ЗАДАЧА ═══ -->
+<section class="pad">
+  <h2>Задача</h2>
+  <p class="txt">Цветочному магазину постоянно нужен человек в кадре: букет в руках выглядит
+     живым, понятен масштаб, видно, как его нести и кому дарить. Живая съёмка это закрывает,
+     но каждый раз заново: найти модель, договориться о времени, оплатить час работы,
+     оплатить фотографа, свести график всех троих с графиком поставки цветов.</p>
+  <p class="txt">Вторая беда тише, но дороже: модели меняются. Сегодня одна девушка,
+     через месяц другая, а карточки на сайте стоят рядом. Витрина перестаёт читаться как
+     один бренд и превращается в сборную солянку.</p>
+  <p class="txt">Своя модель решает обе задачи сразу. Один раз созданный человек стоит
+     в кадре столько, сколько вам нужно, и выглядит одинаково в январе и в августе.</p>
+</section>
+
+<!-- ═══ ЧТО ДЕЛАЛИ ═══ -->
+<section class="pad">
+  <h2>Что делали</h2>
+  <p class="txt">Порядок здесь важнее инструмента. Если перепрыгнуть шаг, модель начнёт
+     «плыть»: лицо поедет, возраст изменится, одежда станет другой — и серию придётся
+     переснимать целиком.</p>
+
+  <div class="step">
+    <div>
+      <div class="n">01</div>
+      <h3>Генерируем модель</h3>
+      <p>Первый кадр — портрет крупно, на нейтральном фоне, при ровном свете. Никаких
+         сложных поз и теней: сейчас нужно только лицо, всё остальное будет строиться от него.</p>
+      <p>Это будущее лицо бренда, и выбирать его стоит внимательно. Заменить героиню
+         через полгода — значит переснять всё, что вы успели снять.</p>
+      <p class="rule">Правило: пока лицо не нравится полностью — дальше не идём.</p>
+    </div>
+    <figure class="shot">
+      <img src="../../img/razbory/model/1-istochnik.jpg" alt="Сгенерированный портрет модели на нейтральном фоне" loading="lazy" decoding="async">
+      <figcaption>Шаг 1 · исходная модель</figcaption>
+    </figure>
+  </div>
+
+  <div class="step solo">
+    <div>
+      <div class="n">02</div>
+      <h3>Фиксируем и апскейлим</h3>
+      <p>Понравившийся кадр фиксируем — дальше он становится опорой для всех остальных.
+         И апскейлим.</p>
+      <p>Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются
+         кожа, волосы, ресницы, мелкие детали. Без него лицо остаётся подозрительно
+         гладким, и в карточке товара это видно сразу.</p>
+      <p class="rule">Правило: апскейлить до одежды, а не после — иначе детали
+         придётся вытягивать в каждом кадре заново.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div>
+      <div class="n">03</div>
+      <h3>Одеваем</h3>
+      <p>Подбираем одежду, в которой модель будет работать на ваших площадках: сайт,
+         карточки товара, соцсети. Образ должен быть нейтральным настолько, чтобы не спорить
+         с букетом, и характерным настолько, чтобы его узнавали.</p>
+      <p>Для сайта одежда должна быть одинаковой во всех кадрах. Когда в каждой карточке
+         новый образ, страница рябит, и внимание уходит с товара на разглядывание нарядов.</p>
+      <p class="rule">Правило: один образ на всю серию. Разная одежда — разный бренд.</p>
+    </div>
+    <figure class="shot">
+      <img src="../../img/razbory/model/2-odezhda.jpg" alt="Модель в подобранной одежде в полный рост" loading="lazy" decoding="async">
+      <figcaption>Шаг 3 · образ для съёмок</figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div class="wide">
+      <div class="n">04</div>
+      <h3>Паспорт модели, часть первая: лицо</h3>
+      <p>Паспорт модели — это набор кадров одного лица в разных ракурсах, который
+         прикладывается к каждой новой генерации. Первая половина — лицо крупно:
+         фас, три четверти, поворот, профиль.</p>
+      <p>Именно паспорт держит форму. С ним модель остаётся собой от кадра к кадру,
+         без него — незаметно молодеет, меняет разрез глаз и через десять генераций
+         превращается в другого человека.</p>
+    </div>
+    <figure class="shot wide">
+      <img src="../../img/razbory/model/3-pasport-lico.jpg" alt="Паспорт модели: лицо в четырёх ракурсах" loading="lazy" decoding="async">
+      <figcaption>Шаг 4 · паспорт лица, четыре ракурса</figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div class="wide">
+      <div class="n">05</div>
+      <h3>Паспорт модели, часть вторая: полный рост</h3>
+      <p>Те же ракурсы в полный рост: фас, три четверти, профиль, спина. Это вторая
+         половина паспорта — она фиксирует не только лицо, но и фигуру, рост, посадку
+         одежды и обувь.</p>
+      <p>Две части вместе дают восемь опорных кадров. Дальше любая новая сцена
+         строится от них.</p>
+    </div>
+    <figure class="shot wide">
+      <img src="../../img/razbory/model/4-pasport-rost.jpg" alt="Паспорт модели: полный рост в четырёх ракурсах" loading="lazy" decoding="async">
+      <figcaption>Шаг 5 · паспорт в полный рост, четыре ракурса</figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <div class="n">06</div>
+      <h3>Добавляем букеты</h3>
+      <p>Только теперь начинается работа, ради которой всё затевалось: к готовой модели
+         добавляются букеты. Модель держит форму, образ не меняется, кадры складываются
+         в серию.</p>
+      <p>И здесь главное правило портала остаётся в силе: букет должен быть вашим
+         настоящим. Нейросеть меняет человека, свет и окружение — но не состав букета.
+         Придуманный ею букет вы не соберёте, а покупатель придёт именно за ним.</p>
+      <p class="rule">Правило: человека можно создать, товар — нельзя.</p>
+    </div>
+    <figure class="shot">
+      <img src="../../img/razbory/model/5-buket.jpg" alt="Модель с букетом пионов" loading="lazy" decoding="async">
+      <figcaption>Шаг 6 · модель с букетом</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ ГДЕ НЕ СРАБОТАЛО ═══ -->
+<section class="pad">
+  <h2>Где не сработало</h2>
+  <p class="txt">Честный список того, на чём этот пайплайн ломается. Все три пункта —
+     из практики, а не из теории.</p>
+
+  <div class="trap">
+    <b>Работа без паспорта</b>
+    <p>Самая частая ошибка. Пока кадров два-три, кажется, что модель и так узнаваемая.
+       На десятом кадре выясняется, что лицо изменилось, и серия распадается — вернуть
+       прежнюю героиню без паспорта почти невозможно.</p>
+  </div>
+  <div class="trap">
+    <b>Разная одежда в серии</b>
+    <p>Каждый кадр по отдельности красивый, а витрина рябит. Глаз читает не букеты,
+       а смену нарядов, и карточки перестают работать как единая линейка.</p>
+  </div>
+  <div class="trap">
+    <b>Сгенерированный букет</b>
+    <p>Соблазн большой: раз уж модель нарисована, пусть и букет нарисуется.
+       В результате получается кадр, который невозможно повторить руками: несуществующие
+       сорта, спираль, которая не собирается, цветы не в сезоне. Клиент приходит
+       за картинкой, а вы объясняете, почему так не бывает.</p>
+  </div>
+</section>
+
+<!-- ═══ ВОРОНКА В КАРТОТЕКУ ═══ -->
+<div class="pad">
+  <div class="end">
+    <div>
+      <h2>Получить инструкцию</h2>
+      <p>Промты для каждого из шести шагов, готовая связка инструментов и порядок
+         действий целиком — в картотеке.</p>
+    </div>
+    <a class="go" href="../../dostup/">Промты и связка →</a>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<section class="pad">
+  <h2>Вопросы</h2>
+  <div class="q">
+    <b>Что такое паспорт модели?</b>
+    <p>Паспорт модели — это набор кадров одного лица в разных ракурсах, который вы
+       прикладываете к каждой новой генерации. Он состоит из двух частей: лицо крупно
+       и полный рост. Паспорт нужен, чтобы модель не менялась и не искажалась от кадра к кадру.</p>
+  </div>
+  <div class="q">
+    <b>Зачем нужен апскейл модели?</b>
+    <p>Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются кожа,
+       волосы и мелкие детали. Без апскейла лицо остаётся гладким и выглядит нарисованным,
+       и в карточке товара это заметно.</p>
+  </div>
+  <div class="q">
+    <b>Можно ли использовать одну модель для всех карточек товара?</b>
+    <p>Да, в этом и смысл. Один человек в одной одежде во всех карточках делает витрину
+       спокойной. Если менять одежду от кадра к кадру, страница начинает рябить
+       и внимание уходит с букета.</p>
+  </div>
+  <div class="q">
+    <b>Заменяет ли своя модель съёмку букета?</b>
+    <p>Нет. Модель — это человек в кадре, а букет остаётся вашим настоящим товаром:
+       сорта, спираль и пропорции должны быть реальными. Нейросеть меняет окружение
+       и человека, а не состав букета.</p>
+  </div>
+</section>
+
+<!-- ═══ ДАЛЬШЕ ═══ -->
+<div class="pad">
+  <div class="next">
+    <a href="../">← Все разборы</a>
+    <a href="../../besplatno/#karta">Что делегировать нейросети</a>
+    <a href="../../dostup/">Картотека →</a>
+  </div>
+  <div class="foot">
+    <div>Портал «AI для цветочного бизнеса» · 2026</div>
+    <div><a href="../../">На портал</a></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var b = document.getElementById('mbtn');
+  if(!b) return;
+  b.addEventListener('click', function(){
+    document.body.classList.toggle('menu');
+    b.textContent = document.body.classList.contains('menu') ? 'закрыть' : 'меню';
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && document.body.classList.contains('menu')){
+      document.body.classList.remove('menu'); b.textContent = 'меню';
+    }
+  });
+})();
+</script>
+</body>
+</html>
