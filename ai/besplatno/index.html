@@ -909,25 +909,46 @@ h2 em{font-style:normal;color:var(--red)}
   if (matchMedia('(min-width:861px)').matches) requestAnimationFrame(frame);
   else { web.classList.add('on'); nodes.forEach(function(n){ n.style.opacity=1; }); mobileThread(); }
 
-  /* мобиле нить строится по фактическим центрам капсул: змейка из гладких
-     S-сегментов с заходом сверху и выбегом вниз; рисуется при появлении */
+  /* мобильная нить = «запутанные мысли»: между капсулами она не идёт дорогой,
+     а делает полные петли и выносы за край, пересекая саму себя.
+     Все стыки — S-сегменты (гладко), узор детерминирован номером промежутка. */
   function mobileThread(){
     var svg = web.querySelector('svg'), path = svg.querySelector('path');
     function build(){
       var wr = web.getBoundingClientRect();
-      svg.setAttribute('viewBox','0 0 '+Math.round(wr.width)+' '+Math.round(wr.height));
+      var W = Math.round(wr.width);
+      svg.setAttribute('viewBox','0 0 '+W+' '+Math.round(wr.height));
       svg.setAttribute('preserveAspectRatio','none');
       var pts = [];
       for (var i=0;i<nodes.length;i++){
         var r = nodes[i].getBoundingClientRect();
         pts.push({x:r.left-wr.left+r.width/2, y:r.top-wr.top+r.height/2});
       }
-      var lead = 70;
-      var d='M'+(pts[0].x-40)+','+(pts[0].y-lead)+
-        ' C'+(pts[0].x+50)+','+(pts[0].y-lead*0.5)+' '+pts[0].x+','+(pts[0].y-30)+' '+pts[0].x+','+pts[0].y;
-      for (var i=1;i<pts.length;i++) d+=' S'+pts[i].x+','+(pts[i].y-60)+' '+pts[i].x+','+pts[i].y;
+      var d='M'+(pts[0].x+90)+','+(pts[0].y-90)+
+        ' C'+(pts[0].x-80)+','+(pts[0].y-70)+' '+(pts[0].x+60)+','+(pts[0].y-34)+' '+pts[0].x+','+pts[0].y;
+      for (var i=1;i<pts.length;i++){
+        var a=pts[i-1], b=pts[i], my=(a.y+b.y)/2, mx=(a.x+b.x)/2;
+        if (i%3===1){
+          // полная петля по кругу между капсулами (лево→низ→право→верх)
+          var r0=Math.min(36,(b.y-a.y)*.32);
+          d+=' S'+(mx-r0*2.2)+','+(my-r0)+' '+(mx-r0)+','+my;
+          d+=' S'+(mx-r0)+','+(my+r0)+' '+mx+','+(my+r0);
+          d+=' S'+(mx+r0)+','+(my+r0)+' '+(mx+r0)+','+my;
+          d+=' S'+(mx+r0*.4)+','+(my-r0)+' '+(mx-r0*.7)+','+(my-r0*.35);
+          d+=' S'+(b.x-80)+','+(b.y-46)+' '+b.x+','+b.y;
+        } else if (i%3===2){
+          // вынос за край экрана и возврат с пересечением
+          var side=(b.x>a.x)? W+34 : -34;
+          d+=' S'+side+','+(my-20)+' '+(mx+(b.x>a.x?30:-30))+','+(my+26);
+          d+=' S'+(a.x+(b.x>a.x?-40:40))+','+(b.y-20)+' '+b.x+','+b.y;
+        } else {
+          // короткий перехлёст: замах в чужую сторону, потом к цели
+          d+=' S'+(a.x+(b.x>a.x?-70:70))+','+(my+14)+' '+b.x+','+b.y;
+        }
+      }
       var last=pts[pts.length-1];
-      d+=' S'+(last.x+60)+','+(last.y+lead*0.7)+' '+(last.x-30)+','+(last.y+lead);
+      d+=' S'+(last.x+90)+','+(last.y+40)+' '+(last.x-20)+','+(last.y+62)+
+         ' S'+(last.x-90)+','+(last.y+96)+' '+(last.x+40)+','+(last.y+92);
       path.setAttribute('d',d);
       var L = path.getTotalLength();
       path.style.setProperty('--len', L);
