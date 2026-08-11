@@ -308,13 +308,13 @@ h2 em{font-style:normal;color:var(--red)}
 .pin{height:260vh;position:relative}
 .web{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;margin-top:0}
-.web svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.web>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 /* ⚠️ vector-effect:non-scaling-stroke здесь НЕЛЬЗЯ: dasharray начинает
    считаться в экранных px, а getTotalLength — в юнитах viewBox → нить
    обрывается на двух третях. Толщину держим юнитами. */
-.web svg path{fill:none;stroke:rgba(0,48,73,.6);stroke-width:1.4;
+.web>svg path{fill:none;stroke:rgba(0,48,73,.6);stroke-width:1.4;
   stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
-.web svg path.thin{stroke:rgba(0,48,73,.32);stroke-width:1.1}
+.web>svg path.thin{stroke:rgba(0,48,73,.32);stroke-width:1.1}
 
 .web .kick{position:relative;z-index:2;font-family:var(--mono);text-align:center;
   font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.22em;text-transform:uppercase;
@@ -330,8 +330,8 @@ h2 em{font-style:normal;color:var(--red)}
   transition:background .3s var(--ease),color .3s var(--ease)}
 .web.on .node{opacity:1;transform:none}
 .node .av{width:clamp(28px,2.6vw,40px);aspect-ratio:1;border-radius:50%;flex:none;
-  overflow:hidden;background:var(--cosmos)}
-.node .av img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block}
+  overflow:hidden;background:var(--red);display:flex;align-items:center;justify-content:center}
+.node .av svg{width:60%;height:60%}
 .node b{font-family:var(--disp);font-weight:800;text-transform:uppercase;
   letter-spacing:.01em;font-size:clamp(9px,.75vw,10.5px);line-height:1.1;
   white-space:nowrap}
@@ -465,9 +465,12 @@ h2 em{font-style:normal;color:var(--red)}
      которую JS прокладывает через их реальные центры (mobileThread) */
   .web{position:relative;height:auto;min-height:auto;flex-direction:column;
     align-items:flex-start;gap:clamp(26px,4.6vh,40px);padding:20px 0 34px}
-  .web .kick,.web h2{text-align:left}
-  .web h2{margin-bottom:clamp(6px,1.4vh,14px)}
-  .web svg{display:block;position:absolute;inset:0;z-index:1}
+  /* заголовок — ядро клубка: в середине списка капсул, по центру */
+  .web .kick,.web h2{text-align:center;align-self:center;order:2}
+  .web h2{margin:6px 0 10px}
+  .node.n1,.node.n2,.node.n3{order:1}
+  .node.n4,.node.n5,.node.n6,.node.n7{order:3}
+  .web>svg{display:block;position:absolute;inset:0;z-index:1}
   .node{position:static!important;opacity:1;transform:none;z-index:3;
     max-width:86%;padding:5px 15px 5px 5px}
   .node .av{width:36px}
@@ -561,19 +564,19 @@ h2 em{font-style:normal;color:var(--red)}
     <p class="kick">Карта делегирования</p>
     <h2>Цветочный<br><em>бизнес</em></h2>
 
-    <div class="node n1"><span class="av"><img loading="lazy" src="../img/hero/p1.jpg" alt="Съёмка букета нейросетью"></span><b>Съёмка букетов</b>
+    <div class="node n1"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7l1.2-2.4h3.6L15 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M12 12.2v2.6M10.9 13.5h2.2"/></svg></span><b>Съёмка букетов</b>
       <span class="tip">Серия кадров из одного фото реального букета — без студии и фотографа</span></div>
-    <div class="node n2"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Карточки товаров для букетов"></span><b>Карточки товаров</b>
+    <div class="node n2"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="3.5" width="15" height="17" rx="2"/><circle cx="9" cy="8.6" r="1.7"/><path d="M13 8.6h4M7.5 13h9M7.5 16.4h6"/></svg></span><b>Карточки товаров</b>
       <span class="tip">Названия, описания, подписи — десятки за вечер</span></div>
-    <div class="node n3"><span class="av"><img loading="lazy" src="../img/hero/p4.jpg" alt="Видео из фото букета"></span><b>Видео</b>
+    <div class="node n3"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10.4 9.2l5 2.8-5 2.8z"/></svg></span><b>Видео</b>
       <span class="tip">Пять секунд движения из готового снимка — для сторис и карточек</span></div>
-    <div class="node n4"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Анализ ассортимента"></span><b>Анализ ассортимента</b>
+    <div class="node n4"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 20V11M9.5 20V5.5M14.5 20v-7M19.5 20V9"/><path d="M3 20h18"/></svg></span><b>Анализ ассортимента</b>
       <span class="tip">Что продаётся, а что зависает — по выгрузкам из учётной системы</span></div>
-    <div class="node n5"><span class="av"><img loading="lazy" src="../img/hero/p2.jpg" alt="Тексты рассылок"></span><b>Тексты рассылок</b>
+    <div class="node n5"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span><b>Тексты рассылок</b>
       <span class="tip">Письма и посты вашим голосом — по фактуре, которую даёте вы</span></div>
-    <div class="node n6"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Расчёты зарплат"></span><b>Расчёты зарплат</b>
+    <div class="node n6"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 16.5V8h3a2.4 2.4 0 0 1 0 4.8h-3M9 14.6h4"/></svg></span><b>Расчёты зарплат</b>
       <span class="tip">По сменам и выручке, без ручных таблиц</span></div>
-    <div class="node n7"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Прогнозирование спроса"></span><b>Прогнозирование</b>
+    <div class="node n7"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#FDF0D5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5l5-5 3.4 3 4.6-5.5"/><path d="M17.5 9.5l3-3.4" stroke-dasharray="2 2.4"/><circle cx="21" cy="5.5" r="1.1"/></svg></span><b>Прогнозирование</b>
       <span class="tip">Спрос к праздникам по данным прошлых сезонов</span></div>
   </div></div>
 </section>
@@ -936,19 +939,30 @@ h2 em{font-style:normal;color:var(--red)}
     return d;
   }
 
+  // виток вокруг ядра: 4 орбитальные точки вокруг центра заголовка,
+  // S-цепь проходит их полным кольцом — нить наматывается на «Цветочный бизнес»
+  function orbit(cx, cy, R, dir){
+    return dir > 0
+      ? [{x:cx-R,y:cy},{x:cx,y:cy+R*.8},{x:cx+R,y:cy},{x:cx,y:cy-R*.8}]
+      : [{x:cx+R,y:cy},{x:cx,y:cy+R*.8},{x:cx-R,y:cy},{x:cx,y:cy-R*.8}];
+  }
+
   function build(){
-    // обход: на десктопе по периметру (верх → право → низ → лево),
-    // чтобы середины отрезков не толпились на заголовке.
-    // Три нити: главная — по капсулам; две блуждающие — те же точки
-    // в другом порядке, с дрожанием и другой фазой узора.
+    // обход: на десктопе по периметру, чтобы капсульные отрезки не толпились
+    // на заголовке; ядро клубка — витки вокруг центра h2 у всех трёх нитей
     var o = centers(DESK ? [0,1,3,5,6,4,2] : [0,1,2,3,4,5,6]);
     svg.setAttribute('viewBox','0 0 '+o.W+' '+o.H);
     svg.setAttribute('preserveAspectRatio','none');
+    var wr = web.getBoundingClientRect(), hr = web.querySelector('h2').getBoundingClientRect();
+    var cx = hr.left - wr.left + hr.width/2, cy = hr.top - wr.top + hr.height/2;
+    var base = Math.min(o.W, o.H);
     var r0 = DESK ? 70 : 34;
+    var A = o.pts, B = [2,0,4,1,6,3,5].map(function(ix){return A[ix];}),
+        C = A.slice().reverse();
     var routes = [
-      {pts:o.pts, phase:0, r:r0},
-      {pts:jit([2,0,4,1,6,3,5].map(function(ix){return o.pts[ix];}), 1), phase:1, r:r0*.7},
-      {pts:jit(o.pts.slice().reverse(), 2), phase:2, r:r0*1.25}
+      {pts:A.slice(0,3).concat(orbit(cx,cy,base*.30, 1), A.slice(3)), phase:0, r:r0},
+      {pts:jit(B.slice(0,2).concat(orbit(cx,cy,base*.22,-1), B.slice(2)), 1), phase:1, r:r0*.7},
+      {pts:jit(C.slice(0,5).concat(orbit(cx,cy,base*.40, 1), C.slice(5)), 2), phase:2, r:r0*1.25}
     ];
     var lens = [];
     paths.forEach(function(p, i){
