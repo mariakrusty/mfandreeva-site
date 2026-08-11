@@ -15,3 +15,4 @@ ai/*.md
 ai/klub/
 # PHP-подписка — не для GitHub Pages
 subscribe/
+*.bak.*
