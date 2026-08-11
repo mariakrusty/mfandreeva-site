@@ -174,7 +174,7 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
 .meter .todo b{color:var(--red);opacity:.55}
 
 /* ─── общий текстовый блок ─── */
-section{padding-top:clamp(16px,3vh,38px);padding-bottom:clamp(34px,6vh,78px)}
+section.pad{padding-top:clamp(34px,6vh,80px);padding-bottom:clamp(34px,6vh,78px)}
 h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
   font-size:clamp(20px,3.1vw,42px);line-height:1.04;margin-bottom:clamp(18px,2.8vh,30px)}
 .txt{max-width:62ch;font-size:clamp(12.5px,1.18vw,15.5px);line-height:1.66}
@@ -182,24 +182,37 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
 .def{border-left:2px solid var(--red);padding:clamp(12px,1.8vh,18px) 0 clamp(12px,1.8vh,18px) clamp(16px,2vw,26px);
   margin:clamp(20px,3vh,32px) 0;max-width:62ch;font-size:clamp(13px,1.22vw,16px);line-height:1.6}
 
-/* ─── шаги ─── */
-.step{border-top:1px solid var(--line);padding:clamp(24px,4vh,52px) 0;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(22px,4vw,64px);
-  align-items:start}
-.step .n{font-family:var(--disp);font-weight:800;font-size:clamp(46px,7.6vw,104px);line-height:.8;
-  letter-spacing:-.05em;color:var(--cosmos);opacity:.16;margin-bottom:clamp(12px,1.8vh,18px)}
-.step h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
-  font-size:clamp(15px,1.9vw,25px);line-height:1.14;margin-bottom:clamp(10px,1.6vh,16px)}
-.step p{font-size:clamp(12.5px,1.14vw,15px);line-height:1.64;max-width:52ch}
-.step p + p{margin-top:10px}
-.step .rule{margin-top:clamp(12px,1.8vh,18px);font-size:clamp(11px,1vw,13px);
-  color:var(--red);line-height:1.5;max-width:46ch}
-.shot{margin:0}
-.shot img{width:100%;height:auto}
-.shot figcaption{margin-top:10px;font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(0,48,73,.5)}
-.wide{grid-column:1/-1}
-.step.solo{grid-template-columns:1fr}
+/* ─── шаги: кадр сверху, описание под ним ─── */
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,2.2vw,30px);margin:clamp(20px,3.4vh,40px) 0 0}
+.card{margin:0}
+.card > img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 18%}
+.band{margin:clamp(30px,5vh,66px) 0 0}
+.band > img{width:100%}
+.cap{padding-top:clamp(12px,1.8vh,18px);border-top:1px solid var(--line);
+  margin-top:clamp(10px,1.4vh,14px)}
+.cap .n{font-family:var(--disp);font-weight:800;font-size:clamp(13px,1.2vw,15px);
+  letter-spacing:.02em;color:var(--red);margin-bottom:clamp(8px,1.2vh,12px)}
+.cap h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(14px,1.55vw,21px);line-height:1.14;margin-bottom:clamp(8px,1.4vh,14px)}
+.cap p{font-size:clamp(11.5px,1.02vw,14px);line-height:1.62;max-width:48ch}
+.cap p + p{margin-top:9px}
+.cap .rule{margin-top:clamp(10px,1.5vh,15px);color:var(--red);
+  font-size:clamp(10.5px,.95vw,12.5px);line-height:1.5}
+.band .cap{display:grid;grid-template-columns:minmax(0,24ch) minmax(0,1fr);
+  gap:clamp(16px,3vw,52px);align-items:start}
+.band .cap .n{grid-row:1;margin-bottom:8px}
+.band .cap h3{grid-column:1;font-size:clamp(15px,1.9vw,26px)}
+.band .cap .body{grid-column:2;grid-row:1/span 2}
+.band .cap .body p{max-width:60ch}
+
+/* финал: кадр и правило крупно */
+.fin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,2.2vw,30px);margin-top:clamp(30px,5vh,66px);align-items:start}
+.fin blockquote{grid-column:2/-1;font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  letter-spacing:-.035em;line-height:.98;font-size:clamp(24px,3.6vw,54px);
+  align-self:center;max-width:16ch}
+.fin blockquote em{font-style:normal;color:var(--red)}
 
 /* ─── результат ─── */
 .result{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(22px,4vw,64px);
@@ -247,8 +260,10 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   .mbtn,.kt{padding:14px 12px;margin:-14px -12px}
   .kt{margin-right:2px}
   .meter{grid-template-columns:repeat(2,1fr)}
-  .step{grid-template-columns:1fr;gap:clamp(16px,3vh,24px)}
-  .step .n{font-size:clamp(40px,15vw,72px)}
+  .row3,.fin{grid-template-columns:1fr;gap:clamp(26px,4.4vh,40px)}
+  .fin blockquote{grid-column:1;font-size:clamp(22px,7.4vw,34px)}
+  .band .cap{grid-template-columns:1fr;gap:10px}
+  .band .cap .body{grid-column:1;grid-row:auto}
   .result{grid-template-columns:1fr}
   .trap{grid-template-columns:1fr;gap:8px}
   .end{flex-direction:column;align-items:flex-start}
@@ -335,103 +350,99 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
      «плыть»: лицо поедет, возраст изменится, одежда станет другой — и серию придётся
      переснимать целиком.</p>
 
-  <div class="step">
-    <div>
-      <div class="n">01</div>
-      <h3>Генерируем модель</h3>
-      <p>Первый кадр — портрет крупно, на нейтральном фоне, при ровном свете. Никаких
-         сложных поз и теней: сейчас нужно только лицо, всё остальное будет строиться от него.</p>
-      <p>Это будущее лицо бренда, и выбирать его стоит внимательно. Заменить героиню
-         через полгода — значит переснять всё, что вы успели снять.</p>
-      <p class="rule">Правило: пока лицо не нравится полностью — дальше не идём.</p>
-    </div>
-    <figure class="shot">
+  <div class="row3">
+
+    <figure class="card">
       <img src="../../img/razbory/model/1-istochnik.jpg" alt="Сгенерированный портрет модели на нейтральном фоне" loading="lazy" decoding="async">
-      <figcaption>Шаг 1 · исходная модель</figcaption>
+      <figcaption class="cap">
+        <div class="n">01</div>
+        <h3>Генерируем модель</h3>
+        <p>Первый кадр — портрет крупно, на нейтральном фоне, при ровном свете. Никаких
+           сложных поз и теней: сейчас нужно только лицо, всё остальное будет строиться от него.</p>
+        <p>Это будущее лицо бренда. Заменить героиню через полгода — значит переснять всё,
+           что вы успели снять.</p>
+        <p class="rule">Правило: пока лицо не нравится полностью — дальше не идём.</p>
+      </figcaption>
     </figure>
-  </div>
 
-  <div class="step solo">
-    <div>
-      <div class="n">02</div>
-      <h3>Фиксируем и апскейлим</h3>
-      <p>Понравившийся кадр фиксируем — дальше он становится опорой для всех остальных.
-         И апскейлим.</p>
-      <p>Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются
-         кожа, волосы, ресницы, мелкие детали. Без него лицо остаётся подозрительно
-         гладким, и в карточке товара это видно сразу.</p>
-      <p class="rule">Правило: апскейлить до одежды, а не после — иначе детали
-         придётся вытягивать в каждом кадре заново.</p>
-    </div>
-  </div>
+    <figure class="card">
+      <img src="../../img/razbory/model/2-apskeil.jpg" alt="Фрагмент лица крупно: кожа и ресницы после апскейла" loading="lazy" decoding="async">
+      <figcaption class="cap">
+        <div class="n">02</div>
+        <h3>Фиксируем и апскейлим</h3>
+        <p>Понравившийся кадр фиксируем — дальше он становится опорой для всех остальных.
+           И апскейлим.</p>
+        <p>Апскейл — это шаг, на котором модели придают реалистичность: прорабатываются кожа,
+           волосы, ресницы, веснушки. Без него лицо остаётся подозрительно гладким,
+           и в карточке товара это видно сразу.</p>
+        <p class="rule">Правило: апскейлить до одежды, а не после.</p>
+      </figcaption>
+    </figure>
 
-  <div class="step">
-    <div>
-      <div class="n">03</div>
-      <h3>Одеваем</h3>
-      <p>Подбираем одежду, в которой модель будет работать на ваших площадках: сайт,
-         карточки товара, соцсети. Образ должен быть нейтральным настолько, чтобы не спорить
-         с букетом, и характерным настолько, чтобы его узнавали.</p>
-      <p>Для сайта одежда должна быть одинаковой во всех кадрах. Когда в каждой карточке
-         новый образ, страница рябит, и внимание уходит с товара на разглядывание нарядов.</p>
-      <p class="rule">Правило: один образ на всю серию. Разная одежда — разный бренд.</p>
-    </div>
-    <figure class="shot">
+    <figure class="card">
       <img src="../../img/razbory/model/2-odezhda.jpg" alt="Модель в подобранной одежде в полный рост" loading="lazy" decoding="async">
-      <figcaption>Шаг 3 · образ для съёмок</figcaption>
+      <figcaption class="cap">
+        <div class="n">03</div>
+        <h3>Одеваем</h3>
+        <p>Подбираем одежду, в которой модель будет работать на ваших площадках: сайт,
+           карточки товара, соцсети. Образ должен быть нейтральным настолько, чтобы не спорить
+           с букетом, и характерным настолько, чтобы его узнавали.</p>
+        <p>Для сайта одежда одинаковая во всех кадрах. Когда в каждой карточке новый образ,
+           страница рябит, и внимание уходит с товара на разглядывание нарядов.</p>
+        <p class="rule">Правило: один образ на всю серию.</p>
+      </figcaption>
     </figure>
+
   </div>
 
-  <div class="step">
-    <div class="wide">
+  <figure class="band">
+    <img src="../../img/razbory/model/3-pasport-lico.jpg" alt="Паспорт модели: лицо в четырёх ракурсах" loading="lazy" decoding="async">
+    <figcaption class="cap">
       <div class="n">04</div>
-      <h3>Паспорт модели, часть первая: лицо</h3>
-      <p>Паспорт модели — это набор кадров одного лица в разных ракурсах, который
-         прикладывается к каждой новой генерации. Первая половина — лицо крупно:
-         фас, три четверти, поворот, профиль.</p>
-      <p>Именно паспорт держит форму. С ним модель остаётся собой от кадра к кадру,
-         без него — незаметно молодеет, меняет разрез глаз и через десять генераций
-         превращается в другого человека.</p>
-    </div>
-    <figure class="shot wide">
-      <img src="../../img/razbory/model/3-pasport-lico.jpg" alt="Паспорт модели: лицо в четырёх ракурсах" loading="lazy" decoding="async">
-      <figcaption>Шаг 4 · паспорт лица, четыре ракурса</figcaption>
-    </figure>
-  </div>
+      <h3>Паспорт модели,<br>часть первая: лицо</h3>
+      <div class="body">
+        <p>Паспорт модели — это набор кадров одного лица в разных ракурсах, который
+           прикладывается к каждой новой генерации. Первая половина — лицо крупно:
+           фас, три четверти, поворот, профиль.</p>
+        <p>Именно паспорт держит форму. С ним модель остаётся собой от кадра к кадру,
+           без него — незаметно молодеет, меняет разрез глаз и через десять генераций
+           превращается в другого человека.</p>
+      </div>
+    </figcaption>
+  </figure>
 
-  <div class="step">
-    <div class="wide">
+  <figure class="band">
+    <img src="../../img/razbory/model/4-pasport-rost.jpg" alt="Паспорт модели: полный рост в четырёх ракурсах" loading="lazy" decoding="async">
+    <figcaption class="cap">
       <div class="n">05</div>
-      <h3>Паспорт модели, часть вторая: полный рост</h3>
-      <p>Те же ракурсы в полный рост: фас, три четверти, профиль, спина. Это вторая
-         половина паспорта — она фиксирует не только лицо, но и фигуру, рост, посадку
-         одежды и обувь.</p>
-      <p>Две части вместе дают восемь опорных кадров. Дальше любая новая сцена
-         строится от них.</p>
-    </div>
-    <figure class="shot wide">
-      <img src="../../img/razbory/model/4-pasport-rost.jpg" alt="Паспорт модели: полный рост в четырёх ракурсах" loading="lazy" decoding="async">
-      <figcaption>Шаг 5 · паспорт в полный рост, четыре ракурса</figcaption>
+      <h3>Паспорт модели,<br>часть вторая: полный рост</h3>
+      <div class="body">
+        <p>Те же ракурсы в полный рост: фас, три четверти, профиль, спина. Это вторая
+           половина паспорта — она фиксирует не только лицо, но и фигуру, рост, посадку
+           одежды и обувь.</p>
+        <p>Две части вместе дают восемь опорных кадров. Дальше любая новая сцена
+           строится от них.</p>
+      </div>
+    </figcaption>
+  </figure>
+
+  <div class="fin">
+    <figure class="card">
+      <img src="../../img/razbory/model/5-buket.jpg" alt="Модель с букетом пионов" loading="lazy" decoding="async">
+      <figcaption class="cap">
+        <div class="n">06</div>
+        <h3>Добавляем букеты</h3>
+        <p>Только теперь начинается работа, ради которой всё затевалось: к готовой модели
+           добавляются букеты. Модель держит форму, образ не меняется, кадры складываются
+           в серию.</p>
+        <p>Букет при этом остаётся вашим настоящим. Нейросеть меняет человека, свет
+           и окружение — но не состав букета. Придуманный ею букет вы не соберёте,
+           а покупатель придёт именно за ним.</p>
+      </figcaption>
     </figure>
+    <blockquote>Человека можно создать,<br><em>товар — нельзя</em></blockquote>
   </div>
 
-  <div class="step">
-    <div>
-      <div class="n">06</div>
-      <h3>Добавляем букеты</h3>
-      <p>Только теперь начинается работа, ради которой всё затевалось: к готовой модели
-         добавляются букеты. Модель держит форму, образ не меняется, кадры складываются
-         в серию.</p>
-      <p>И здесь главное правило портала остаётся в силе: букет должен быть вашим
-         настоящим. Нейросеть меняет человека, свет и окружение — но не состав букета.
-         Придуманный ею букет вы не соберёте, а покупатель придёт именно за ним.</p>
-      <p class="rule">Правило: человека можно создать, товар — нельзя.</p>
-    </div>
-    <figure class="shot">
-      <img src="../../img/razbory/model/5-buket.jpg" alt="Модель с букетом пионов" loading="lazy" decoding="async">
-      <figcaption>Шаг 6 · модель с букетом</figcaption>
-    </figure>
-  </div>
 </section>
 
 <!-- ═══ ГДЕ НЕ СРАБОТАЛО ═══ -->
