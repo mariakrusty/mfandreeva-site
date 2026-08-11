@@ -457,12 +457,15 @@ h2 em{font-style:normal;color:var(--red)}
   .hero{position:static;padding-top:calc(56px + 3vh);pointer-events:auto}
   h1{font-size:clamp(22px,6.8vw,34px)}
   .sub{font-size:clamp(11px,3.2vw,14px);max-width:none}
-  .lane-w{position:static;height:56vh;height:56dvh;margin-top:3vh;
+  /* галерея тянется от подстрочника почти до низа экрана:
+     высота = экран минус шапка+заголовок+подзаголовок (~290px) */
+  .lane-w{position:static;height:calc(100vh - 292px);height:calc(100dvh - 292px);
+    min-height:400px;margin-top:12px;
     overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
     scrollbar-width:none}
   .lane-w::-webkit-scrollbar{display:none}
-  .lane{position:static;display:flex;align-items:flex-end;gap:12px;
-    height:92%;width:max-content;padding:0 5vw}
+  .lane{position:static;display:flex;align-items:flex-end;gap:0;
+    height:100%;width:max-content;padding:0 5vw}
   .it{position:static;flex:none;transform:none!important;
     width:calc(var(--w)*2.53);height:var(--h)}
   .it .tag{font-size:10px}
