@@ -322,7 +322,7 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
     /* мобила: крупный цветок (мельче — форма из символов не читается),
        прежняя вертикальная центровка, смещение влево */
     var boxW = (narrow ? MW*0.88 : MW*0.52) * cfg.size;
-    var boxH = (narrow ? MH*0.40 : MH*0.94) * cfg.size;
+    var boxH = (narrow ? MH*0.56 : MH*0.94) * cfg.size;
     var s = Math.min(boxW/img.width, boxH/img.height);
     var iw = img.width*s, ih = img.height*s;
     var ox = narrow ? MW*-0.03 : MW*0.66 - iw*0.26;  // мобила: чуть за левый край
@@ -397,8 +397,8 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
     var nrw = c.width/DPR < 760;
     var edge = nrw ? -c.width : c.width*0.44,
         feather = nrw ? c.width*0.04 : c.width*0.13;
-    var floorY = nrw ? c.height*0.44 : c.height*0.70,
-        ffeather = nrw ? c.height*0.10 : c.height*0.16;
+    var floorY = nrw ? c.height*0.50 : c.height*0.70,
+        ffeather = nrw ? c.height*0.13 : c.height*0.16;
 
     for (var i=0;i<cells.length;i++){
       var p = cells[i];
