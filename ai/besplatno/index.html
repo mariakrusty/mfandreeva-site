@@ -316,9 +316,11 @@ h2 em{font-style:normal;color:var(--red)}
   stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
 .web>svg path.thin{stroke:rgba(0,48,73,.32);stroke-width:1.1}
 
-.web .kick{position:relative;z-index:2;font-family:var(--mono);text-align:center;
+/* название раздела — вверху секции; ядро в центре остаётся заголовку */
+.web .kick{position:absolute;top:clamp(76px,11vh,120px);left:0;right:0;z-index:2;
+  font-family:var(--mono);text-align:center;
   font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--red);margin-bottom:clamp(10px,1.8vh,18px)}
+  color:var(--red)}
 /* заголовок-гигант в центре, нить проходит ЗА ним */
 .web h2{position:relative;z-index:2;text-align:center;max-width:14ch;
   font-size:clamp(28px,5.4vw,88px);line-height:.9}
@@ -465,9 +467,10 @@ h2 em{font-style:normal;color:var(--red)}
      которую JS прокладывает через их реальные центры (mobileThread) */
   .web{position:relative;height:auto;min-height:auto;flex-direction:column;
     align-items:flex-start;gap:clamp(26px,4.6vh,40px);padding:20px 0 34px}
-  /* заголовок — ядро клубка: в середине списка капсул, по центру */
-  .web .kick,.web h2{text-align:center;align-self:center;order:2}
-  .web h2{margin:6px 0 10px}
+  /* название раздела — первым, слева; h2-ядро — в середине списка капсул */
+  .web .kick{position:static;order:0;align-self:flex-start;text-align:left;
+    margin-bottom:4px}
+  .web h2{text-align:center;align-self:center;order:2;margin:6px 0 10px}
   .node.n1,.node.n2,.node.n3{order:1}
   .node.n4,.node.n5,.node.n6,.node.n7{order:3}
   .web>svg{display:block;position:absolute;inset:0;z-index:1}
