@@ -173,8 +173,7 @@ body.typed h1,body.typed .lnk,body.typed .lbl{opacity:1;transition:opacity .42s 
   .core{max-width:none;gap:24px}
   .bot{flex-direction:column;align-items:flex-start;gap:16px}
   .sign{text-align:left;padding-bottom:0}
-  /* двухколонник: слева цветок, справа текст доступа */
-  .access{flex-direction:column;align-items:stretch;width:58%;align-self:flex-end;gap:14px}
+  .access{flex-direction:column;align-items:stretch;width:100%;gap:14px}
   .acc .note{display:none}
   .lnk{font-size:clamp(17px,5.6vw,22px)}
   .menu nav a .note{display:none}
@@ -318,14 +317,14 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
     var g = o.getContext('2d');
 
     var narrow = c.width/DPR < 760;
-    /* мобила: цветок — левая колонка, текст доступа — правая;
-       верх бутона на линии «Открыто · бесплатно» (~26% высоты) */
-    var boxW = (narrow ? MW*0.46 : MW*0.52) * cfg.size;
-    var boxH = (narrow ? MH*0.52 : MH*0.94) * cfg.size;
+    /* мобила: крупный цветок (мельче — форма из символов не читается),
+       прежняя вертикальная центровка, смещение влево */
+    var boxW = (narrow ? MW*0.88 : MW*0.52) * cfg.size;
+    var boxH = (narrow ? MH*0.62 : MH*0.94) * cfg.size;
     var s = Math.min(boxW/img.width, boxH/img.height);
     var iw = img.width*s, ih = img.height*s;
-    var ox = narrow ? MW*0.01 : MW*0.66 - iw*0.26;   // мобила — левая колонка, десктоп правее
-    var oy = narrow ? MH*0.26 : (MH-ih)/2;
+    var ox = narrow ? MW*-0.03 : MW*0.66 - iw*0.26;  // мобила: чуть за левый край
+    var oy = narrow ? MH*0.04 : (MH-ih)/2;
 
     if (cfg.flip){
       g.save(); g.translate(MW,0); g.scale(-1,1);
