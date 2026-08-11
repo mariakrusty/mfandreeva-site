@@ -314,6 +314,7 @@ h2 em{font-style:normal;color:var(--red)}
    обрывается на двух третях. Толщину держим юнитами. */
 .web svg path{fill:none;stroke:rgba(0,48,73,.6);stroke-width:1.4;
   stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.web svg path.thin{stroke:rgba(0,48,73,.32);stroke-width:1.1}
 
 .web .kick{position:relative;z-index:2;font-family:var(--mono);text-align:center;
   font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.22em;text-transform:uppercase;
@@ -546,25 +547,15 @@ h2 em{font-style:normal;color:var(--red)}
 <!-- ═══ КАРТА ДЕЛЕГИРОВАНИЯ ═══ -->
 <section id="karta" class="pad">
   <div class="pin"><div class="web" id="web">
-    <!-- одна непрерывная «нить» с петлями, как у Detroit: рисуется по скроллу -->
+    <!-- клубок из трёх нитей: главная + две блуждающие (бледнее).
+         d генерируется JS по реальным центрам капсул; статичная d — фолбэк без JS -->
     <svg viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
-      <!-- нить строится S-сегментами: каждый стык гладкий (C1), петли —
-           обход точек по кругу; координаты в viewBox 1000×620 = % экрана -->
-      <path d="M-80,340
-               C 20,300 80,275 132,232
-               S 235,115 380,95
-               S 640,45 795,110
-               S 1030,180 945,300
-               S 900,450 820,435
-               S 715,350 815,262
-               S 935,275 895,365
-               S 810,520 750,505
-               S 555,605 430,565
-               S 250,545 195,455
-               S 110,395 175,345
-               S 290,330 275,415
-               S 220,520 120,540
-               S 0,560 -80,520"/>
+      <path d="M-80,340 C 20,300 80,275 132,232 S 235,115 380,95 S 640,45 795,110
+               S 1030,180 945,300 S 900,450 820,435 S 715,350 815,262 S 935,275 895,365
+               S 810,520 750,505 S 555,605 430,565 S 250,545 195,455 S 110,395 175,345
+               S 290,330 275,415 S 220,520 120,540 S 0,560 -80,520"/>
+      <path class="thin" d=""/>
+      <path class="thin" d=""/>
     </svg>
 
     <p class="kick">Карта делегирования</p>
@@ -572,18 +563,18 @@ h2 em{font-style:normal;color:var(--red)}
 
     <div class="node n1"><span class="av"><img loading="lazy" src="../img/hero/p1.jpg" alt="Съёмка букета нейросетью"></span><b>Съёмка букетов</b>
       <span class="tip">Серия кадров из одного фото реального букета — без студии и фотографа</span></div>
-    <div class="node n2"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Карточка товара для букета"></span><b>Карточки товара</b>
+    <div class="node n2"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Карточки товаров для букетов"></span><b>Карточки товаров</b>
       <span class="tip">Названия, описания, подписи — десятки за вечер</span></div>
-    <div class="node n3"><span class="av"><img loading="lazy" src="../img/hero/p4.jpg" alt="Видео из фото букета"></span><b>Видео для сторис</b>
-      <span class="tip">Пять секунд движения из готового снимка</span></div>
-    <div class="node n4"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Сезонная витрина"></span><b>Витрина к сезону</b>
-      <span class="tip">Кампания к празднику из ваших же кадров</span></div>
-    <div class="node n5"><span class="av"><img loading="lazy" src="../img/hero/p2.jpg" alt="Посты и рассылки"></span><b>Посты и рассылки</b>
-      <span class="tip">Тексты вашим голосом — по фактуре, которую даёте вы</span></div>
-    <div class="node n6"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Расшифровка голосовых"></span><b>Голосовые и планёрки</b>
-      <span class="tip">Расшифровка в заказы и задачи — ничего не теряется</span></div>
-    <div class="node n7"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Расчёты по выгрузкам"></span><b>Себестоимость и наценка</b>
-      <span class="tip">Расчёты по выгрузкам из учётной системы</span></div>
+    <div class="node n3"><span class="av"><img loading="lazy" src="../img/hero/p4.jpg" alt="Видео из фото букета"></span><b>Видео</b>
+      <span class="tip">Пять секунд движения из готового снимка — для сторис и карточек</span></div>
+    <div class="node n4"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Анализ ассортимента"></span><b>Анализ ассортимента</b>
+      <span class="tip">Что продаётся, а что зависает — по выгрузкам из учётной системы</span></div>
+    <div class="node n5"><span class="av"><img loading="lazy" src="../img/hero/p2.jpg" alt="Тексты рассылок"></span><b>Тексты рассылок</b>
+      <span class="tip">Письма и посты вашим голосом — по фактуре, которую даёте вы</span></div>
+    <div class="node n6"><span class="av"><img loading="lazy" src="../img/hero/p5.jpg" alt="Расчёты зарплат"></span><b>Расчёты зарплат</b>
+      <span class="tip">По сменам и выручке, без ручных таблиц</span></div>
+    <div class="node n7"><span class="av"><img loading="lazy" src="../img/hero/p3.jpg" alt="Прогнозирование спроса"></span><b>Прогнозирование</b>
+      <span class="tip">Спрос к праздникам по данным прошлых сезонов</span></div>
   </div></div>
 </section>
 
@@ -899,7 +890,7 @@ h2 em{font-style:normal;color:var(--red)}
 (function(){
   var web = document.getElementById('web');
   var pin = web.parentElement, nodes = web.querySelectorAll('.node'),
-      svg = web.querySelector('svg'), path = svg.querySelector('path');
+      svg = web.querySelector('svg'), paths = svg.querySelectorAll('path');
   var DESK = matchMedia('(min-width:861px)').matches;
 
   function centers(order){
@@ -911,19 +902,27 @@ h2 em{font-style:normal;color:var(--red)}
     return {pts:pts, W:Math.round(wr.width), H:Math.round(wr.height)};
   }
 
-  function tangle(o, r0){
+  // детерминированное «дрожание» точек — у каждой нити свой узор
+  function jit(pts, seed){
+    if (!seed) return pts;
+    return pts.map(function(p,i){
+      return {x:p.x+(((i*73+seed*41)%89)-44), y:p.y+(((i*57+seed*29)%71)-35)};
+    });
+  }
+
+  function tangle(o, r0, phase){
     var pts=o.pts, W=o.W, p0=pts[0];
     var d='M'+(p0.x+110)+','+(p0.y-110)+
       ' C'+(p0.x-90)+','+(p0.y-80)+' '+(p0.x+70)+','+(p0.y-40)+' '+p0.x+','+p0.y;
     for (var i=1;i<pts.length;i++){
       var a=pts[i-1], b=pts[i], mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      if (i%3===1){                      // полное кольцо с самопересечением
+      if ((i+phase)%3===1){              // полное кольцо с самопересечением
         d+=' S'+(mx-r0*2.2)+','+(my-r0)+' '+(mx-r0)+','+my;
         d+=' S'+(mx-r0)+','+(my+r0)+' '+mx+','+(my+r0);
         d+=' S'+(mx+r0)+','+(my+r0)+' '+(mx+r0)+','+my;
         d+=' S'+(mx+r0*.4)+','+(my-r0)+' '+(mx-r0*.7)+','+(my-r0*.35);
         d+=' S'+(b.x-90)+','+(b.y-50)+' '+b.x+','+b.y;
-      } else if (i%3===2){               // вынос за ближний край, возврат с перехлёстом
+      } else if ((i+phase)%3===2){       // вынос за ближний край, возврат с перехлёстом
         var side=(mx>W/2)? W+50 : -50;
         d+=' S'+side+','+(my-24)+' '+(mx+(side>0?34:-34))+','+(my+30);
         d+=' S'+(a.x+(b.x>a.x?-46:46))+','+(b.y-24)+' '+b.x+','+b.y;
@@ -939,17 +938,29 @@ h2 em{font-style:normal;color:var(--red)}
 
   function build(){
     // обход: на десктопе по периметру (верх → право → низ → лево),
-    // чтобы середины отрезков не толпились на заголовке
+    // чтобы середины отрезков не толпились на заголовке.
+    // Три нити: главная — по капсулам; две блуждающие — те же точки
+    // в другом порядке, с дрожанием и другой фазой узора.
     var o = centers(DESK ? [0,1,3,5,6,4,2] : [0,1,2,3,4,5,6]);
     svg.setAttribute('viewBox','0 0 '+o.W+' '+o.H);
     svg.setAttribute('preserveAspectRatio','none');
-    path.setAttribute('d', tangle(o, DESK ? 70 : 34));
-    var L = path.getTotalLength();
-    path.style.setProperty('--len', L);
-    return L;
+    var r0 = DESK ? 70 : 34;
+    var routes = [
+      {pts:o.pts, phase:0, r:r0},
+      {pts:jit([2,0,4,1,6,3,5].map(function(ix){return o.pts[ix];}), 1), phase:1, r:r0*.7},
+      {pts:jit(o.pts.slice().reverse(), 2), phase:2, r:r0*1.25}
+    ];
+    var lens = [];
+    paths.forEach(function(p, i){
+      p.setAttribute('d', tangle({pts:routes[i].pts, W:o.W}, routes[i].r, routes[i].phase));
+      var L = p.getTotalLength();
+      p.style.setProperty('--len', L);
+      lens.push(L);
+    });
+    return lens;
   }
-  var L = build();
-  addEventListener('resize', function(){ L = build(); });
+  var lens = build();
+  addEventListener('resize', function(){ lens = build(); });
 
   if (DESK){
     // прокрутка пина собирает карту: нить прорисовывается, капсулы всплывают
@@ -958,8 +969,10 @@ h2 em{font-style:normal;color:var(--red)}
       var total = pin.offsetHeight - innerHeight;
       var p = Math.min(1, Math.max(0, -r.top / (total || 1)));
       web.classList.toggle('on', p > 0.02);
-      var k = Math.min(1, Math.max(0, p / 0.5));
-      path.style.strokeDashoffset = (1-k) * L;
+      paths.forEach(function(pt, i){
+        var k = Math.min(1, Math.max(0, (p - i*0.07) / 0.5));
+        pt.style.strokeDashoffset = (1-k) * lens[i];
+      });
       nodes.forEach(function(n, i){
         var q = Math.min(1, Math.max(0, (p - 0.10 - i*0.075) / 0.2));
         n.style.opacity = q;
@@ -971,13 +984,15 @@ h2 em{font-style:normal;color:var(--red)}
     web.classList.add('on');
     nodes.forEach(function(n){ n.style.opacity = 1; });
     if (matchMedia('(prefers-reduced-motion: reduce)').matches){
-      path.style.strokeDashoffset = 0;
+      paths.forEach(function(p){ p.style.strokeDashoffset = 0; });
     } else {
-      path.style.strokeDashoffset = L;
+      paths.forEach(function(p,i){ p.style.strokeDashoffset = lens[i]; });
       new IntersectionObserver(function(es,o){
         if (!es[0].isIntersecting) return; o.disconnect();
-        path.style.transition = 'stroke-dashoffset 3s cubic-bezier(.22,1,.36,1)';
-        requestAnimationFrame(function(){ path.style.strokeDashoffset = 0; });
+        paths.forEach(function(p,i){
+          p.style.transition = 'stroke-dashoffset 3s cubic-bezier(.22,1,.36,1) '+(i*0.4)+'s';
+        });
+        requestAnimationFrame(function(){ paths.forEach(function(p){ p.style.strokeDashoffset = 0; }); });
       }, {threshold:.12}).observe(web);
     }
   }
