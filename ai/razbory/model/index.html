@@ -46,6 +46,8 @@
   {
    "@type": "HowTo",
    "name": "Как создать свою модель для съёмок цветочного магазина",
+   "totalTime": "PT30M",
+   "estimatedCost": {"@type": "MonetaryAmount", "currency": "RUB", "value": "100"},
    "description": "Порядок работы: сгенерировать лицо, зафиксировать и апскейлить, одеть, собрать паспорт модели в ракурсах и только потом добавлять букеты.",
    "step": [
     {"@type":"HowToStep","position":1,"name":"Сгенерировать модель",
@@ -168,15 +170,19 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
 /* ─── замер ─── */
 .meter{display:grid;grid-template-columns:repeat(4,1fr);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  margin:clamp(30px,5vh,60px) 0}
+  margin:clamp(30px,5vh,60px) 0 12px}
 .meter div{padding:clamp(18px,2.8vh,30px) clamp(14px,1.6vw,24px);
   border-left:1px solid var(--line)}
 .meter div:first-child{border-left:0;padding-left:0}
-.meter b{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(22px,3.4vw,44px);
-  line-height:1;letter-spacing:-.03em}
+.meter b{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(19px,2.6vw,38px);
+  line-height:1;letter-spacing:-.03em;white-space:nowrap}
 .meter span{display:block;margin-top:10px;font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;
   text-transform:uppercase;color:var(--dimmer)}
-.meter .todo b{color:var(--red-lite);opacity:.6}
+.meter .was b{color:var(--dimmer);text-decoration:line-through;
+  text-decoration-color:var(--red-lite);text-decoration-thickness:3px}
+.meter-note{margin-bottom:clamp(30px,5vh,60px);
+  font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dimmer)}
 
 /* ─── общий текстовый блок ─── */
 section.pad{padding-top:clamp(34px,6vh,80px);padding-bottom:clamp(34px,6vh,78px)}
@@ -379,11 +385,12 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
 <!-- ═══ ЗАМЕР ═══ -->
 <div class="pad">
   <div class="meter">
-    <div><b>6</b><span>шагов от лица до букета</span></div>
-    <div><b>8</b><span>кадров в паспорте модели</span></div>
-    <div class="todo"><b>—</b><span>часов на создание модели</span></div>
-    <div class="todo"><b>—</b><span>стоимость в рублях</span></div>
+    <div class="was"><b>от 5 000 ₽</b><span>реальная модель — каждая съёмка</span></div>
+    <div><b>100 ₽</b><span>AI-модель — один раз</span></div>
+    <div><b>30 минут</b><span>на создание AI-модели</span></div>
+    <div><b>0 ₽</b><span>оплата модели во всех съёмках дальше</span></div>
   </div>
+  <div class="meter-note">Замер: август 2026 · создание модели по этому разбору</div>
 </div>
 
 <!-- ═══ ЗАДАЧА ═══ -->
