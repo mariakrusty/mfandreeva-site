@@ -450,12 +450,21 @@ h2 em{font-style:normal;color:var(--red)}
   /* hero: лента ниже и крупнее, чтобы не накрывала подзаголовок;
      размеры карточек (--w в vw) домножаются — иначе на телефоне крохи.
      h1 6.8vw — чтобы «для цветочного» держалось одной строкой */
-  .hero-pin{height:200vh}
-  .hero{padding-top:calc(56px + 3vh)}
+  /* на таче пин неудобен (инерционный свайп проваливается сквозь секцию):
+     лента = нативная горизонтальная карусель, страница скроллится отдельно */
+  .hero-pin{height:auto}
+  .hero-stick{position:static;height:auto;overflow:visible}
+  .hero{position:static;padding-top:calc(56px + 3vh);pointer-events:auto}
   h1{font-size:clamp(22px,6.8vw,34px)}
   .sub{font-size:clamp(11px,3.2vw,14px);max-width:none}
-  .lane-w{height:56vh;height:56dvh}
-  .it{width:calc(var(--w)*2.53)}
+  .lane-w{position:static;height:56vh;height:56dvh;margin-top:3vh;
+    overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none}
+  .lane-w::-webkit-scrollbar{display:none}
+  .lane{position:static;display:flex;align-items:flex-end;gap:12px;
+    height:92%;width:max-content;padding:0 5vw}
+  .it{position:static;flex:none;transform:none!important;
+    width:calc(var(--w)*2.53);height:var(--h)}
   .it .tag{font-size:10px}
 
   .geo,.faq{--off:0px}
@@ -796,8 +805,7 @@ h2 em{font-style:normal;color:var(--red)}
     }
   }
 
-  measure(); layout(0);
-  addEventListener('resize', function(){ measure(); layout(cur); });
+  var DESK = matchMedia('(min-width:861px)').matches;
 
   function frame(){
     var r = pin.getBoundingClientRect();
@@ -808,7 +816,30 @@ h2 em{font-style:normal;color:var(--red)}
     layout(cur);
     requestAnimationFrame(frame);
   }
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frame);
+
+  if (DESK){
+    measure(); layout(0);
+    addEventListener('resize', function(){ measure(); layout(cur); });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frame);
+  } else {
+    // мобильная карусель: рост карточки зависит от её места на экране
+    var laneW = lane.parentElement;
+    function upd(){
+      cards.forEach(function(c){
+        var r = c.getBoundingClientRect();
+        var t = Math.min(1, Math.max(0, (r.left + r.width*0.5) / innerWidth));
+        var e = t * t * (3 - 2 * t);
+        c.style.height = (46 + e * 54).toFixed(1) + '%';
+        if (!c._imgs) c._imgs = c.querySelectorAll('img');
+        var zoom = (1 + 0.11 * e).toFixed(3);
+        for (var k = 0; k < c._imgs.length; k++)
+          c._imgs[k].style.transform = 'translate(' + (-6.5*t).toFixed(2) + '%,-6%) scale(' + zoom + ')';
+      });
+    }
+    laneW.addEventListener('scroll', upd, {passive:true});
+    addEventListener('resize', upd);
+    upd();
+  }
 
   // слайдшоу внутри карточек — вразнобой; лента при этом стоит
   [].slice.call(lane.children).forEach(function(card, i){
