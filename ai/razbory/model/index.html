@@ -269,6 +269,35 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   font-size:clamp(12px,1.28vw,16px);letter-spacing:-.01em;transition:color .25s}
 .next a:hover{color:var(--red-lite)}
 
+/* ─── липкая полоска-воронка: едет с читателем, прячется у финального блока ─── */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:250;
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,34px);
+  padding:clamp(10px,1.6vh,14px) clamp(18px,4vw,64px);
+  background:rgba(0,18,32,.88);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(253,240,213,.14);
+  transform:translateY(110%);transition:transform .45s var(--ease)}
+.sticky-cta.on{transform:none}
+.sticky-cta .t{font-family:var(--mono);font-size:clamp(10px,.95vw,12.5px);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.sticky-cta .b{display:inline-flex;align-items:center;gap:8px;background:var(--red);
+  color:var(--cream);border-radius:100px;padding:10px 22px;white-space:nowrap;
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  font-size:clamp(10px,.95vw,12px);letter-spacing:.03em;transition:background .3s}
+.sticky-cta .b:hover{background:var(--crimson)}
+
+/* ─── врезка-тизер между шагами: редакционная строка, не карточка ─── */
+.tease{display:block;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  margin:clamp(30px,5vh,66px) 0 0;padding:clamp(20px,3.4vh,34px) 0;
+  transition:padding-left .35s var(--ease)}
+.tease:hover{padding-left:clamp(8px,1.4vw,22px)}
+.tease .k{font-family:var(--mono);font-size:clamp(9.5px,.85vw,11.5px);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red-lite);margin-bottom:clamp(8px,1.2vh,12px)}
+.tease .l{font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  letter-spacing:-.03em;line-height:1.06;font-size:clamp(17px,2.6vw,36px);color:var(--cream)}
+.tease .l em{font-style:normal;color:var(--red-lite)}
+.tease .arr{display:inline-block;margin-left:clamp(10px,1.4vw,18px);transition:transform .35s var(--ease)}
+.tease:hover .arr{transform:translateX(8px)}
+
 .foot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
   padding:clamp(20px,3.4vh,36px) 0 clamp(28px,5vh,56px);
   font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
@@ -289,6 +318,10 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   .result{grid-template-columns:1fr}
   .trap{grid-template-columns:1fr;gap:8px}
   .end{flex-direction:column;align-items:flex-start}
+  .sticky-cta{justify-content:space-between;gap:10px}
+  .sticky-cta .t{display:none}
+  .sticky-cta .t2{display:block!important;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-align:left}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -331,10 +364,12 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   </div>
   <div class="kicker mono">Разбор 01 · Съёмка</div>
   <h1>Своя модель для съёмок</h1>
-  <p class="lead"><b>Своя модель — это постоянный человек в кадре, которого вы создаёте один раз
-     и дальше используете во всех съёмках.</b> Её не нужно искать, оплачивать почасово и ловить
-     в графике: она всегда одна и та же, в одной и той же одежде, и поэтому карточки товара
-     складываются в спокойную витрину, а не в набор случайных фотографий.</p>
+  <p class="lead"><b>Постоянная головная боль цветочного — найти модель для фотосессии.</b>
+     Берёшь коммерческую — плати за смену, договаривайся о правах на использование лица,
+     сращивай её график с графиком фотографа и поставкой цветов. Снимаешь своих — дочку,
+     сестру, флориста, соседку — каждый раз думай, чтобы человек выглядел хорошо, успел
+     и совпал со съёмкой. Здесь разбираю, как мы закрыли эту проблему нейросетями —
+     на кейсах тех, кто у меня учился.</p>
   <div class="by mono">
     <span>Мария Андреева · экономист, продюсер брендов цветочных магазинов</span>
     <span>Обновлено 11.08.2026</span>
@@ -355,10 +390,9 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
 <section class="pad split">
   <h2>Задача</h2>
   <div class="cols">
-    <p>Цветочному магазину постоянно нужен человек в кадре: букет в руках выглядит
-       живым, понятен масштаб, видно, как его нести и кому дарить. Живая съёмка это закрывает,
-       но каждый раз заново: найти модель, договориться о времени, оплатить час работы,
-       оплатить фотографа, свести график всех троих с графиком поставки цветов.</p>
+    <p>Своя модель — это постоянный человек в кадре, которого вы создаёте один раз
+       и дальше используете во всех съёмках. Человек в кадре нужен магазину всё время:
+       букет в руках выглядит живым, понятен масштаб, видно, как его нести и кому дарить.</p>
     <p>Вторая беда тише, но дороже: модели меняются. Сегодня одна девушка,
        через месяц другая, а карточки на сайте стоят рядом. Витрина перестаёт читаться как
        один бренд и превращается в сборную солянку.</p>
@@ -420,6 +454,12 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
     </figure>
 
   </div>
+
+  <a class="tease" href="../../dostup/">
+    <div class="k">Картотека · по доступу</div>
+    <div class="l">Промты каждого из шести шагов — готовые, копируй и вставляй
+      <em class="arr">→</em></div>
+  </a>
 
   <figure class="band">
     <img src="../../img/razbory/model/3-pasport-lico.jpg" alt="Паспорт модели: лицо в четырёх ракурсах" loading="lazy" decoding="async">
@@ -566,6 +606,31 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
       document.body.classList.remove('menu'); b.textContent = 'меню';
     }
   });
+})();
+</script>
+
+<!-- липкая полоска-воронка в картотеку -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="t">Полный промт и пайплайн этого разбора — в картотеке</span>
+  <span class="t2" style="display:none">Промты разбора — в картотеке</span>
+  <a class="b" href="../../dostup/">Получить инструкцию →</a>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var end = document.querySelector('.end');
+  if(!bar) return;
+  var nearEnd = false, past = false;
+  function upd(){
+    past = (window.scrollY || 0) > innerHeight * 0.7;
+    bar.classList.toggle('on', past && !nearEnd);
+  }
+  if ('IntersectionObserver' in window && end){
+    new IntersectionObserver(function(es){
+      nearEnd = es[0].isIntersecting; upd();
+    }, {rootMargin:'0px 0px 120px 0px'}).observe(end);
+  }
+  addEventListener('scroll', upd, {passive:true}); upd();
 })();
 </script>
 
