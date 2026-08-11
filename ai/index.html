@@ -391,8 +391,14 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
     sx.clearRect(0,0,scene.width,scene.height);
     sx.textAlign = 'center'; sx.textBaseline = 'middle';
 
-    var edge = c.width*0.44, feather = c.width*0.13;   // левее этой границы символов нет
-    var floorY = c.height*0.70, ffeather = c.height*0.16;  // ниже — гасим, там текст
+    /* десктоп: слева заголовок — гасим символы левее 44% ширины.
+       мобила: цветок ВЕСЬ слева-сверху — гашение слева выключено,
+       а нижняя граница поднята к тексту доступа */
+    var nrw = c.width/DPR < 760;
+    var edge = nrw ? -c.width : c.width*0.44,
+        feather = nrw ? c.width*0.04 : c.width*0.13;
+    var floorY = nrw ? c.height*0.44 : c.height*0.70,
+        ffeather = nrw ? c.height*0.10 : c.height*0.16;
 
     for (var i=0;i<cells.length;i++){
       var p = cells[i];
