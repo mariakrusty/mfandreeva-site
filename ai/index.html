@@ -320,13 +320,13 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
 
     var narrow = c.width/DPR < 760;
     /* мобила: крупный цветок (мельче — форма из символов не читается),
-       прежняя вертикальная центровка, смещение влево */
+       прижат к ПРАВОМУ ВЕРХНЕМУ углу — слева освобождено место под текст */
     var boxW = (narrow ? MW*0.88 : MW*0.52) * cfg.size;
     var boxH = (narrow ? MH*0.56 : MH*0.94) * cfg.size;
     var s = Math.min(boxW/img.width, boxH/img.height);
     var iw = img.width*s, ih = img.height*s;
-    var ox = narrow ? MW*-0.03 : MW*0.66 - iw*0.26;  // мобила: чуть за левый край
-    var oy = narrow ? MH*0.04 : (MH-ih)/2;
+    var ox = narrow ? MW*0.24 : MW*0.66 - iw*0.26;   // мобила: сдвиг вправо, кончик лепестка за краем
+    var oy = narrow ? MH*-0.06 : (MH-ih)/2;
 
     if (cfg.flip){
       g.save(); g.translate(MW,0); g.scale(-1,1);
@@ -392,12 +392,12 @@ setTimeout(function(){ document.body.classList.add('s-done'); }, 3400);
     sx.textAlign = 'center'; sx.textBaseline = 'middle';
 
     /* десктоп: слева заголовок — гасим символы левее 44% ширины.
-       мобила: цветок ВЕСЬ слева-сверху — гашение слева выключено,
-       а нижняя граница поднята к тексту доступа */
+       мобила: цветок в правом верхнем углу — гашение слева выключено
+       (там и так пусто), нижняя граница поднята выше текста доступа */
     var nrw = c.width/DPR < 760;
     var edge = nrw ? -c.width : c.width*0.44,
         feather = nrw ? c.width*0.04 : c.width*0.13;
-    var floorY = nrw ? c.height*0.50 : c.height*0.70,
+    var floorY = nrw ? c.height*0.43 : c.height*0.70,
         ffeather = nrw ? c.height*0.13 : c.height*0.16;
 
     for (var i=0;i<cells.length;i++){
