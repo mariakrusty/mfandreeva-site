@@ -226,13 +226,9 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
 .band .cap .body{grid-column:2;grid-row:1/span 2}
 .band .cap .body p{max-width:none}
 
-/* финал: кадр и правило крупно */
-.fin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(14px,2.2vw,30px);margin-top:clamp(30px,5vh,66px);align-items:start}
-.fin blockquote{grid-column:2/-1;font-family:var(--disp);font-weight:800;text-transform:uppercase;
-  letter-spacing:-.035em;line-height:.98;font-size:clamp(24px,3.6vw,54px);
-  align-self:center;max-width:16ch}
-.fin blockquote em{font-style:normal;color:var(--red-lite)}
+/* финал: пара кадров с букетами */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.2vw,30px)}
+.duo img{width:100%;aspect-ratio:4/5;object-fit:cover}
 
 /* ─── результат ─── */
 .result{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(22px,4vw,64px);
@@ -314,8 +310,7 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   .meter div:nth-child(odd){border-left:0;padding-left:0}
   .meter div:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .split,.trap,.q{grid-template-columns:1fr;gap:clamp(10px,1.8vh,16px)}
-  .row3,.fin{grid-template-columns:1fr;gap:clamp(26px,4.4vh,40px)}
-  .fin blockquote{grid-column:1;font-size:clamp(22px,7.4vw,34px)}
+  .row3{grid-template-columns:1fr;gap:clamp(26px,4.4vh,40px)}
   .band .cap{grid-template-columns:1fr;gap:10px}
   .band .cap .body{grid-column:1;grid-row:auto}
   .result{grid-template-columns:1fr}
@@ -499,22 +494,24 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
     </figcaption>
   </figure>
 
-  <div class="fin">
-    <figure class="card">
-      <img src="../../img/razbory/model/5-buket.jpg" alt="Модель с букетом в полный рост" loading="lazy" decoding="async">
-      <figcaption class="cap">
-        <div class="n">06</div>
-        <h3>Добавляем букеты</h3>
+  <figure class="band">
+    <div class="duo">
+      <img src="../../img/razbory/model/5-buket.jpg" alt="Модель с букетом в полный рост — первый кадр серии" loading="lazy" decoding="async">
+      <img src="../../img/razbory/model/6-buket2.jpg" alt="Модель с тем же букетом — второй кадр серии" loading="lazy" decoding="async">
+    </div>
+    <figcaption class="cap">
+      <div class="n">06</div>
+      <h3>Добавляем букеты</h3>
+      <div class="body">
         <p>Только теперь начинается работа, ради которой всё затевалось: к готовой модели
-           добавляются букеты. Модель держит форму, образ не меняется, кадры складываются
-           в серию.</p>
+           добавляются букеты. Модель держит форму, образ не меняется — кадры складываются
+           в серию, хоть для карточек товара, хоть для соцсетей.</p>
         <p>Букет при этом остаётся вашим настоящим. Нейросеть меняет человека, свет
            и окружение — но не состав букета. Придуманный ею букет вы не соберёте,
            а покупатель придёт именно за ним.</p>
-      </figcaption>
-    </figure>
-    <blockquote>Человека можно создать,<br><em>товар — нельзя</em></blockquote>
-  </div>
+      </div>
+    </figcaption>
+  </figure>
 
 </section>
 
