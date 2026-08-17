@@ -85,6 +85,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mfandreeva.ru/ai/razbory/banner/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mfandreeva.ru/ai/zamery/</loc>
     <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
