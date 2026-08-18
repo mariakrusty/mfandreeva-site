@@ -216,6 +216,8 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
 .band{margin:clamp(30px,5vh,66px) 0 0}
 .band > img{width:100%}
 .band > img.tall{width:auto;max-width:100%;max-height:88vh;margin:0 auto;display:block}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,30px)}
+.trio img{width:100%;aspect-ratio:4/5;object-fit:cover}
 .cap{padding-top:clamp(14px,2.2vh,22px);border-top:2px solid var(--red-lite);
   margin-top:clamp(12px,1.8vh,16px)}
 .cap .n{font-family:var(--disp);font-weight:800;font-size:clamp(34px,3.4vw,56px);line-height:1;
@@ -314,6 +316,7 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   .split,.trap,.q{grid-template-columns:1fr;gap:clamp(10px,1.8vh,16px)}
   .row3,.fin{grid-template-columns:1fr;gap:clamp(26px,4.4vh,40px)}
   .fin blockquote{grid-column:1;font-size:clamp(22px,7.4vw,34px)}
+  .trio{grid-template-columns:1fr}
   .five{grid-template-columns:repeat(2,1fr)}
   .five figure:last-child{grid-column:1/-1}
   .five img{aspect-ratio:3/4}
@@ -451,8 +454,8 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   </figure>
 
   <figure class="band">
-    <img class="tall" src="../../img/razbory/eskiz/2-buket.jpg" alt="Эскиз букета в розово-зелёной гамме, собранный из позиций наличия" loading="lazy" decoding="async">
-    <div class="duo" style="margin-top:clamp(14px,2.2vw,30px)">
+    <div class="trio">
+      <img src="../../img/razbory/eskiz/2-buket.jpg" alt="Эскиз букета в розово-зелёной гамме, собранный из позиций наличия" loading="lazy" decoding="async">
       <img src="../../img/razbory/eskiz/2-fragment-a.jpg" alt="Фрагмент эскиза крупно: циннии, георгины и дельфиниум" loading="lazy" decoding="async">
       <img src="../../img/razbory/eskiz/2-fragment-b.jpg" alt="Фрагмент эскиза крупно: зелёные циннии и гортензия" loading="lazy" decoding="async">
     </div>
