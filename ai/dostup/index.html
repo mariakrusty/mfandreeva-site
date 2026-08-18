@@ -67,14 +67,32 @@ h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spaci
   margin-bottom:9px;letter-spacing:-.01em}
 .card p{font-size:clamp(12px,1.05vw,13.5px);color:rgba(253,240,213,.66)}
 
-/* цена */
-.buy{margin-top:clamp(46px,9vh,104px);border:1px solid rgba(253,240,213,.2);
-  padding:clamp(26px,4vw,52px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,52px);
-  align-items:flex-end;justify-content:space-between;background:rgba(253,240,213,.03)}
-.price{font-family:var(--disp);font-weight:900;font-size:clamp(30px,5vw,64px);line-height:1;
+/* два формата */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
+.way{border:1px solid rgba(253,240,213,.2);background:rgba(253,240,213,.03);
+  padding:clamp(24px,3.4vw,44px);display:flex;flex-direction:column;
+  gap:clamp(14px,2vh,20px);transition:border-color .35s var(--ease)}
+.way:hover{border-color:rgba(253,240,213,.38)}
+.way .k{font-size:clamp(9.5px,.92vw,11px);letter-spacing:.19em;text-transform:uppercase;
+  color:var(--red);color:#D0201C}
+.way h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(19px,2.2vw,30px);line-height:1.05}
+.way p{font-size:clamp(12px,1.08vw,14px);color:rgba(253,240,213,.72);max-width:52ch}
+.way ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.way li{font-size:clamp(11.5px,1.02vw,13.5px);color:rgba(253,240,213,.66);
+  padding-left:16px;position:relative}
+.way li::before{content:"—";position:absolute;left:0;color:#D0201C}
+.way .bottom{margin-top:auto;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;
+  justify-content:space-between;padding-top:clamp(10px,1.6vh,16px)}
+.price{font-family:var(--disp);font-weight:900;font-size:clamp(26px,3.4vw,44px);line-height:1;
   letter-spacing:-.03em}
-.price small{display:block;font-family:var(--mono);font-weight:400;font-size:clamp(11px,1.05vw,13px);
-  letter-spacing:.05em;color:rgba(253,240,213,.6);margin-top:14px;line-height:1.7}
+.price small{display:block;font-family:var(--mono);font-weight:400;font-size:clamp(10.5px,1vw,12.5px);
+  letter-spacing:.05em;color:rgba(253,240,213,.6);margin-top:12px;line-height:1.7}
+.soonline{margin-top:clamp(14px,2vw,22px);border-top:1px solid rgba(253,240,213,.14);
+  padding-top:clamp(14px,2.2vh,20px);font-size:clamp(11px,1.02vw,13px);
+  color:rgba(253,240,213,.5);letter-spacing:.03em}
+.soonline b{color:rgba(253,240,213,.75);font-weight:400}
+@media(max-width:760px){ .ways{grid-template-columns:1fr} }
 .cta{display:inline-flex;align-items:center;gap:12px;background:var(--red);color:var(--cream);
   padding:18px 34px;font-family:var(--disp);font-weight:700;text-transform:uppercase;
   font-size:clamp(12px,1.2vw,15px);letter-spacing:.06em;transition:.3s var(--ease);white-space:nowrap}
@@ -117,7 +135,8 @@ details p{margin-top:13px;font-size:clamp(12px,1.05vw,14px);color:rgba(253,240,2
   <h1>Библиотека<br>и сообщество</h1>
   <p class="lead">Всё, что я применяю в работе с цветочными магазинами: готовые промты с превью,
      съёмки целыми сериями, пайплайны и расчёты. Плюс чат в Telegram с теми, кто пользуется
-     этими же инструментами. Библиотека пополняется — доступ остаётся навсегда.</p>
+     этими же инструментами. Работать можно двумя способами: самостоятельно по картотеке
+     или лично со мной — над задачами вашего магазина.</p>
 
   <section>
     <h2>Что внутри</h2>
@@ -150,13 +169,51 @@ details p{margin-top:13px;font-size:clamp(12px,1.05vw,14px);color:rgba(253,240,2
        а материалы копятся.</p>
   </section>
 
-  <div class="buy">
-    <div class="price">— ₽
-      <small>доступ навсегда · библиотека пополняется<br>
-             без подписки и доплат за новые материалы</small></div>
-    <a class="cta" href="https://t.me/AIbyAndreeva_bot" target="_blank" rel="noopener">
-      Купить доступ <span class="arw">→</span></a>
-  </div>
+  <section>
+    <h2>Два формата</h2>
+    <div class="ways">
+
+      <div class="way">
+        <span class="k">Формат 01 · Самостоятельно</span>
+        <h3>Картотека</h3>
+        <p>Все промты, пайплайны и полные версии разборов — копируете и применяете
+           в своём магазине сегодня. Плюс закрытый чат в Telegram.</p>
+        <ul>
+          <li>шесть разделов: визуал, видео, тексты, расчёты, пайплайны, разборы</li>
+          <li>картотека пополняется — новые материалы без доплат</li>
+          <li>доступ навсегда, личный логин</li>
+        </ul>
+        <div class="bottom">
+          <div class="price">— ₽
+            <small>разовая оплата · навсегда</small></div>
+          <a class="cta" href="https://t.me/AIbyAndreeva_bot" target="_blank" rel="noopener">
+            Купить доступ <span class="arw">→</span></a>
+        </div>
+      </div>
+
+      <div class="way">
+        <span class="k">Формат 02 · Один на один</span>
+        <h3>Личная работа со мной</h3>
+        <p>Берём задачи вашего магазина и делаем вместе: своя модель, карточки товара,
+           баннеры, серии — под ваш бренд, на ваших букетах. По занятиям или пакетом,
+           онлайн.</p>
+        <ul>
+          <li>после работы у вас остаётся своя модель с паспортом</li>
+          <li>набор промтов, настроенных под ваш магазин</li>
+          <li>доступ к картотеке и чату — входит</li>
+        </ul>
+        <div class="bottom">
+          <div class="price">— ₽
+            <small>за занятие · пакетом дешевле</small></div>
+          <a class="cta" href="https://t.me/AIbyAndreeva_bot" target="_blank" rel="noopener">
+            Записаться <span class="arw">→</span></a>
+        </div>
+      </div>
+
+    </div>
+    <div class="soonline">Скоро — <b>«Прокачка по бизнес-инструментам»</b>: групповой формат.
+      Анонс будет в телеграм-канале.</div>
+  </section>
 
   <section>
     <h2>Как получить</h2>
