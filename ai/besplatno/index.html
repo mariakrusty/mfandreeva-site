@@ -277,13 +277,12 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
    на уровень, иначе капс начинает кричать. --off = общий сдвиг колонки. */
 .geo{--off:0px;margin-top:clamp(26px,5vh,60px)}
 .claim{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.035em;
-  line-height:1.06;font-size:clamp(19px,2.7vw,42px);max-width:21ch;
+  line-height:1.08;font-size:clamp(19px,2.7vw,42px);max-width:none;
   margin:0 0 clamp(26px,4.6vh,58px) var(--off)}
 .claim em{font-style:normal;color:var(--red)}
-.geo .body{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:clamp(18px,2.4vw,44px);max-width:min(880px,100%);margin-left:var(--off)}
-.geo .body p{font-size:clamp(13px,1.06vw,15.5px);line-height:1.72;color:rgba(0,48,73,.82);
-  margin-bottom:13px}
+.geo .body{display:block;max-width:none;margin-left:var(--off)}
+.geo .body p{font-size:clamp(13px,1.15vw,16.5px);line-height:1.72;color:rgba(0,48,73,.82);
+  max-width:none;margin-bottom:clamp(14px,2vh,20px)}
 .geo .body p b{font-weight:400;color:var(--cosmos);border-bottom:1px solid rgba(176,27,24,.55)}
 
 /* умеет / не умеет — строками, как считалки */
