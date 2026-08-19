@@ -1,9 +1,25 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<script>if(/github\.io$/.test(location.hostname)){var _m=document.createElement("meta");_m.name="robots";_m.content="noindex,nofollow";document.head.appendChild(_m);}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Мария Андреева — Hero (заставка)</title>
+<title>Мария Андреева — учёт, AI и бренды для цветочного бизнеса</title>
+<meta name="description" content="Экономист и продюсер брендов цветочных магазинов. Бесплатные AI-калькуляторы для флористов, книга и обучение: учитесь считать деньги, строить бренд и дружить с AI.">
+<link rel="canonical" href="https://mfandreeva.ru/">
+
+<!-- Open Graph / соцсети -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Мария Андреева">
+<meta property="og:url" content="https://mfandreeva.ru/">
+<meta property="og:title" content="Мария Андреева — учёт, AI и бренды для цветочного бизнеса">
+<meta property="og:description" content="Экономист и продюсер брендов цветочных магазинов. Бесплатные AI-калькуляторы для флористов, книга и обучение: считать деньги, строить бренд и дружить с AI.">
+<meta property="og:image" content="https://mfandreeva.ru/assets/maria-doors.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Мария Андреева — учёт, AI и бренды для цветочного бизнеса">
+<meta name="twitter:description" content="Экономист и продюсер брендов цветочных магазинов. Бесплатные AI-калькуляторы для флористов, книга и обучение.">
+<meta name="twitter:image" content="https://mfandreeva.ru/assets/maria-doors.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -278,6 +294,12 @@
   .s-tax .step-body{justify-content:flex-start;padding-top:clamp(8px,1.4vh,18px)}
   .s-tax .ghost-num{display:none}
   .txsplit{display:flex;gap:clamp(12px,1.4vw,18px);align-items:stretch;height:clamp(300px,calc(100vh - 440px),460px);margin-top:clamp(6px,1.2vh,16px)}
+  .txread{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 16px;margin-top:clamp(10px,1.4vh,16px);
+    font-size:clamp(10.5px,.92vw,12px);letter-spacing:.03em;line-height:1.55}
+  .txread .txread-l{color:rgba(26,10,4,.32);text-transform:uppercase;letter-spacing:.16em;font-size:.9em}
+  .txread a{color:rgba(26,10,4,.42);text-decoration:none;border-bottom:1px solid rgba(26,10,4,.14);
+    padding-bottom:1px;transition:color .2s,border-color .2s}
+  .txread a:hover{color:rgba(26,10,4,.78);border-color:rgba(26,10,4,.4)}
   .txpane{flex:1 1 0;min-width:0;border-radius:24px;position:relative;overflow:hidden;padding:clamp(18px,2.1vw,32px);display:flex;flex-direction:column;align-items:flex-start;text-align:left;cursor:pointer;text-decoration:none;will-change:flex-grow;transition:flex-grow .65s var(--ease),box-shadow .45s var(--ease)}
   .txsplit:hover .txpane{flex-grow:.72}
   .txsplit .txpane:hover{flex-grow:2.3}
@@ -586,6 +608,39 @@
   .ck-need:hover{background:rgba(253,240,213,.1)}
   @media(max-width:640px){.cookie{flex-direction:column;align-items:flex-start}}
 </style>
+
+<!-- Structured data для Яндекс/Google: кто такая Мария + сайт -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://mfandreeva.ru/#website",
+      "url": "https://mfandreeva.ru/",
+      "name": "Мария Андреева",
+      "inLanguage": "ru-RU",
+      "publisher": { "@id": "https://mfandreeva.ru/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mfandreeva.ru/#person",
+      "name": "Мария Андреева",
+      "url": "https://mfandreeva.ru/",
+      "image": "https://mfandreeva.ru/assets/maria-doors.jpg",
+      "jobTitle": "Экономист, продюсер брендов цветочных магазинов",
+      "description": "Экономист и продюсер брендов цветочных магазинов, автор книги о цветочном бизнесе. Учит владельцев считать деньги, строить бренды и применять AI.",
+      "knowsAbout": ["цветочный бизнес", "флористика", "учёт и налоги для флористов", "точка безубыточности", "наценка и маржа", "AI для цветочного бизнеса"],
+      "sameAs": [
+        "https://t.me/FloralBusiness",
+        "https://vk.com/floral_business",
+        "https://www.youtube.com/@mariaandreeva6046",
+        "https://www.instagram.com/andreeva_mf"
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -598,7 +653,7 @@
 
   <!-- ЗАСТАВКА: фото крупно по центру -->
   <div class="intro-photo">
-    <div class="ph"><img src="assets/maria-doors.jpg" alt="Мария Андреева"></div>
+    <div class="ph"><img src="assets/maria-doors.jpg" alt="Мария Андреева" fetchpriority="high" decoding="async"></div>
   </div>
 
   <!-- ЧИСТЫЙ HERO -->
@@ -626,14 +681,14 @@
 
   <!-- 01 КТО Я -->
   <section class="step s-about" id="about">
-    <div class="step-head"><span class="idx">01</span> Кто я <span class="hint">экономист · не айтишник</span></div>
+    <h2 class="step-head"><span class="idx">01</span> Кто я <span class="hint">экономист · не айтишник</span></h2>
     <div class="step-fold">
     <div class="about-hero">
       <div class="about-line">
         <span class="about-word l">Я вижу</span>
         <div class="about-photo" id="aboutPhoto">
-          <img class="eyes-closed" src="assets/maria-closed.jpg" alt="">
-          <img class="eyes-open" src="assets/maria-doors.jpg" alt="Мария Андреева">
+          <img class="eyes-closed" src="assets/maria-closed.jpg" alt="" loading="lazy" decoding="async">
+          <img class="eyes-open" src="assets/maria-doors.jpg" alt="Мария Андреева" loading="lazy" decoding="async">
         </div>
         <span class="about-word r">хаос в цифрах</span>
       </div>
@@ -650,8 +705,8 @@
 
   <!-- 02 AI-ИНСТРУМЕНТЫ -->
   <section class="step s-tools" id="tools">
-    <div class="sphere-bg"><img src="assets/ai-sphere.gif" alt=""></div>
-    <div class="step-head"><span class="idx">02</span> AI-инструменты <span class="hint">бесплатно</span></div>
+    <div class="sphere-bg"><img src="assets/ai-sphere.gif" alt="" loading="lazy" decoding="async"></div>
+    <h2 class="step-head"><span class="idx">02</span> AI-инструменты <span class="hint">бесплатно</span></h2>
     <div class="step-body">
       <h3>3 готовых AI-инструмента</h3>
       <p class="lead">Используй сразу — или научись делать свои с помощью AI.</p>
@@ -674,13 +729,25 @@
           <span class="tt">Точка безубыточности магазина</span>
           <span class="tgo">→</span>
         </a>
+        <a class="trow" href="/ai/">
+          <span class="tn">04</span>
+          <span class="tfree">бесплатно</span>
+          <span class="tt">AI-портал: разборы и замеры</span>
+          <span class="tgo">→</span>
+        </a>
+        <a class="trow" href="/rynok/">
+          <span class="tn">05</span>
+          <span class="tfree">бесплатно</span>
+          <span class="tt">Рынок цветов в цифрах</span>
+          <span class="tgo">→</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- 03 ВИДЕОКОНТЕНТ -->
   <section class="step s-video" id="video">
-    <div class="step-head"><span class="idx">03</span> Видеоконтент <span class="hint">смотреть и учиться</span></div>
+    <h2 class="step-head"><span class="idx">03</span> Видеоконтент <span class="hint">смотреть и учиться</span></h2>
     <div class="step-body">
       <div class="vsplit">
         <div class="vsplit-l">
@@ -705,21 +772,21 @@
 
   <!-- 04 МЕРОПРИЯТИЯ -->
   <section class="step s-events" id="events">
-    <div class="step-head"><span class="idx">04</span> Мероприятия <span class="hint">расписание 2026/2027</span></div>
+    <h2 class="step-head"><span class="idx">04</span> Мероприятия <span class="hint">расписание 2026/2027</span></h2>
     <div class="step-body">
       <div class="elist">
-        <a class="erow featured" href="https://mfandreeva.ru/kemp2026/" target="_blank" rel="noopener">
+        <a class="erow featured" href="https://andreeva-mf.timepad.ru/event/4111521/" target="_blank" rel="noopener">
           <span class="en">01</span>
-          <span class="emain"><span class="etag">Главное · лето</span><span class="ett">AI-Кемп для цветочных</span></span>
+          <span class="emain"><span class="etag">Лекция · офлайн · билеты в продаже</span><span class="ett">Тренды цветочного ритейла 2027/2028</span></span>
+          <span class="emeta"><span class="edate">7 сентября 2026</span><span class="einfo">Крокус Экспо, Москва · от 2 900 ₽</span></span>
+          <span class="ego">→</span>
+        </a>
+        <a class="erow" href="https://mfandreeva.ru/kemp2026/" target="_blank" rel="noopener">
+          <span class="en">02</span>
+          <span class="emain"><span class="etag">Онлайн · лето</span><span class="ett">AI-Кемп для цветочных</span></span>
           <span class="emeta"><span class="edate">7 июня — 23 августа</span><span class="einfo">6 уроков · 3 месяца · 50 000 ₽</span></span>
           <span class="ego">→</span>
         </a>
-        <div class="erow soon">
-          <span class="en">02</span>
-          <span class="emain"><span class="etag">Лекция · офлайн</span><span class="ett">Тренды 2027/2028</span></span>
-          <span class="emeta"><span class="edate">Сентябрь 2026</span><span class="einfo">Крокус, Москва</span></span>
-          <span class="esoon">Анонс · авг 2026</span>
-        </div>
         <div class="erow soon">
           <span class="en">03</span>
           <span class="emain"><span class="etag">Программа · онлайн</span><span class="ett">Прокачка цветочного бизнеса 2.0</span></span>
@@ -738,7 +805,7 @@
 
   <!-- 05 УЧЁТ И НАЛОГИ -->
   <section class="step s-tax" id="tax">
-    <div class="step-head"><span class="idx">05</span> Учёт и налоги <span class="hint">НК РФ · ТК РФ · МойСклад</span></div>
+    <h2 class="step-head"><span class="idx">05</span> Учёт и налоги <span class="hint">НК РФ · ТК РФ · МойСклад</span></h2>
     <div class="step-body">
       <div class="txsplit">
         <a class="txpane svc" href="https://max.ru/u/f9LHodD0cOJ4o_DeRuYIjc1G-Nzh3Wxbq2xS1iP5vrVlFUV6ImW021ilazA" target="_blank" rel="noopener">
@@ -758,16 +825,21 @@
           </div></div>
         </a>
       </div>
+      <div class="txread">
+        <span class="txread-l">Читать</span>
+        <a href="/blog/kak-otkryt-internet-magazin-cvetov/">Как открыть интернет-магазин цветов</a>
+        <a href="/blog/rynok-tsvetov-v-rossii-2026-tsifry-trendy-i-moj-prognoz/">Рынок цветов в цифрах</a>
+      </div>
     </div>
   </section>
 
   <!-- 06 КНИГА -->
   <section class="step s-book" id="book">
-    <div class="step-head"><span class="idx">06</span> Книга <span class="hint">с 2024 года</span></div>
+    <h2 class="step-head"><span class="idx">06</span> Книга <span class="hint">с 2024 года</span></h2>
     <div class="step-body">
       <div class="book-split">
         <div class="book-art">
-          <img class="book-cover" src="assets/book-mockup.png" alt="Книга «Цветочный бизнес без цензуры»">
+          <img class="book-cover" src="assets/book-mockup.png" alt="Книга «Цветочный бизнес без цензуры»" loading="lazy" decoding="async">
         </div>
         <div class="book-info">
           <span class="book-eyebrow">Книга · в бумаге и электронно</span>
@@ -797,9 +869,10 @@
             <button type="submit" aria-label="Подписаться">→</button>
           </div>
           <label class="sub-agree">
-            <input type="checkbox" required>
-            <span>Я соглашаюсь с условиями <a href="https://mfandreeva.ru/policy/" target="_blank" rel="noopener">политики конфиденциальности</a> и <a href="https://mfandreeva.ru/private/" target="_blank" rel="noopener">пользовательского соглашения</a></span>
+            <input type="checkbox" id="subAgree" required>
+            <span>Я соглашаюсь получать письма и с условиями <a href="https://mfandreeva.ru/policy/" target="_blank" rel="noopener">политики конфиденциальности</a> и <a href="https://mfandreeva.ru/private/" target="_blank" rel="noopener">пользовательского соглашения</a></span>
           </label>
+          <input type="text" name="website" id="subHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <div class="sub-done" aria-live="polite">Спасибо! Вы подписаны 🌸</div>
         </form>
       </div>
@@ -831,16 +904,16 @@
   <div class="flip-stage" id="flipStage">
     <button class="flip-nav" id="flipPrev" type="button" aria-label="Назад">‹</button>
     <div class="flip-book" id="flipBook">
-      <img class="flip-pg flip-left" id="flipLeft" alt="Левая страница">
-      <img class="flip-pg flip-right" id="flipRight" alt="Правая страница">
+      <img class="flip-pg flip-left" id="flipLeft" alt="Левая страница" loading="lazy" decoding="async">
+      <img class="flip-pg flip-right" id="flipRight" alt="Правая страница" loading="lazy" decoding="async">
       <span class="flip-gutter"></span>
       <div class="flip-turn" id="flipTurn">
-        <div class="flip-face flip-face-front"><img id="flipTF" alt=""></div>
-        <div class="flip-face flip-face-back"><img id="flipTB" alt=""></div>
+        <div class="flip-face flip-face-front"><img id="flipTF" alt="" loading="lazy" decoding="async"></div>
+        <div class="flip-face flip-face-back"><img id="flipTB" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
     <div class="flip-end" id="flipEnd">
-      <img class="flip-end-cover" src="assets/book-cover.png" alt="Обложка книги">
+      <img class="flip-end-cover" src="assets/book-cover.png" alt="Обложка книги" loading="lazy" decoding="async">
       <div class="flip-end-text">
         <span class="flip-end-eyebrow">Это только фрагмент</span>
         <h4>Дальше <em>в книге</em></h4>
@@ -889,7 +962,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
       </a>
       <a class="soc" href="https://max.ru/id143506715455_biz" aria-label="Max" target="_blank" rel="noopener">
-        <img src="assets/max.png" alt="Max">
+        <img src="assets/max.png" alt="Max" loading="lazy" decoding="async">
       </a>
       <a class="soc" href="https://www.instagram.com/andreeva_mf/" aria-label="Instagram" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.05" fill="currentColor" stroke="none"/></svg>
@@ -928,24 +1001,38 @@
   if(subForm){ subForm.addEventListener('submit', function(e){
     e.preventDefault();
     var emailEl = subForm.querySelector('input[type="email"]');
-    var email = emailEl ? emailEl.value.trim() : '';
-    var btn = subForm.querySelector('button[type="submit"]');
+    var agreeEl = document.getElementById('subAgree');
+    var hpEl    = document.getElementById('subHp');
+    var doneEl  = subForm.querySelector('.sub-done');
+    var btn     = subForm.querySelector('button[type="submit"]');
+    var email   = emailEl ? emailEl.value.trim() : '';
+    if(!email || (agreeEl && !agreeEl.checked)) return;
     if(btn) btn.disabled = true;
-    fetch('https://api.web3forms.com/submit', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify({
-        access_key:'f840fbf9-7e71-4c15-a672-31930d14675e',
-        subject:'Новая подписка с сайта mfandreeva.ru',
-        from_name:'Сайт mfandreeva.ru',
-        email: email
-      })
-    }).then(function(r){return r.json();}).then(function(d){
-      if(d && d.success){ subForm.classList.add('sent'); }
-      else { if(btn) btn.disabled=false; alert('Не удалось отправить. Попробуйте ещё раз чуть позже.'); }
-    }).catch(function(){ if(btn) btn.disabled=false; alert('Ошибка сети. Проверьте интернет и попробуйте снова.'); });
-  }); }
 
+    var fd = new FormData();
+    fd.append('email', email);
+    fd.append('agree', '1');
+    fd.append('page', location.href);
+    fd.append('website', hpEl ? hpEl.value : '');
+
+    fetch('/subscribe/', { method:'POST', body: fd })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.ok){
+          if(doneEl){ doneEl.textContent = (d.message || 'Спасибо! Вы подписаны'); doneEl.classList.add('on'); }
+          subForm.classList.add('sent');
+          if(emailEl) emailEl.value = '';
+          if(agreeEl) agreeEl.checked = false;
+        } else {
+          if(doneEl){ doneEl.textContent = (d && d.error) ? d.error : 'Что-то пошло не так, попробуйте ещё раз'; doneEl.classList.add('on'); }
+          if(btn) btn.disabled = false;
+        }
+      })
+      .catch(function(){
+        if(doneEl){ doneEl.textContent = 'Сеть недоступна, попробуйте позже'; doneEl.classList.add('on'); }
+        if(btn) btn.disabled = false;
+      });
+  }); }
   var GLYPHS = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ#%@&*0123456789";
   var timers = [];
   function decodeLine(el, finalText){

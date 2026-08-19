@@ -1,9 +1,86 @@
+# ─────────────────────────────────────────────
+#  mfandreeva.ru — robots.txt
+#  Поисковые роботы и ИИ-краулеры: доступ открыт.
+#  Машиночитаемая карта смыслов: /llms.txt
+# ─────────────────────────────────────────────
+
 User-agent: *
 Allow: /
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /private/
 Disallow: /ai/klub/
+Disallow: /*?utm_
+Disallow: /*?fbclid
+
+# ── Поисковые системы ──
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&from
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# ── ИИ-ассистенты и ответные системы (GEO) ──
+# ChatGPT / OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Claude / Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI Overviews / Gemini
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Яндекс Нейро и Алиса
+User-agent: YandexAdditional
+Allow: /
+
+User-agent: YandexAdditionalBot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (используется многими моделями)
+User-agent: CCBot
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
 
 Sitemap: https://mfandreeva.ru/sitemap.xml
-Sitemap: https://mfandreeva.ru/sitemap_index.xml
