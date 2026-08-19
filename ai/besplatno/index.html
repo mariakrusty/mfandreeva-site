@@ -4,12 +4,12 @@
 <script>if(/github\.io$/.test(location.hostname)){var _m=document.createElement("meta");_m.name="robots";_m.content="noindex,nofollow";document.head.appendChild(_m);}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Искусственный интеллект для магазина цветов: что работает, а что нет</title>
-<meta name="description" content="Как использовать ИИ в цветочном магазине: съёмка букета без фотографа, карточки товара, видео из фото. Разборы с замерами времени и денег, границы применения. Открыто и бесплатно.">
+<title>Искусственный интеллект для магазина цветов: разборы и замеры</title>
+<meta name="description" content="Как использовать ИИ в цветочном магазине: съёмка букета без фотографа, карточки товара, видео из фото. Разборы с замерами времени и денег.">
 <link rel="canonical" href="https://mfandreeva.ru/ai/besplatno/">
 <link rel="icon" type="image/png" href="../img/logo-ai.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI для цветочного бизнеса — открытая часть">
+<meta property="og:title" content="Искусственный интеллект для магазина цветов: разборы и замеры">
 <meta property="og:description" content="Разборы с замерами, карта делегирования и тест на границы нейросетей.">
 <meta property="og:url" content="https://mfandreeva.ru/ai/besplatno/">
 <meta property="og:image" content="https://mfandreeva.ru/ai/img/og-ai.jpg">
@@ -36,6 +36,12 @@
         "@type": "Person",
         "name": "Мария Андреева",
         "url": "https://mfandreeva.ru/",
+        "sameAs": [
+          "https://t.me/FloralBusiness",
+          "https://vk.com/floral_business",
+          "https://www.youtube.com/@mariaandreeva6046",
+          "https://www.instagram.com/andreeva_mf"
+        ],
         "jobTitle": "Дизайнер цифрового контента, продюсер брендов",
         "knowsAbout": [
           "нейросети в цветочном бизнесе",
@@ -109,7 +115,7 @@
           "name": "Какая нейросеть лучше рисует цветы",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Одной идеальной нейросети не существует: под съёмку, видео и тексты нужны разные инструменты. Лучше всего работает комбинация из нескольких нейросетей и готовые связки промтов под конкретную задачу — такие связки, собранные по шагам, лежат в картотеке."
+            "text": "Одной идеальной нейросети не существует. Под съёмку букета по референсу подходят Nano Banana и Midjourney, под видео из снимка — Seedance, под тексты — GPT (проверено: август 2026). Но результат делает комбинация из нескольких нейросетей и готовые связки промтов под задачу — такие связки, собранные по шагам, лежат в картотеке."
           }
         },
         {
@@ -128,6 +134,17 @@
             "text": "Нет. Она заменяет фотографа, копирайтера и оператора рутины. Сборка букета, оценка свежести, вкус и ответственность за результат остаются за человеком."
           }
         }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Разборы: задачи цветочного магазина, решённые нейросетями, с замерами",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Своя модель для съёмок","url":"https://mfandreeva.ru/ai/razbory/model/","description":"Постоянное лицо бренда нейросетью: 30 минут, 100 рублей (замер: август 2026)"},
+        {"@type":"ListItem","position":2,"name":"Съёмка на улице, которой не было","url":"https://mfandreeva.ru/ai/razbory/ulitsa/","description":"Уличная серия из шести кадров с настоящим букетом: 20 минут, 500 рублей (замер: август 2026)"},
+        {"@type":"ListItem","position":3,"name":"Простая карточка товара","url":"https://mfandreeva.ru/ai/razbory/kartochka/","description":"Пять кадров для страницы товара без студии: 20 минут, 600 рублей (замер: август 2026)"},
+        {"@type":"ListItem","position":4,"name":"Баннер за три минуты","url":"https://mfandreeva.ru/ai/razbory/banner/","description":"Баннер на сайт или постер: 3 минуты, 50–60 рублей (замер: август 2026)"},
+        {"@type":"ListItem","position":5,"name":"Букет по фото поставщика","url":"https://mfandreeva.ru/ai/razbory/eskiz/","description":"Эскиз для клиента из цветов в наличии: 10 минут, 30 рублей (замер: август 2026)"}
       ]
     },
     {
@@ -299,7 +316,7 @@ h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:
 .row-i .n{font-family:var(--mono);font-size:clamp(10px,.88vw,12px);letter-spacing:.14em;
   color:var(--red);min-width:30px}
 .row-i .n.no{color:rgba(0,48,73,.38)}
-.row-i b{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
+.row-i b,.row-i h3{display:inline;margin:0;font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;
   font-size:clamp(14px,1.9vw,30px);line-height:1.04;flex:1 1 260px}
 .row-i p{font-size:clamp(11.5px,.98vw,13.5px);line-height:1.65;color:rgba(0,48,73,.62);
   max-width:36ch;flex:1 1 220px;margin:0}
@@ -353,6 +370,23 @@ h2 em{font-style:normal;color:var(--red)}
   font-family:var(--mono);text-align:center;
   font-size:clamp(9.5px,.82vw,11.5px);letter-spacing:.22em;text-transform:uppercase;
   color:var(--red)}
+/* коротко: тезисы строками */
+.krow{border-top:1px solid rgba(0,48,73,.16);padding:clamp(12px,2vh,20px) 0;
+  font-size:clamp(13px,1.15vw,16.5px);line-height:1.6;color:rgba(0,48,73,.85);max-width:none}
+.krow:last-child{border-bottom:1px solid rgba(0,48,73,.16)}
+.krow em{font-style:normal;color:var(--red)}
+/* скрытый смысловой слой (квиз для краулеров) */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* таблица замеров */
+.ztab{width:100%;border-collapse:collapse;margin-top:clamp(18px,3vh,34px)}
+.ztab th{text-align:left;font-family:var(--mono);font-size:clamp(9.5px,.85vw,11.5px);
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(0,48,73,.5);
+  padding:0 14px 10px 0;border-bottom:2px solid var(--cosmos)}
+.ztab td{padding:clamp(12px,1.8vh,18px) 14px clamp(12px,1.8vh,18px) 0;
+  border-bottom:1px solid rgba(0,48,73,.16);font-size:clamp(12.5px,1.1vw,15px);
+  color:rgba(0,48,73,.85);vertical-align:top}
+.ztab td b{font-family:var(--disp);font-weight:800;color:var(--red);white-space:nowrap}
+.ztab a{border-bottom:1px solid rgba(176,27,24,.4)}
 /* заголовок-гигант в центре, нить проходит ЗА ним */
 .web h2{position:relative;z-index:2;text-align:center;max-width:21ch;
   font-size:clamp(20px,3.2vw,52px);line-height:1.0}
@@ -393,9 +427,9 @@ h2 em{font-style:normal;color:var(--red)}
   transition:padding-left .5s var(--ease),color .35s var(--ease)}
 .li:first-child{border-top:1px solid var(--line)}
 .li:hover{padding-left:clamp(10px,1.8vw,26px)}
-.li b{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
+.li b,.li h3{display:inline;margin:0;font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:-.05em;
   font-size:clamp(17px,3.2vw,48px);line-height:1;flex:1 1 auto;transition:opacity .35s}
-.list:hover .li b{opacity:.32}
+.list:hover .li b,.list:hover .li h3{opacity:.32}
 .list .li:hover b{opacity:1}
 .li .m{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,48,73,.5);
   white-space:nowrap}
@@ -570,7 +604,7 @@ h2 em{font-style:normal;color:var(--red)}
 <div class="hero-pin" id="heroPin"><div class="hero-stick">
 
 <div class="pad hero">
-  <h1>AI для цветочного<br>магазина</h1>
+  <h1 aria-label="AI для цветочного магазина">AI для цветочного<br>магазина</h1>
   <p class="sub">Как использовать нейросети в цветочном бизнесе:<br>
      разборы и примеры.
      <span class="by">от Марии Андреевой — автора цифрового контента
@@ -583,11 +617,11 @@ h2 em{font-style:normal;color:var(--red)}
     <a class="it" style="--w:34vw;--h:84%" href="../razbory/kartochka/"><span class="tag"><s></s>Карточка товара</span><span class="frame"><span class="sl on"><img src="../img/hero/p8.jpg?v=3" alt="Карточка товара: модель с букетом"></span></span></a>
     <a class="it" style="--w:39vw;--h:92%" href="../razbory/banner/"><span class="tag"><s></s>Баннеры</span><span class="frame"><span class="sl on"><img src="../img/hero/p9.jpg?v=2" alt="Баннер для цветочного: модель с букетом в красном"></span></span></a>
     <a class="it" style="--w:44vw;--h:100%" href="../razbory/eskiz/"><span class="tag"><s></s>Собери букет</span><span class="frame"><span class="sl on"><img src="../img/hero/p10.jpg" alt="Эскиз букета из цветов в наличии"></span></span></a>
-    <a class="it" style="--w:28vw;--h:60%" href="../razbory/model/"><span class="tag"><s></s>Своя модель</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p6.jpg" alt=""></span></span></a>
-    <a class="it" style="--w:35vw;--h:66%" href="../razbory/ulitsa/"><span class="tag"><s></s>Съёмка на улице</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p7.jpg" alt=""></span></span></a>
-    <a class="it" style="--w:31vw;--h:78%" href="../razbory/kartochka/"><span class="tag"><s></s>Карточка товара</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p8.jpg?v=3" alt=""></span></span></a>
-    <a class="it" style="--w:37vw;--h:88%" href="../razbory/banner/"><span class="tag"><s></s>Баннеры</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p9.jpg?v=2" alt=""></span></span></a>
-    <a class="it" style="--w:42vw;--h:100%" href="../razbory/eskiz/"><span class="tag"><s></s>Собери букет</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p10.jpg" alt=""></span></span></a>
+    <a class="it" style="--w:28vw;--h:60%" href="../razbory/model/"><span class="tag"><s></s>Своя модель</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p6.jpg" alt="Своя модель для съёмок с букетом"></span></span></a>
+    <a class="it" style="--w:35vw;--h:66%" href="../razbory/ulitsa/"><span class="tag"><s></s>Съёмка на улице</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p7.jpg" alt="Уличная серия: модель с букетом георгинов"></span></span></a>
+    <a class="it" style="--w:31vw;--h:78%" href="../razbory/kartochka/"><span class="tag"><s></s>Карточка товара</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p8.jpg?v=3" alt="Карточка товара: модель с букетом"></span></span></a>
+    <a class="it" style="--w:37vw;--h:88%" href="../razbory/banner/"><span class="tag"><s></s>Баннеры</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p9.jpg?v=2" alt="Баннер: модель в красном с букетом"></span></span></a>
+    <a class="it" style="--w:42vw;--h:100%" href="../razbory/eskiz/"><span class="tag"><s></s>Собери букет</span><span class="frame"><span class="sl on"><img loading="lazy" src="../img/hero/p10.jpg" alt="Эскиз букета из цветов в наличии"></span></span></a>
   </div>
 </div>
 
@@ -595,6 +629,24 @@ h2 em{font-style:normal;color:var(--red)}
 
 
 <!-- ═══ КАРТА ДЕЛЕГИРОВАНИЯ ═══ -->
+<!-- ═══ КОРОТКО ═══ -->
+<section id="korotko" class="pad" style="padding-top:clamp(40px,7vh,90px);padding-bottom:0">
+  <div class="two">
+    <h2>Коротко</h2>
+    <p class="txt">Четыре вещи, которые надо знать до всего остального.</p>
+  </div>
+  <div style="margin-top:clamp(18px,3vh,32px)">
+    <p class="krow">Нейросеть не должна придумывать ваш букет — она должна показать
+       ваш <em>настоящий</em> букет так, чтобы его купили.</p>
+    <p class="krow">Съёмка, карточки товара, баннеры и эскизы делаются из фото реального
+       букета: сорта, сборка и пропорции остаются настоящими, меняются фон, свет и окружение.</p>
+    <p class="krow">Каждый приём здесь измерен: сколько минут и рублей заняла задача,
+       с датой замера. Например, карточка товара — 20 минут и 600 ₽ вместо студии.</p>
+    <p class="krow">Собрать букет руками, оценить свежесть цветка и отвечать перед клиентом
+       нейросеть не может — это остаётся людям.</p>
+  </div>
+</section>
+
 <section id="karta" class="pad">
   <div class="pin"><div class="web" id="web">
     <!-- клубок из трёх нитей: главная + две блуждающие (бледнее).
@@ -654,22 +706,22 @@ h2 em{font-style:normal;color:var(--red)}
 
     <div class="rows">
       <div class="rows-sep">Что берёт на себя</div>
-      <div class="row-i"><span class="n">01</span><b>Съёмка без фотографа</b>
+      <div class="row-i"><span class="n">01</span><h3>Съёмка без фотографа</h3>
         <p>Серия кадров с одним букетом: фон, свет, модель, сезон</p></div>
-      <div class="row-i"><span class="n">02</span><b>Карточки товара</b>
+      <div class="row-i"><span class="n">02</span><h3>Карточки товара</h3>
         <p>Название, описание, подписи — десятки за вечер вместо недели</p></div>
-      <div class="row-i"><span class="n">03</span><b>Видео из фотографии</b>
+      <div class="row-i"><span class="n">03</span><h3>Видео из фотографии</h3>
         <p>Пять секунд движения для сторис из одного снимка</p></div>
-      <div class="row-i"><span class="n">04</span><b>Расчёты и рутина</b>
+      <div class="row-i"><span class="n">04</span><h3>Расчёты и рутина</h3>
         <p>Себестоимость, наценка, разбор выгрузок из учётной системы</p></div>
       <div class="rows-sep off">Чего не сделает</div>
-      <div class="row-i"><span class="n no">—</span><b>Не соберёт букет за флориста</b>
+      <div class="row-i"><span class="n no">—</span><h3>Не соберёт букет за флориста</h3>
         <p>Сборка руками — всегда за человеком. Опасен букет, придуманный с нуля:
            несуществующие сорта, нарушенная физика, композиция без воды — вживую
            такое не повторить. А вот <a href="../razbory/eskiz/" style="text-decoration:underline">эскиз
            из фото цветов в наличии</a> — рабочий приём: в нём всё существует
            и собирается</p></div>
-      <div class="row-i"><span class="n no">—</span><b>Не отвечает за результат</b>
+      <div class="row-i"><span class="n no">—</span><h3>Не отвечает за результат</h3>
         <p>Ошибётся в составе, цене или наличии — а извиняться перед клиентом
            будете вы. Всё, что вышло из нейросети, проверяет человек</p></div>
     </div>
@@ -700,11 +752,12 @@ h2 em{font-style:normal;color:var(--red)}
          Без запретов нейросеть скатывается в «нежное облако чувств», а состав может
          придумать. Проверка занимает минуту, написание с нуля — десять.</p></details>
     <details><summary data-n="04">Какая нейросеть лучше рисует цветы</summary>
-      <p>Одной идеальной нейросети не существует: под съёмку, видео и тексты нужны разные
-         инструменты. Лучше всего работает комбинация из нескольких нейросетей и готовые
-         связки промтов под конкретную задачу — такие связки, собранные по шагам,
-         лежат в картотеке. <a href="../dostup/" style="text-decoration:underline">Получить
-         готовые связки →</a></p></details>
+      <p>Одной идеальной нейросети не существует. Под съёмку букета по референсу мы
+         используем Nano Banana и Midjourney, под видео из снимка — Seedance, под
+         тексты — GPT (проверено: август 2026). Но результат делает не выбор «той самой»,
+         а комбинация из нескольких нейросетей и готовые связки промтов под задачу —
+         такие связки, собранные по шагам, лежат в картотеке.
+         <a href="../dostup/" style="text-decoration:underline">Получить готовые связки →</a></p></details>
     <details><summary data-n="05">Клиент принёс картинку из нейросети и просит такой букет. Что делать</summary>
       <p>Разберите картинку по частям: какие сорта изображены и существуют ли они, есть ли
          в композиции вода, реален ли размер и вес. Часть таких картинок собрать нельзя
@@ -729,17 +782,32 @@ h2 em{font-style:normal;color:var(--red)}
 
   <div class="pad list" id="list">
     <a class="li" href="../razbory/model/" data-img="../img/razbory/model/5-buket.jpg?v=2">
-      <b>Своя модель для съёмок</b><span class="m">паспорт из 8 кадров · 30 мин · 100 ₽ · <i>читать →</i></span></a>
+      <h3>Своя модель для съёмок</h3><span class="m">паспорт из 8 кадров · 30 мин · 100 ₽ · <i>читать →</i></span></a>
     <a class="li" href="../razbory/ulitsa/" data-img="../img/razbory/ulitsa/4-dvizhenie.jpg">
-      <b>Съёмка на улице, которой не было</b><span class="m">6 кадров · 20 мин · 500 ₽ · <i>читать →</i></span></a>
+      <h3>Съёмка на улице, которой не было</h3><span class="m">6 кадров · 20 мин · 500 ₽ · <i>читать →</i></span></a>
     <a class="li" href="../razbory/kartochka/" data-img="../img/razbory/kartochka/4-rakurs-a.jpg?v=2">
-      <b>Простая карточка товара</b><span class="m">5 кадров · 20 мин · 600 ₽ · <i>читать →</i></span></a>
+      <h3>Простая карточка товара</h3><span class="m">5 кадров · 20 мин · 600 ₽ · <i>читать →</i></span></a>
     <a class="li" href="../razbory/banner/" data-img="../img/razbory/banner/2-povod.jpg">
-      <b>Баннер за три минуты</b><span class="m">5 баннеров · 3 мин · 50–60 ₽ · <i>читать →</i></span></a>
+      <h3>Баннер за три минуты</h3><span class="m">5 баннеров · 3 мин · 50–60 ₽ · <i>читать →</i></span></a>
     <a class="li" href="../razbory/eskiz/" data-img="../img/razbory/eskiz/2-buket.jpg">
-      <b>Букет по фото поставщика</b><span class="m">2 товара · 10 мин · 30 ₽ · <i>читать →</i></span></a>
+      <h3>Букет по фото поставщика</h3><span class="m">2 товара · 10 мин · 30 ₽ · <i>читать →</i></span></a>
     <a class="li" href="../razbory/">
-      <b>Все разборы</b><span class="m"><i>смотреть →</i></span></a>
+      <h3>Все разборы</h3><span class="m"><i>смотреть →</i></span></a>
+  </div>
+
+  <div class="pad">
+    <table class="ztab">
+      <thead><tr><th>Задача</th><th>Время</th><th>Стоимость</th><th>Разбор</th></tr></thead>
+      <tbody>
+        <tr><td>Своя модель для съёмок — постоянное лицо бренда</td><td><b>30 мин</b></td><td><b>100 ₽</b></td><td><a href="../razbory/model/">читать →</a></td></tr>
+        <tr><td>Уличная серия из шести кадров с настоящим букетом</td><td><b>20 мин</b></td><td><b>500 ₽</b></td><td><a href="../razbory/ulitsa/">читать →</a></td></tr>
+        <tr><td>Простая карточка товара — пять кадров для сайта</td><td><b>20 мин</b></td><td><b>600 ₽</b></td><td><a href="../razbory/kartochka/">читать →</a></td></tr>
+        <tr><td>Баннер на сайт или рекламный постер</td><td><b>3 мин</b></td><td><b>50–60 ₽</b></td><td><a href="../razbory/banner/">читать →</a></td></tr>
+        <tr><td>Эскиз букета для клиента из цветов в наличии</td><td><b>10 мин</b></td><td><b>30 ₽</b></td><td><a href="../razbory/eskiz/">читать →</a></td></tr>
+      </tbody>
+    </table>
+    <p class="txt" style="margin-top:14px;color:rgba(0,48,73,.55)">Замеры: август 2026 ·
+      <a href="../zamery/" style="border-bottom:1px solid rgba(176,27,24,.4)">полная таблица замеров</a></p>
   </div>
 
   <div class="peek" id="peek">
@@ -764,6 +832,7 @@ h2 em{font-style:normal;color:var(--red)}
       <span class="mono" id="qn" style="color:rgba(0,48,73,.5)">Задача 1 из 10</span>
       <span class="score" id="sc">0 / 0</span>
     </div>
+<div class="sr">Игра «Сможет или нет»: Написать описания для сорока букетов на сайт — сможет: один промт, сорок описаний за вечер. Собрать букет из того, что осталось к вечеру — не сможет: пропорции и постановка цветка в руке это работа флориста. Снять лукбук без фотографа и модели — сможет: серия кадров за пару часов. Понять по фото, что роза уже поплыла — не сможет: свежесть определяется только руками и глазами. Оживить фото букета для сторис — сможет: из снимка пять секунд движения. Ответить клиенту, у которого завял букет — не сможет: нужен человек с полномочиями решать. Посчитать себестоимость по вашим остаткам — не сможет без ваших данных. Придумать название для нового букета — сможет как генератор вариантов. Заменить фон на фото букета — сможет, сохранив сам букет. Отвечать за качество и сроки — не сможет: ответственность остаётся на владельце.</div>
     <div class="q" id="q">Написать описания для сорока букетов на сайт</div>
     <div class="verdict" id="vd"></div>
     <div class="gbtns" id="gb">
