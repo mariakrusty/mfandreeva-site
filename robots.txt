@@ -6,6 +6,9 @@
 
 User-agent: *
 Allow: /
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /private/
 Disallow: /ai/klub/
 Disallow: /*?utm_
 Disallow: /*?fbclid
@@ -13,6 +16,9 @@ Disallow: /*?fbclid
 # ── Поисковые системы ──
 User-agent: Yandex
 Allow: /
+Disallow: /wp-admin/
+Disallow: /private/
+Disallow: /ai/klub/
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&from
 
 User-agent: Googlebot
@@ -83,4 +89,5 @@ Allow: /
 User-agent: MistralAI-User
 Allow: /
 
+Sitemap: https://mfandreeva.ru/sitemap_index.xml
 Sitemap: https://mfandreeva.ru/sitemap.xml
