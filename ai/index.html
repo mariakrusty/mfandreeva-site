@@ -81,7 +81,7 @@ body.open .mbtn i::after{transform:translateY(-4.8px) rotate(-45deg)}
 
 /* центр — лид и блок доступа, всё в левой половине */
 .core{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;
-  padding:clamp(14px,3vh,40px) 0;max-width:min(46vw,720px)}
+  padding:clamp(14px,3vh,40px) 0;max-width:min(58vw,900px)}
 .tag{font-size:clamp(11px,1vw,13px);line-height:1.65;max-width:46ch;margin-top:10px;
   color:rgba(253,240,213,.62);letter-spacing:.01em}
 
@@ -97,7 +97,7 @@ h1 em{font-style:normal;color:rgba(253,240,213,.45)}
   color:var(--cream);margin-bottom:4px;letter-spacing:0}
 /* ═══ ДОСТУП: открытая часть и закрытая ═══
    Без капсул — крупная надпись с тонкой линией, линия растёт при наведении */
-.access{display:flex;align-items:flex-start;gap:clamp(26px,4.5vw,72px);flex-wrap:wrap}
+.access{display:flex;align-items:flex-start;gap:clamp(18px,2.6vw,44px);flex-wrap:wrap}
 .acc{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,13px)}
 .acc .lbl{font-size:clamp(9.5px,.92vw,11px);letter-spacing:.19em;text-transform:uppercase;
   color:rgba(253,240,213,.42)}
@@ -201,13 +201,19 @@ body.typed h1,body.typed .lnk,body.typed .lbl{opacity:1;transition:opacity .42s 
   <div class="core">
     <div class="access">
       <div class="acc">
-        <span class="lbl">Открыто · бесплатно</span>
-        <a class="lnk dim" href="besplatno/">Бесплатные<br>материалы<span class="arw">→</span></a>
+        <span class="lbl">01 · Открыто · бесплатно</span>
+        <a class="lnk dim" href="besplatno/">Разборы<br>и замеры<span class="arw">→</span></a>
+        <span class="note">пять реальных задач по шагам:<br>что делали, сколько минут и рублей</span>
       </div>
       <div class="acc">
-        <span class="lbl">Закрыто · по доступу</span>
-        <a class="lnk" href="dostup/">Библиотека<br>и сообщество<span class="arw">→</span></a>
-        <span class="note">купить доступ — библиотека промтов,<br>готовые съёмки и чат в Telegram</span>
+        <span class="lbl">02 · Подписка · 990 ₽/мес</span>
+        <a class="lnk" href="dostup/">Картотека<br>и чат<span class="arw">→</span></a>
+        <span class="note">все промты и связки к разборам,<br>закрытый чат — пока подписка активна</span>
+      </div>
+      <div class="acc">
+        <span class="lbl">03 · Один на один</span>
+        <a class="lnk" href="dostup/#lichnaya">Личная<br>работа<span class="arw">→</span></a>
+        <span class="note">задачи вашего магазина делаем вместе:<br>модель, карточки, баннеры — под ваш бренд</span>
       </div>
     </div>
   </div>
